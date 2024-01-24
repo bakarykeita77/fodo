@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>accueil</title>
+    <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/style.ejs') %>
+</head>
+<body>
+
+    <div id="container">
+        
+        <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/page_head.ejs') %>
+        <div id="page_body">
+
+            <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/header.ejs') %>
+
+            <div id="nav_laterale_container">
+                <div id="nav_laterale_head">
+                    <h2 id="nav_laterale_titre">Les champs</h2>
+                    <div id="nav_laterale_plus">+</div>
+                </div>
+                <div id="nav_laterale_body">
+                    <ol id="nav_laterale_list"></ol>
+                </div>
+            </div>
+
+            <div id="asides_container">
+                        
+            </div>
+        </div>
+        <div id="page_foot"></div>
+
+    </div>
+    <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/accueil_script.ejs') %>
+</body>
+</html>
