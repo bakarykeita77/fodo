@@ -1,6 +1,6 @@
 
     <script>
-        console.log('Keita');
+   
         let nav_laterale_plus = document.getElementById('nav_laterale_plus');
         let nav_laterale_list = document.getElementById('nav_laterale_list');
 
@@ -11,6 +11,7 @@
             let nom_de_nouveau_element = prompt('Taper le nom du nouveau Champs');
 
             if(nom_de_nouveau_element == "") return;
+            if(nom_de_nouveau_element == null) return;
             nav_laterale_list.innerHTML += "<li>"+nom_de_nouveau_element+"</li>";
         }
     </script>

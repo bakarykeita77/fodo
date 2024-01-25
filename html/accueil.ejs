@@ -22,7 +22,11 @@
                     <div id="nav_laterale_plus">+</div>
                 </div>
                 <div id="nav_laterale_body">
-                    <ol id="nav_laterale_list"></ol>
+                    <ol id="nav_laterale_list">
+                        <% for(var i=0;i<data.length;i++) { %>
+                            <li><%= data[i].localite %></li>
+                        <% } %>
+                    </ol>
                 </div>
             </div>
 
