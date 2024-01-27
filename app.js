@@ -2,6 +2,8 @@
 const express = require('express');
 const mysql = require('mysql');
 const myconnection = require('express-myconnection');
+const { LONG } = require('mysql/lib/protocol/constants/types');
+const { urlencoded } = require('express');
 
 const connect = {
     host: 'localhost',
@@ -13,7 +15,11 @@ const connect = {
 
 const app = express();
 
-//Gestion des erreurs
+
+//Extraction des donnees du formulaire
+    app.use(express.urlencoded({extended: false}));
+
+//Connection a la base de donnees
     app.use(myconnection(mysql,connect,'pool'));
 
 //Moteur d'affichage
@@ -26,7 +32,7 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                connection.query('SELECT * FROM champ', [],(erreur,data) => {
+                connection.query('SELECT * FROM champs', [],(erreur,data) => {
                     if(erreur){
                         console.log(erreur);
                     }else{
@@ -43,7 +49,7 @@ const app = express();
             { console.log(erreur); }
             else
             { 
-                connection.query('SELECT * FROM champ', [], (erreur, data) => {
+                connection.query('SELECT * FROM champs', [], (erreur, data) => {
                     if(erreur)
                     { console.log(erreur); }
                     else
@@ -57,10 +63,35 @@ const app = express();
         res.status(200).render('propos');
     });
 
+//Envoi des donnees a la base de donnees
+    app.post('/', (req, res) => {
+
+        let nom_de_localite = req.body.localite;
+        let nombre_de_champs = req.body.nombre_de_champs;
+        let cultures = req.body.cultures;
+       
+        req.getConnection((erreur,connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                connection.query('INSERT INTO champs(id, localite, nombre_de_champs, cultures) VALUES(?,?,?,?)', [null, nom_de_localite, nombre_de_champs, cultures], (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                console.log('post');
+                        res.status(300).redirect('/');
+                    }
+                });
+            }
+        });
+    });
+
     app.use((req, res) => {
         res.status(404).render('erreur');
     });
 
+
+    
     app.listen(3000, () => {
         console.log('Le serveur tourne sur le port 3000');
     });
