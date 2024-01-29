@@ -70,6 +70,10 @@ const app = express();
         let nombre_de_champs = req.body.nombre_de_champs;
         let cultures = req.body.cultures;
        
+        if(nom_de_localite == '')  { return; } 
+        if(nombre_de_champs == '') { return; } 
+        if(cultures == '')         { return; } 
+
         req.getConnection((erreur,connection) => {
             if(erreur) {
                 console.log(erreur);
@@ -78,7 +82,6 @@ const app = express();
                     if(erreur) {
                         console.log(erreur);
                     }else{
-                console.log('post');
                         res.status(300).redirect('/');
                     }
                 });

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>accueil</title>
-    <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/style.ejs') %>
+    <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/style_accueil.ejs') %>
 </head>
 <body>
 
@@ -21,24 +21,37 @@
                     <h2 id="nav_laterale_titre">Les champs</h2>
                     <div id="nav_laterale_plus">+</div>
 
-                    <form action="/" method="post">
-                        <label for="localite">Localite</label>
-                        <input type="text" name="localite" id="localite">
-
-                        <label for="nombre_de_champs">Nombre de champs</label>
-                        <input type="text" name="nombre_de_champs" id="nombre_de_champs">
-
-                        <label for="cultures">Cultures</label>
-                        <input type="text" name="cultures" id="cultures">
-
-                        <input type="submit" value="Submit">
-                    </form>
-                        
+                    <div id="form_container">
+                        <form action="/" method="post" id="form">
+                            <span id="form_fermeture">&times</span>
+                            <br><br>
+                            <label for="localite">Localite</label><br>
+                            <input type="text" name="localite" id="localite">
+                            <br><br>
+                            <label for="nombre_de_champs">Nombre de champs</label><br>
+                            <input type="text" name="nombre_de_champs" id="nombre_de_champs">
+                            <br><br>
+                            <label for="cultures">Cultures</label><br>
+                            <input type="text" name="cultures" id="cultures">
+                            <br><br>
+                            <input type="submit" id="submit" value="Submit">
+                        </form>
+                    </div>
+                    
                 </div>
                 <div id="nav_laterale_body">
                     <ol id="nav_laterale_list">
                         <% for(var i=0;i<data.length;i++) { %>
-                            <li><%= data[i].localite %></li>
+                            <li>
+                                <span class="localite"><%= data[i].localite %></span> 
+                                <span class="trois_points">&#8942;</span>
+                                <div class="options_container" id="option_<%= i+1 %>">
+                                    <div class="champs_options" id="option_<%= i+1 %>">
+                                        <p id="modifier_champs">Modifier</p>
+                                        <p id="supprimer_champs">Supprimer</p>
+                                    </div>
+                                </div>
+                            </li>
                         <% } %>
                     </ol>
                 </div>
@@ -51,6 +64,6 @@
         <div id="page_foot"></div>
 
     </div>
-    <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/accueil_script.ejs') %>
+    <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/script_accueil.ejs') %>
 </body>
 </html>
