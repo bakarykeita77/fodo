@@ -1,0 +1,197 @@
+<style>
+    body { margin: 0; padding: 0; }
+    #container {
+        padding: 0;
+        margin: 0;
+    }
+    #page_head {
+        margin: 0;
+        height: 2rem;
+        width: 100%;
+        background-color: greenyellow;
+    }
+    #top_barre {
+        border: 1px solid transparent;
+        border-top-color: #aaa;
+        border-bottom-color: #aaa;
+        padding: 1rem;
+    }
+        #nom_du_site {
+            text-align: center;
+        }
+        #top_barre > div {
+            max-width: 50rem;
+            margin: auto;
+        }
+        #logo, #comentaire_de_logo {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        #logo {
+            width: 5rem; 
+            height: 5rem; 
+            transform: rotate(90deg);
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            padding: 0.5rem;
+            margin: 0.5rem;
+            overflow: hidden;
+        }
+        #logo img {
+            width: 5rem; 
+        }
+        #comentaire_de_logo {
+            width: calc(100% - 8rem);
+        }
+    #page_body {
+        width: 80%;
+        margin: auto;
+        padding: 0;
+    }
+    #nav_laterale_container, #asides_container {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        border: 1px solid transparent;
+        min-height: calc(100vh - 24rem);
+    }
+    #nav_laterale_container {
+        width: 12rem;
+        border-right-color: #aaa;
+        z-index: 1;
+    }
+        #nav_laterale_titre, #nav_laterale_plus {
+            display: inline-block;
+        }
+        #form_container {
+            position: absolute;
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            left: 105%;
+            top: 0;
+            overflow: hidden;
+        }
+        #form_fermeture {
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            background-color: #eee;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            text-align: center;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+        }
+        #form_fermeture:hover {
+            background-color: white;
+            font-weight: bold;
+            background-color: #ddd;
+        }
+        #form_container form {
+            position: relative;
+            width: 12rem;
+            box-shadow: 0.5rem 0.8rem 2rem #ccc;
+            padding: 2rem;
+        }
+        #form_container input {
+            height: 2rem;
+            padding: 0 1rem;
+            border-style: none;
+            background-color: #eee;
+        }
+        #nav_laterale_plus {
+            margin: 0 0.5rem;
+            height: 1.5rem;
+            width: 1.5rem;
+            border: 1px solid #aaa;
+            border-radius: 50%;
+            background-color: #eee;
+            text-align: center;
+            line-height: 1.5rem;
+            cursor: pointer;
+        }
+        #nav_laterale_plus:hover {
+            background-color: #fff;
+            font-weight: bold;
+            color: green;
+        }
+        #nav_laterale_list li {
+            position: relative;
+            padding: 0.25rem 0.5rem;
+        }
+        #nav_laterale_list li:hover {
+            background-color: #0080000a;
+        }
+        #nav_laterale_list li:hover .trois_points {
+            display: block;
+        }
+        .localite {
+            cursor: pointer;
+        }
+        .localite:hover {
+            font-weight: bold;
+        }
+        .trois_points {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1rem;
+            height: 1rem;
+            line-height: 1rem;
+            text-align: center;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            margin: 0;
+            padding: 0.25rem;
+            cursor: pointer;
+        }
+        .trois_points:hover {
+            box-shadow: 0 0 1rem #aaa;
+        }
+        .options_container {
+            border-left: 8px solid #aaa;
+            position: absolute;
+            background-color: white;
+            padding: 0.5rem;
+            right: -10.5rem;
+            top: -1rem;
+            overflow: hidden;
+            display: none;
+        }
+        .champs_options {
+            position: relative;
+            border: 1px solid #ddd;
+            width: 8rem;
+            box-shadow: 0 0 0.5rem #ccc;
+        }
+        .champs_options p {
+            cursor: pointer;
+            margin: 0.5rem 1rem;
+            padding: 0.25rem;
+        }
+        .champs_options p:hover {
+            background-color: #0080000a;
+        }
+    #asides_container {
+        width: calc(80vw - 18rem);
+        z-index: 0;
+    }
+
+
+    @keyframes glisser_de_gauche {
+        from { left: -120%; }
+        to { left: 0; }
+    }
+    @keyframes glisser_a_gauche {
+        from { left: 0; }
+        to { left: -120%; }
+    }
+</style>
