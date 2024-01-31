@@ -65,7 +65,8 @@ const app = express();
 
 //Envoi des donnees a la base de donnees
     app.post('/', (req, res) => {
-
+ 
+        let id = (req.body.id === "") ? null : req.body.id;
         let nom_de_localite = req.body.localite;
         let nombre_de_champs = req.body.nombre_de_champs;
         let cultures = req.body.cultures;
@@ -78,7 +79,15 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                connection.query('INSERT INTO champs(id, localite, nombre_de_champs, cultures) VALUES(?,?,?,?)', [null, nom_de_localite, nombre_de_champs, cultures], (erreur, data) => {
+
+                let requetesql = (id === null) ? 
+                    "INSERT INTO champs(id, localite, nombre_de_champs, cultures) VALUES(?,?,?,?)" : 
+                    "UPDATE champs SET localite = ?, nombre_de_champs = ?, cultures = ? WHERE id = ?";
+                let donnees = (id === null) ? 
+                    [null, nom_de_localite, nombre_de_champs, cultures] : 
+                    [nom_de_localite, nombre_de_champs, cultures, id];
+                                    
+                connection.query(requetesql, donnees, (erreur, data) => {
                     if(erreur) {
                         console.log(erreur);
                     }else{

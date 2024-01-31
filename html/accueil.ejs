@@ -18,23 +18,32 @@
 
             <div id="nav_laterale_container">
                 <div id="nav_laterale_head">
+
                     <h2 id="nav_laterale_titre">Les champs</h2>
+
                     <div id="nav_laterale_plus">+</div>
 
                     <div id="form_container">
                         <form action="/" method="post" id="form">
                             <span id="form_fermeture">&times</span>
                             <br><br>
-                            <label for="localite">Localite</label><br>
-                            <input type="text" name="localite" id="localite">
-                            <br><br>
-                            <label for="nombre_de_champs">Nombre de champs</label><br>
-                            <input type="text" name="nombre_de_champs" id="nombre_de_champs">
-                            <br><br>
-                            <label for="cultures">Cultures</label><br>
-                            <input type="text" name="cultures" id="cultures">
-                            <br><br>
-                            <input type="submit" id="submit" value="Submit">
+                            <div id="form_titre"></div>
+                            <br>
+                            <div id="form_content">
+                                <input type="hidden" name="id" id="id">
+                                <br><br>
+                                <label for="localite">Localite</label><br>
+                                <input type="text" name="localite" id="localite">
+                                <br><br>
+                                <label for="nombre_de_champs">Nombre de champs</label><br>
+                                <input type="text" name="nombre_de_champs" id="nombre_de_champs">
+                                <br><br>
+                                <label for="cultures">Cultures</label><br>
+                                <input type="text" name="cultures" id="cultures">
+                                <br><br>
+                                <input type="submit" id="submit" value="Submit">
+                            </div>
+                            
                         </form>
                     </div>
                     
@@ -47,8 +56,8 @@
                                 <span class="trois_points">&#8942;</span>
                                 <div class="options_container" id="option_<%= i+1 %>">
                                     <div class="champs_options" id="option_<%= i+1 %>">
-                                        <p id="modifier_champs">Modifier</p>
-                                        <p id="supprimer_champs">Supprimer</p>
+                                        <p class="modifier_champs" onclick="charger_form('<%= data[i].id %>','<%= data[i].localite %>','<%= data[i].nombre_de_champs %>','<%= data[i].cultures %>')">Modifier</p>
+                                        <p class="supprimer_champs">Supprimer</p>
                                     </div>
                                 </div>
                             </li>
