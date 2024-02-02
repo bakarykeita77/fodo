@@ -82,6 +82,14 @@
             document.getElementById('nombre_de_champs').value = nombre_de_champs;
             document.getElementById('cultures').value = cultures;
         }
+        function supprimer(id) {
+            let chemin = '/'+id;
+            
+            fetch(chemin, {method : 'DELETE'})
+            .then(response => response.json())
+            .then(donnee => window.location.href = donnee.routeRacine)
+            .catch(erreur => console.log(erreur))
+        }
         function viderLesChamps() {
             let inputs = document.querySelectorAll('input:not(#submit)');
             for(var i=0; i<inputs.length; i++) { inputs[i].value = ''; }

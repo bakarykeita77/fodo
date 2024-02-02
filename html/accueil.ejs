@@ -57,7 +57,7 @@
                                 <div class="options_container" id="option_<%= i+1 %>">
                                     <div class="champs_options" id="option_<%= i+1 %>">
                                         <p class="modifier_champs" onclick="charger_form('<%= data[i].id %>','<%= data[i].localite %>','<%= data[i].nombre_de_champs %>','<%= data[i].cultures %>')">Modifier</p>
-                                        <p class="supprimer_champs">Supprimer</p>
+                                        <p class="supprimer_champs" onclick="supprimer('<%= data[i].id %>')">Supprimer</p>
                                     </div>
                                 </div>
                             </li>
@@ -73,6 +73,7 @@
         <div id="page_foot"></div>
 
     </div>
+    
     <%- include('C:/Users/ABDESOUZA/Desktop/fodo/composants/script_accueil.ejs') %>
 </body>
 </html>

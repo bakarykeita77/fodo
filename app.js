@@ -59,6 +59,7 @@ const app = express();
         });
         
     });
+
     app.get('/propos', (req, res) => {
         res.status(200).render('propos');
     });
@@ -92,6 +93,25 @@ const app = express();
                         console.log(erreur);
                     }else{
                         res.status(300).redirect('/');
+                    }
+                });
+            }
+        });
+    });
+
+//Suppression des donnees de la base de donnees
+    app.delete('/:id', (req, res) => {
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                let id = req.params.id;
+              
+                connection.query('DELETE FROM champs WHERE id = ?', [id], (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(200).json({routeRacine:'/'});
                     }
                 });
             }
