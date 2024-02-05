@@ -2,6 +2,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const myconnection = require('express-myconnection');
+const sharp = require('sharp');
 const { LONG } = require('mysql/lib/protocol/constants/types');
 const { urlencoded } = require('express');
 
@@ -12,6 +13,12 @@ const connect = {
     port: 3306,
     database: 'fodo'
 }
+
+sharp('./images/logos/houe.jpg')
+    .webp()
+    .toFile('houe.webp')
+    .then((info) => { console.log(info); })
+.catch(erreur => {console.log(erreur);});
 
 const app = express();
 
@@ -121,7 +128,7 @@ const app = express();
     app.use((req, res) => {
         res.status(404).render('erreur');
     });
-
+    app.use('/images', express.static('C:/Users/ABDESOUZA/Desktop/fodo/images/'));
 
     
     app.listen(3000, () => {

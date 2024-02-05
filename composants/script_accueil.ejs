@@ -22,12 +22,13 @@
             form_titre.innerHTML = '<span id="titre_comentaire">Ajouter un nouveau champs</span><br><br>';
             viderLesChamps();
         });
-        submit.addEventListener('click', () => { fermer(form); } );
-        asides_container.addEventListener('click', () => { fermer(form); } );
-        form_fermeture.addEventListener('click', () => { fermer(form); } );
+
+        submit.addEventListener('click', () => { fermer(form); });
+        asides_container.addEventListener('click', () => { fermer(form); });
+        form_fermeture.addEventListener('click', () => { fermer(form); });
 
         trois_points.forEach(element => {
-            element.addEventListener('click', function(){
+            element.addEventListener('click', function() {
 
                 let container_id = this.nextElementSibling.id;
                 let container_actif = this.nextElementSibling;
@@ -44,7 +45,7 @@
                         container_inactif.parentElement.style.backgroundColor = 'white';
                         
                         document.querySelector('#'+container_id+' .modifier_champs').addEventListener('click', () => {
-                            fermer(option_active);
+                            masquer(option_active);
                             afficher(form);
                             form_titre.innerHTML = '<span id="titre_comentaire">Modifier le champs de</span> <h3 id="titre">'+localite+'</h3>';
                         });
@@ -75,6 +76,9 @@
             setTimeout(() => {
                 element.parentElement.style.display = 'none';
             }, 200);
+        }
+        function masquer(element) {
+            element.parentElement.style.display = 'none';
         }
         function charger_form(id, localite, nombre_de_champs, cultures) {
             document.getElementById('id').value = id;
