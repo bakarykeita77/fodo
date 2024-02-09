@@ -2,6 +2,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const myconnection = require('express-myconnection');
+const path = require('path');
 const sharp = require('sharp');
 const { LONG } = require('mysql/lib/protocol/constants/types');
 const { urlencoded } = require('express');
@@ -14,14 +15,17 @@ const connect = {
     database: 'fodo'
 }
 
-sharp('./images/logos/houe.jpg')
-    .webp()
-    .toFile('houe.webp')
-    .then((info) => { console.log(info); })
-.catch(erreur => {console.log(erreur);});
+// sharp('./images/logos/houe.jpg')
+//     .webp()
+//     .toFile('houe.webp')
+//     .then((info) => { console.log(info); })
+// .catch(erreur => {console.log(erreur);});
 
 const app = express();
 
+//Rendre les contenus des dossiers public et view disponibles
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'view')));
 
 //Extraction des donnees du formulaire
     app.use(express.urlencoded({extended: false}));
@@ -31,8 +35,9 @@ const app = express();
 
 //Moteur d'affichage
     app.set('view engine', 'ejs');
-    app.set('views', 'html');
+    app.set('views', 'view');
 
+    
 //Recuperation et affichage des data de la base de donnees
     app.get('/', (req, res) => {
         req.getConnection((erreur,connection) => {
@@ -128,7 +133,6 @@ const app = express();
     app.use((req, res) => {
         res.status(404).render('erreur');
     });
-    app.use('/images', express.static('C:/Users/ABDESOUZA/Desktop/fodo/images/'));
 
     
     app.listen(3000, () => {

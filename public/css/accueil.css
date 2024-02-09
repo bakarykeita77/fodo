@@ -1,4 +1,4 @@
-<style>
+
     body { margin: 0; padding: 0; }
     #container {
         padding: 0;
@@ -199,4 +199,3 @@
         from { left: 0; }
         to { left: -120%; }
     }
-</style>
