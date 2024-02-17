@@ -44,11 +44,12 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                connection.query('SELECT * FROM champs', [],(erreur,data) => {
+                let requete =  'SELECT * FROM champs INNER JOIN lieux ON champs.id_lieu = lieux.id';
+                connection.query(requete, [], (erreur, data) => {
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('accueil', { data });
+                        res.status(200).render('index', { data });
                     }
                 });
             }
@@ -71,22 +72,25 @@ const app = express();
         });
         
     });
-
+    
     app.get('/propos', (req, res) => {
         res.status(200).render('propos');
     });
+
 
 //Envoi des donnees a la base de donnees
     app.post('/', (req, res) => {
  
         let id = (req.body.id === "") ? null : req.body.id;
-        let nom_de_localite = req.body.localite;
-        let nombre_de_champs = req.body.nombre_de_champs;
-        let cultures = req.body.cultures;
+        let id_lieu = req.body.id_lieu;
+        let culture = req.body.culture;
+        let superficie = req.body.superficie;
+        let observations_de_la_culture = req.body.observations_de_la_culture;
        
-        if(nom_de_localite == '')  { return; } 
-        if(nombre_de_champs == '') { return; } 
-        if(cultures == '')         { return; } 
+        if(id_lieu == '')      { return; } 
+        if(culture == '')      { return; } 
+        if(superficie == '')   { return; } 
+        if(observations_de_la_culture == '') { return; } 
 
         req.getConnection((erreur,connection) => {
             if(erreur) {
@@ -94,11 +98,11 @@ const app = express();
             }else{
 
                 let requetesql = (id === null) ? 
-                    "INSERT INTO champs(id, localite, nombre_de_champs, cultures) VALUES(?,?,?,?)" : 
-                    "UPDATE champs SET localite = ?, nombre_de_champs = ?, cultures = ? WHERE id = ?";
+                    "INSERT INTO champs(id, id_lieu, culture ,superficie ,observations_de_la_culture) VALUES(?,?,?,?,?)" : 
+                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ?, observations_de_la_culture = ? WHERE id = ?";
                 let donnees = (id === null) ? 
-                    [null, nom_de_localite, nombre_de_champs, cultures] : 
-                    [nom_de_localite, nombre_de_champs, cultures, id];
+                    [null, id_lieu, culture, superficie, observations_de_la_culture] : 
+                    [id_lieu, culture, superficie, observations_de_la_culture, id];
                                     
                 connection.query(requetesql, donnees, (erreur, data) => {
                     if(erreur) {
@@ -138,3 +142,20 @@ const app = express();
     app.listen(3000, () => {
         console.log('Le serveur tourne sur le port 3000');
     });
+
+    function recuperationEtAffichageDesDonnees(localite) {
+        app.get('/culture', (req, res) => {
+            req.getConnection((erreur, connection) => {
+                if(erreur) { console.log(erreur); }
+                else{
+                    connection.query('SELECT cultures FROM champs WHERE localite = "'+localite+'"', [], (erreur, data) => {
+                        if(erreur) { console.log(erreur); }
+                        else{
+                            console.log(data);
+                            res.status(200).render('culture', { data });
+                        }
+                    });
+                }
+            });
+        });
+    }
