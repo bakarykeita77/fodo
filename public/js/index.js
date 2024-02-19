@@ -30,61 +30,22 @@
         
         element.addEventListener('click', () => {
             
-            afficherCultureCards();
             chargerCultureImage();
-            chargemerEtAfficherDetailsDuChamps();
+            chargerEtAfficherDetailsDuChamps();
             fermetureDesDetailsDuChamps();
             
      
-            function afficherCultureCards() {
-                for (let i = 0; i < cultures_cards.length; i++) {
-
-                    let cards_container = cultures_cards[i];
-                    let element_id = cultures_cards[i].id.split('_')[2];
-
-                    
-                    if(element.textContent === element_id) {
-                        cards_container.style.display = 'flex';
-                    }else{
-                        cards_container.style.display = 'none';
-                    }
-                }  
-            }
+           
             function chargerCultureImage() {
                 nom_de_la_culture.innerHTML = "Champs de "+element.textContent;
                 image_de_localite.src = './images/cultures/'+element.textContent+'.jpg';
-            }
-            function chargementEtAffichageDesDetailsDuChamps() {
-
-                let cards = document.querySelectorAll('.card');
-                cards.forEach(element => {
-                    element.addEventListener('click', () => {
-
-                        chargementDesDetailsDuChamps();
-                        affichageVertical(details_de_champs);
-
-                        
-                        function chargementDesDetailsDuChamps() {
-                            let nom_de_la_culture = document.getElementById('nom_de_la_culture').innerHTML;
-                            document.getElementById('nom_de_la_culture').innerHTML = nom_de_la_culture;
-                        }
-                    });
-                });
-            }
-            function chargemerEtAfficherDetailsDuChamps() {
-
-            }
-            function fermetureDesDetailsDuChamps() {
-                document.getElementById('details_foot').addEventListener('click', () => {
-                    fermetureVertical(details_de_champs);
-                })
             }
         });       
     }
 
     nav_laterale_plus.addEventListener('click', () => { 
         affichageHorizontal(form_culture); 
-        form_culture_titre.innerHTML = '<span id="titre_comentaire">Ajouter un nouveau champs</span><br><br>';
+        form_culture_titre.innerHTML = '<span id="titre_comentaire">Ajouter une nouvelle Culture</span><br><br>';
         viderLesChamps();
         
         image_de_localite.src = '';

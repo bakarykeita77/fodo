@@ -27,7 +27,7 @@
 
                     <div id="nav_laterale_head">
 
-                        <h2 id="nav_laterale_titre">Les champs</h2>
+                        <h2 id="nav_laterale_titre">Les Cultures</h2>
 
                         <div id="nav_laterale_plus">+</div>
 
@@ -91,7 +91,7 @@
 
                                 <li id=<%= liste_de_culture_2[i] %>>
 
-                                    <span class="culture"><%= liste_de_culture_2[i] %></span> 
+                                    <span class="culture"><a href="/culture?culture=<%= liste_de_culture_2[i] %>"><%= liste_de_culture_2[i] %></a></span> 
                                     <span class="trois_points">&#8942;</span>
                                     <div class="options_container" id="option_<%= i+1 %>">
                                         <div class="champs_options" id="option_<%= i+1 %>">
@@ -100,7 +100,6 @@
                                         </div>
                                     </div>
                                 </li>
-
 
                             <% } %>
 
@@ -111,37 +110,11 @@
                 <div id="asides_container">
                     <h2 id="nom_de_la_culture"></h2>
                     
-                    <!-- Chargement des cards -->
-                    <div id="cultures_cards_container">
-                        <% for(let i=0; i<cultures_identiques.length; i++) { %>
-                            <div class="cultures_cards" id="cultures_de_<%= liste_de_culture_2[i] %>">
-                                <% for(let j=0; j<cultures_identiques[i].length; j++) { %>
-                                    <div class="culture_card">
-                                        
-                                        <h4><%= cultures_identiques[i][j].culture %> de <%= cultures_identiques[i][j].nom_de_lieu %></h4>
-
-                                    </div>
-                                <% } %>
-                            </div>
-                            
-                        <% } %>
-
-                    </div>
-
                     <!-- Affichage des cards -->
-
-                    <div id="image_de_localite"><img src="/images/localites/guinee.jpg" alt=""></div>    
-                    <hr> 
+                    <center>
+                        <div id="image_de_localite"><img src="/images/localites/guinee.jpg" alt=""></div>    
+                    </center>
                 
-
-                    <div id="details_de_champs_container">
-                        <div id="details_de_champs">
-                            <div id="details_head"></div>
-                            <div id="details_body"><%- include("accueil") %></div>
-                            <div id="details_foot"></div>
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
 

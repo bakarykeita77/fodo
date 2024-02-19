@@ -58,6 +58,7 @@
         vertical-align: top;
         position: relative;
         border: 1px solid transparent;
+        width: 74%;
         min-height: calc(100vh - 24rem);
     }
     #nav_laterale_container {
@@ -191,83 +192,14 @@
         .champs_options p:hover {
             background-color: #0080000a;
         }
-    #asides_container {
-        margin: 0.5rem 0;
-        width: calc(80vw - 15rem);
-        z-index: 0;
-    }
-        #cultures_cards_container {
-            position: relative;
-            margin: 0.5rem 0;
-            padding: 0;
-            width: 100%;
-            overflow: auto;
-        }
-        .cultures_cards {
-            display: none;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-
-            background-color: #eee;
-            width: calc(100% - 1rem);
-            height: 10rem;
-        }
-        .culture_card {
-            border: 1px solid #ccc;
-            background-color: #fff;
-            width: 10rem;
-            height: 9rem;
-            margin: 0.5rem;
-            padding: 0 0.5rem;
-            display: block;
-        }
-        .culture_card h4 {
-            margin: 00.5rem;
+        .culture a {
+            text-decoration: none;
         }
         #image_de_localite img {
             position: relative;
             width: 80%;
             max-width: 40rem;
             max-height: 20rem;
-        }
-        #les_cultures_cards .card {
-            border: 1px solid green;
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            margin: 0 0.125rem;
-            min-width: 5rem;
-            min-height: 6rem;
-            cursor: pointer;
-        }
-        #details_de_champs_container {
-            position: absolute;
-            top: 0;
-            padding: 0 0.5rem;
-            height: 0;
-            width: 100%;
-            border: 1px solid transparent;
-            border-top: 0.5rem solid green;
-            overflow: hidden;
-        }
-        #details_de_champs {
-            position: relative;
-            height: calc(100vh - 24rem);
-            width: 100%;
-            border: 1px solid green;
-            background-color: #eee;
-        }
-        #details_head {
-            height: 3rem;
-        }
-        #details_body {
-            height: calc(100vh - 28rem);
-            overflow: auto;
-        }
-        #details_foot { 
-            background-color: #aaa;
-            height: 1rem; 
-            cursor: pointer;
         }
 
 

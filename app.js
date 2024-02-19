@@ -56,6 +56,25 @@ const app = express();
         });
     });
 
+    app.get('/culture', (req, res) => {
+        req.getConnection((erreur,connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                let culture = req.url.split('?')[1].split('=')[1];
+                let requete =  'SELECT * FROM champs INNER JOIN lieux ON champs.id_lieu = lieux.id AND champs.culture = "'+culture+'"';
+                connection.query(requete, [], (erreur, data) => {
+                    if(erreur){
+                        console.log(erreur);
+                    }else{
+                        res.status(200).render('culture', { data });
+                        console.log(data);
+                    }
+                });
+            }
+        });
+    });
+
     app.get('/accueil', (req, res) => {
         req.getConnection((erreur,connection) => {
             if(erreur) 

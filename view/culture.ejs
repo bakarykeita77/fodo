@@ -4,16 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>champs</title>
+    <title>culture</title>
+    <link rel="stylesheet" href="css/culture.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <h1 id="culture_titre">Arachide de Kogota</h1>
-    <h3>Exercice 2024</h3>
-    <div>
-        <p>pour l'annee 2024, la surface mis en valeur est de 1 ha pour la phas d'experimentation avec ue quantite de semence egal a 10 KG</p>
-        <p>Les travaux de semis ont commence a mis avril et termine dans la premiere semaine de mai</p>
+
+    <div id="container">
+        
+        <%- include('../public/composants/page_head.ejs') %>
+        
+        <div id="page_body">
+                
+            <%- include('../public/composants/header.ejs') %> 
+       
+            <div id="champs_container">
+
+                <h1 id="culture_titre"> Champs de <%= data[0].culture %></h1>
+
+                <div id="cultures_cards_container">
+                    <% for(let i=0; i<data.length; i++) { %>
+                        <div class="culture_card" id="<%= data[i].culture %>_de_<%= data[i].nom_de_lieu %>">
+                            <h4><%= data[i].culture %> de <%= data[i].nom_de_lieu %></h4>
+                        </div>
+                    <% } %>
+                </div>
+                    
+
+                <div id="details_de_champs">
+
+                    <div id="details_body">
+                    </div>
+                    <div id="details_foot"></div>
+                </div>
+            </div>
+
+            
+        </div>
     </div>
     
-    <script src="js/culture.js"></script>
+    <script src="js/index.js"></script>
+    
 </body>
 </html>
