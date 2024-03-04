@@ -1,207 +1,32 @@
 
     body { margin: 0; padding: 0; }
-    #container {
-        padding: 0;
-        margin: 0;
-    }
-    #page_head {
-        margin: 0;
-        height: 2rem;
-        width: 100%;
-        background-color: greenyellow;
-    }
-    #top_barre {
-        border: 1px solid transparent;
-        border-top-color: #aaa;
-        border-bottom-color: #aaa;
-        padding: 1rem 0;
-    }
-        #nom_du_site {
-            text-align: center;
-        }
-        #top_barre > div {
-            max-width: 50rem;
-            margin: auto;
-        }
-        #logo, #comentaire_de_logo {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        #logo {
-            width: 5rem; 
-            height: 5rem; 
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            padding: 0.5rem;
-            margin: 0.5rem;
-            overflow: hidden;
-        }
-        #logo img {
-            width: 5rem; 
-        }
-        #comentaire_de_logo {
-            width: calc(100% - 8rem);
-        }
-    #page_body {
-        width: 80%;
-        margin: auto;
-        padding: 0;
-    }
-    #sections {
-        border: 1px solid transparent;
-        border-top-color: #aaa;
-        border-bottom-color: #aaa;
-        padding: 1rem 0;
-    }
-    #nav_laterale_container, #asides_container {
-        display: inline-block;
-        vertical-align: top;
-        position: relative;
-        border: 1px solid transparent;
-        width: 74%;
-        min-height: calc(100vh - 24rem);
-    }
-    #nav_laterale_container {
-        margin: 0.5rem;
-        width: 12rem;
-        border-right-color: #aaa;
-        z-index: 1;
-    }
-        #nav_laterale_titre, #nav_laterale_plus {
-            display: inline-block;
-        }
-        #forms_container {
-            position: absolute;
-            display: none;
-            background-color: white;
-            padding: 2rem 2rem 2rem 0.5rem;
-            left: 105%;
-            top: 0;
-            overflow: hidden;
-        }
-        #form_culture_fermeture {
-            position: absolute;
-            width: 0.5rem;
-            height: 0.5rem;
-            line-height: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            background-color: #eee;
-            margin: 0.5rem;
-            padding: 0.5rem;
-            text-align: center;
-            right: 0;
-            top: 0;
-            cursor: pointer;
-        }
-        #form_culture_fermeture:hover {
-            background-color: white;
-            font-weight: bold;
-            background-color: #ddd;
-        }
-        #forms_container form {
-            position: relative;
-            width: 18rem;
-            padding: 2rem;
-            box-shadow: 0.5rem 0.8rem 2rem #ccc;
-        }
-        #titre_comentaire, #titre { display: inline-block; }
-        #form_culture_content {
-            width: 15rem;
-            max-height: 20rem;
-            margin: auto;
-            overflow: auto;
-        }
-        #forms_container input {
-            height: 2rem;
-            border-style: none;
-            padding: 0 1rem;
-            background-color: #eee;
-        }
-        #nav_laterale_plus {
-            margin: 0 0.5rem;
-            height: 1.5rem;
-            width: 1.5rem;
-            border: 1px solid #aaa;
-            border-radius: 50%;
-            background-color: #eee;
-            text-align: center;
-            line-height: 1.5rem;
-            cursor: pointer;
-        }
-        #nav_laterale_plus:hover {
-            background-color: #fff;
-            font-weight: bold;
-            color: green;
-        }
-        #nav_laterale_list li {
-            position: relative;
-            padding: 0.25rem 0.5rem;
-        }
-        #nav_laterale_list li:hover {
-            background-color: #0080000a;
-        }
-        #nav_laterale_list li:hover .trois_points {
-            display: block;
-        }
-        .localite {
-            cursor: pointer;
-        }
-        .localite:hover {
-            font-weight: bold;
-        }
-        .trois_points {
-            display: none;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 1rem;
-            height: 1rem;
-            line-height: 1rem;
-            text-align: center;
-            border: 1px solid transparent;
-            border-radius: 50%;
-            margin: 0;
-            padding: 0.25rem;
-            cursor: pointer;
-        }
-        .trois_points:hover {
-            box-shadow: 0 0 1rem #aaa;
-        }
-        .options_container {
-            border-left: 8px solid #aaa;
-            position: absolute;
-            background-color: white;
-            padding: 0.5rem;
-            right: -10.5rem;
-            top: -1rem;
-            overflow: hidden;
-            display: none;
-        }
-        .champs_options {
-            position: relative;
-            border: 1px solid #ddd;
-            width: 8rem;
-            box-shadow: 0 0 0.5rem #ccc;
-        }
-        .champs_options p {
-            cursor: pointer;
-            margin: 0.5rem 1rem;
-            padding: 0.25rem;
-        }
-        .champs_options p:hover {
-            background-color: #0080000a;
-        }
-        .culture a {
-            text-decoration: none;
-        }
-        #image_de_localite img {
-            position: relative;
-            width: 80%;
-            max-width: 40rem;
-            max-height: 20rem;
-        }
 
+    .localite {
+        cursor: pointer;
+    }
+    .localite:hover {
+        font-weight: bold;
+    }
+    .culture a {
+        text-decoration: none;
+    }
+    #image_de_localite img {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        max-width: 40rem;
+        max-height: 20rem;
+    }
+    .culture_fiches select {
+        border-style: none;
+        border-bottom: 1px solid #aaa;
+        margin-bottom: 1rem;
+        padding: 0 1rem;
+        min-width: 8rem;
+        font-weight: bold;
+
+    }
 
     @keyframes glisser_de_haut {
         from { top: -80vh; }

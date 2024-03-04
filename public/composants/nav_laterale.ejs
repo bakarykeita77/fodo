@@ -1,37 +1,206 @@
-<div id="nav_laterale_head">
 
-    <h2 id="nav_laterale_titre">Les Cultures</h2>
-
-    <div id="nav_laterale_plus">+</div>
-
-    <div id="forms_container">
-        
-        <form action="/" method="post" id="form_culture">
-            <span id="form_culture_fermeture">&times</span>
-            <br><br>
-            <div id="form_culture_titre"></div>
-            <br>
-            <div id="form_culture_content">
-                <input type="hidden" name="id" id="id">
+<% let liste_de_culture_1 = []; %>
+<% let liste_de_culture_2 = []; %>
+<% let cultures_identiques = []; %>
                 
-                <label for="id_lieu">id du Lieu</label><br>
-                <input type="text" name="id_lieu" id="id_lieu">
-                <br><br>
-                <label for="culture">Culture</label><br>
-                <input type="text" name="culture" id="culture">
-                <br><br>
-                <label for="superficie">Superficie</label><br>
-                <input type="text" name="superficie" id="superficie">
-                <br><br>
-                <label for="observations">observations de la culture</label><br>
-                <input type="text" name="observations_de_la_culture" id="observations_de_la_culture">
-                <br><br>
+<div id="nav_laterale_container">
 
-                <input type="submit" id="submit" value="Submit">
-            </div>
+    <div id="nav_laterale_head">
+
+        <h2 id="nav_laterale_titre">Les Cultures</h2>
+
+        <div id="nav_laterale_plus">+</div>
+
+        <div id="forms_container">
             
-        </form>
+            <form action="/" method="post" id="form_culture">
+                <span id="form_culture_fermeture">&times</span>
+                <br><br>
+                <div id="form_culture_titre"></div>
+                <br>
+                <div id="form_culture_content">
+                    <input type="hidden" name="id" id="id">
+                    
+                    <label for="id_lieu">id du Lieu</label><br>
+                    <input type="text" name="id_lieu" id="id_lieu">
+                    <br><br>
+                    <label for="culture">Culture</label><br>
+                    <input type="text" name="culture" id="culture">
+                    <br><br>
+                    <label for="superficie">Superficie</label><br>
+                    <input type="text" name="superficie" id="superficie">
+                    <br><br>
+                    <label for="observations">observations de la culture</label><br>
+                    <input type="text" name="observations_de_la_culture" id="observations_de_la_culture">
+                    <br><br>
 
+                    <input type="submit" id="submit" value="Submit">
+                </div>
+                
+            </form>
+
+        </div>
+        
     </div>
-    
+
+    <div id="nav_laterale_body">
+        <% 
+            for(var i=0; i<data.length; i++) { 
+                liste_de_culture_1.push(data[i]);
+                if(liste_de_culture_2.indexOf(data[i].culture) === -1) { liste_de_culture_2.push(data[i].culture); }
+            }
+
+            for(let i=0; i<liste_de_culture_2.length; i++) {
+                cultures_identiques.push([liste_de_culture_2[i]]);
+            }
+
+            for(let i=0; i<cultures_identiques.length; i++) {
+                for(let j=0; j<liste_de_culture_1.length; j++) {
+                    if(cultures_identiques[i][0] === liste_de_culture_1[j].culture) {
+                        cultures_identiques[i].push(liste_de_culture_1[j]);
+                    }
+                }
+                cultures_identiques[i].shift();
+            }
+        %>
+        
+
+        <ol id="nav_laterale_list">
+
+            <% for(var i=0; i<liste_de_culture_2.length; i++) { %>
+
+                <li id=<%= liste_de_culture_2[i] %>>
+                    <span class="culture"><a href="/cultures?culture=<%= liste_de_culture_2[i] %>"><%= liste_de_culture_2[i] %></a></span> 
+                </li>
+
+            <% } %>
+
+        </ol>
+    </div>
 </div>
+
+
+
+
+<style>
+    #nav_laterale_container {
+        display: inline-block;
+        position: relative;
+        vertical-align: top;
+        border: 1px solid transparent;
+        border-right-color: #aaa;
+        width: 12rem;
+        min-height: calc(100vh - 24rem);
+        margin: 0.5rem;
+        z-index: 1;
+    }
+    #nav_laterale_titre, #nav_laterale_plus {
+        display: inline-block;
+    }
+    #forms_container {
+        position: absolute;
+        top: 0;
+        display: none;
+        background-color: white;
+        padding: 2rem 2rem 2rem 0.5rem;
+        left: 105%;
+        overflow: hidden;
+    }
+    #form_culture_fermeture {
+        position: absolute;
+        width: 0.5rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        background-color: #eee;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        text-align: center;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+    }
+    #form_culture_fermeture:hover {
+        background-color: white;
+        font-weight: bold;
+        background-color: #ddd;
+    }
+    #forms_container form {
+        position: relative;
+        width: 18rem;
+        padding: 2rem;
+        box-shadow: 0.5rem 0.8rem 2rem #ccc;
+    }
+    #titre_comentaire, #titre { display: inline-block; }
+    #form_culture_content {
+        width: 15rem;
+        max-height: 20rem;
+        margin: auto;
+        overflow: auto;
+    }
+    #forms_container input {
+        height: 2rem;
+        border-style: none;
+        padding: 0 1rem;
+        background-color: #eee;
+    }
+    #nav_laterale_plus {
+        margin: 0 0.5rem;
+        height: 1.5rem;
+        width: 1.5rem;
+        border: 1px solid #aaa;
+        border-radius: 50%;
+        background-color: #eee;
+        text-align: center;
+        line-height: 1.5rem;
+        cursor: pointer;
+    }
+    #nav_laterale_plus:hover {
+        background-color: #fff;
+        font-weight: bold;
+        color: green;
+    }
+    #nav_laterale_list li {
+        position: relative;
+        padding: 0.25rem 0.5rem;
+    }
+    #nav_laterale_list li:hover {
+        background-color: #0080000a;
+    }
+    #nav_laterale_list li:hover .trois_points {
+        display: block;
+    }
+</style>
+
+<script>
+    
+    let forms_container = document.getElementById('forms_container');
+    let form_culture = document.getElementById('form_culture');
+    let form_culture_titre = document.getElementById('form_culture_titre');
+    let nav_laterale_li = document.querySelectorAll('#nav_laterale_list li');
+    let cultures = document.querySelectorAll('#nav_laterale_list li .culture');
+    let id_lieux = document.querySelectorAll('#nav_laterale_list li .id_lieu');
+    let nav_laterale_plus = document.getElementById('nav_laterale_plus');
+    let submit = document.getElementById('submit');
+
+
+    nav_laterale_plus.addEventListener('click', () => { 
+        affichageHorizontal(form_culture); 
+        form_culture_titre.innerHTML = '<span id="titre_comentaire">Ajouter une nouvelle Culture</span><br><br>';
+        viderLesChamps();
+    });
+
+    submit.addEventListener('click', () => { fermetureHorizontal(form_culture); });
+    form_culture_fermeture.addEventListener('click', () => { fermetureHorizontal(form_culture); });
+    
+
+    
+    function charger_form_culture(id, id_lieu, culture, superficie, observations) {
+        document.getElementById('id').value = id;
+        document.getElementById('id_lieu').value = id_lieu;
+        document.getElementById('culture').value = culture;
+        document.getElementById('superficie').value = superficie;
+        document.getElementById('observations').value = observations;
+    }
+</script>

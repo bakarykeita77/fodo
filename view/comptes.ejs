@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>comptes</title>
+    <link rel="stylesheet" href="css/comptes.css">
+    <link rel="stylesheet" href="css/class.css">
+    <link rel="stylesheet" href="css/culture.css">
+</head>
+<body>
+    <div id="container">
+        
+        <%- include('../public/composants/page_head.ejs') %>
+        <div class="page_body">
+
+            <%- include('../public/composants/header.ejs') %> 
+
+            <h1>Les Comptes</h1>
+
+            <div id="culture_onglet">
+                <span id="champs_info"><a href="info?lieu=<%= data[0].village %>&culture=<%= data[0].culture %>">Champs info</a></span>
+                <span id="travaux"><a href="travaux?lieu=<%= data[0].village %>&culture=<%= data[0].culture %>">Travaux</a></span>
+                <span id="comptes"><a href="comptes?lieu=<%= data[0].village %>&culture=<%= data[0].culture %>">Comptes d'exploitation</a></span>
+            </div>
+
+        <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+        </div>
+    </div>
+</body>
+</html>

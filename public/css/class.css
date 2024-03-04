@@ -1,0 +1,23 @@
+
+.container {
+    padding: 0;
+    margin: 0;
+}
+.page_body {
+    width: 70%;
+    margin: auto;
+    padding: 0;
+}
+.sections {
+    border: 1px solid transparent;
+    border-top-color: #aaa;
+    border-bottom-color: #aaa;
+    padding: 1rem 0;
+}
+.asides_container {
+    position: absolute;
+    display: inline-block;
+    border: 1px solid transparent;
+    width: 74%;
+    min-height: calc(100vh - 24rem);
+}

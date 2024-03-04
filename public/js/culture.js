@@ -1,45 +1,21 @@
 
-
-let champs_container = document.getElementById('champs_container');
-let culture_card = document.querySelectorAll('.culture_card');
-let culture_titre = document.getElementById('culture_titre');
-let cultures = document.querySelectorAll('.cultures p');
-
+let fiches = document.querySelector('.culture_fiches:not(#culture_fiche_info)');
+let culture_fiches = document.querySelectorAll('.culture_fiches');
+let champs_info = document.getElementById('champs_info');
+let champs_info_form = document.getElementById('champs_info_form');
 
 
+document.getElementsByTagName('.culture_fiches:not(#culture_fiche_info)').style.display = 'none';
 
+function a() {
+    culture_fiches.forEach(fiche => {
 
-function chargerEtAfficherDetailsDuChamps() {
-
-    champs_container.style.display = 'none';
-    culture_card.forEach(element => {
-        
-        element.addEventListener('click', () => {
+        let id_fiche = fiche.id;
             
-            let culture = element.firstElementChild.innerHTML;
-            let lieu_de_la_culture = culture.split(' ')[2];
-
-            culture_titre.innerHTML = culture;
-
-            champs_container.style.display = 'block';
-            styliserCulturesCards();
-
-
-            function styliserCulturesCards() {
-                culture_card.forEach(element => {
-                    if (element.firstElementChild.innerHTML.split(' ')[2] ===lieu_de_la_culture) {
-                        element.style.backgroundColor = '#fff';
-                    }else{
-                        element.style.backgroundColor = 'greenyellow';
-                    }
-                    
-                });
-            }
-        });
+        if(id_fiche === 'culture_fiche_info') {     
+            fiche.style.display = 'block';
+        }else{
+            fiche.style.display = 'none';
+        }
     });
-}
-function fermetureDesDetailsDuChamps() {
-    document.getElementById('details_foot').addEventListener('click', () => {
-        fermetureVertical(details_de_champs);
-    })
 }

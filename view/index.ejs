@@ -5,125 +5,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/class.css">
+    <link rel="stylesheet" href="css/culture.css">
     <title>index</title>
 </head>
 <body>
 
-    <div id="container">
+    <% let cultures = []; cultures[0] = '';%>
+    <% let villages = []; villages[0] = '';%>
+    <% let champs = []; champs[0] = '';%>
+    <% let etapes = []; etapes[0] = '';%>
+
+    <% for(let i=0; i<data.length; i++) {
+
+        let culture = data[i].culture;
+        let village = data[i].village;
+        let champ = data[i].culture+' de '+data[i].village;
+        let etape = data[i].etape;
+
+        if(cultures.indexOf(culture) === -1) { cultures.push(culture); }
+        if(villages.indexOf(village) === -1) { villages.push(village); }
+        if(champs.indexOf(champ) === -1) { champs.push(champ); }
+        if(etapes.indexOf(etape) === -1) { etapes.push(etape); }
+    } %>
+                
+    
+    <div class="container">
         
         <%- include('../public/composants/page_head.ejs') %>
 
-        <div id="page_body">
+        <div class="page_body">
 
             <%- include('../public/composants/header.ejs') %>
 
-            <div id="sections">
-
-                <% let liste_de_culture_1 = []; %>
-                <% let liste_de_culture_2 = []; %>
-                <% let cultures_identiques = []; %>
+            <div class="sections">
                 
-                <div id="nav_laterale_container">
-
-                    <div id="nav_laterale_head">
-
-                        <h2 id="nav_laterale_titre">Les Cultures</h2>
-
-                        <div id="nav_laterale_plus">+</div>
-
-                        <div id="forms_container">
-                            
-                            <form action="/" method="post" id="form_culture">
-                                <span id="form_culture_fermeture">&times</span>
-                                <br><br>
-                                <div id="form_culture_titre"></div>
-                                <br>
-                                <div id="form_culture_content">
-                                    <input type="hidden" name="id" id="id">
-                                    
-                                    <label for="id_lieu">id du Lieu</label><br>
-                                    <input type="text" name="id_lieu" id="id_lieu">
-                                    <br><br>
-                                    <label for="culture">Culture</label><br>
-                                    <input type="text" name="culture" id="culture">
-                                    <br><br>
-                                    <label for="superficie">Superficie</label><br>
-                                    <input type="text" name="superficie" id="superficie">
-                                    <br><br>
-                                    <label for="observations">observations de la culture</label><br>
-                                    <input type="text" name="observations_de_la_culture" id="observations_de_la_culture">
-                                    <br><br>
-
-                                    <input type="submit" id="submit" value="Submit">
-                                </div>
-                                
-                            </form>
-
-                        </div>
-                        
-                    </div>
-
-                    <div id="nav_laterale_body">
-                        <% 
-                            for(var i=0; i<data.length; i++) { 
-                                liste_de_culture_1.push(data[i]);
-                                if(liste_de_culture_2.indexOf(data[i].culture) === -1) { liste_de_culture_2.push(data[i].culture); }
-                            }
-
-                            for(let i=0; i<liste_de_culture_2.length; i++) {
-                                cultures_identiques.push([liste_de_culture_2[i]]);
-                            }
-
-                            for(let i=0; i<cultures_identiques.length; i++) {
-                                for(let j=0; j<liste_de_culture_1.length; j++) {
-                                    if(cultures_identiques[i][0] === liste_de_culture_1[j].culture) {
-                                        cultures_identiques[i].push(liste_de_culture_1[j]);
-                                    }
-                                }
-                                cultures_identiques[i].shift();
-                            }
-                        %>
-                        
-
-                        <ol id="nav_laterale_list">
-
-                            <% for(var i=0; i<liste_de_culture_2.length; i++) { %>
-
-                                <li id=<%= liste_de_culture_2[i] %>>
-
-                                    <span class="culture"><a href="/culture?culture=<%= liste_de_culture_2[i] %>"><%= liste_de_culture_2[i] %></a></span> 
-                                    <span class="trois_points">&#8942;</span>
-                                    <div class="options_container" id="option_<%= i+1 %>">
-                                        <div class="champs_options" id="option_<%= i+1 %>">
-                                            <p class="modifier_champs" onclick="charger_form_culture('<%= data[i].id %>','<%= data[i].id_lieu %>','<%= data[i].culture %>','<%= data[i].superficie %>','<%= data[i].observations %>')">Modifier</p>
-                                            <p class="supprimer_champs" onclick="supprimer('<%= liste_de_culture_2[i].id %>')">Supprimer</p>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            <% } %>
-
-                        </ol>
-                    </div>
-                </div>
-
-                <div id="asides_container">
-                    <h2 id="nom_de_la_culture"></h2>
+                <%- include('../public/composants/nav_laterale.ejs') %>
+                
+                <div class="asides_container">
                     
                     <!-- Affichage des cards -->
-                    <center>
-                        <div id="image_de_localite"><img src="/images/localites/guinee.jpg" alt=""></div>    
-                    </center>
+                    
+                    <div class="culture_fiches" id="culture_fiche_info">
+                        <form action="#">
+
+                            <h1 id="nom_de_la_culture">Journal des Travaux</h1>
+
+                            <label for="culture">Type de culture : </label>
+                            <select type="text" name="culture" id="culture">
+                                <% for(let i=0; i<cultures.length; i++) { %>
+                                    <option value="<%= cultures[i] %>"><%= cultures[i] %></option>
+                                <% } %>
+                            </select><br>
+                            
+                            <label for="village">Lieu de la culture : </label>
+                            <select type="text" name="village" id="village">
+                                <% for(let i=0; i<villages.length; i++) { %>
+                                    <option value="<%= villages[i] %>"><%= villages[i] %></option>
+                                <% } %>
+                            </select>/<br>
+
+                            <label for="champs">Champs :</label>
+                            <select type="text" name="champs" id="champs">
+                                <% for(let i=0; i<champs.length; i++) { %>
+                                    <option value="<%= champs[i] %>"><%= champs[i] %></option>
+                                <% } %>
+                            </select>/
+
+                            <label for="etape">Etape : </label>
+                            <select type="text" name="etape" id="etape">
+                                    <option value=""></option>
+                                    <option value="preparation_du_terrain">Preparation du terrain</option>
+                                    <option value="semis">Semis</option>
+                                    <option value="travaux_d_entretient">Travaux d'entretient</option>
+                                    <option value="recolte">Recolte</option>
+                            </select><br>
+
+                            <label for="date">Date :</label>
+                            <input type="text" name="date" id="date" value="<%=  %>"><br>
+
+                            <label for="travail">Travail :</label>
+                            <input type="text" name="travail" id="travail" value="<%=  %>"><br>
+
+                            <label for="personnel">Personnel :</label>
+                            <input type="text" name="personnel" id="personnel" value="<%=  %>">/
+
+                            <label for="quantite">Quantite :</label>
+                            <input type="text" name="quantite" id="quantite" value="<%=  %>">/
+
+                            <label for="duree">Duree :</label>
+                            <input type="text" name="duree" id="duree" value="<%=  %>">/
+
+                            <label for="cout">Cout :</label>
+                            <input type="text" name="cout" id="cout" value="<%=  %>">
+
+                        </form>
+                    </div>
+
+                <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+                
                 
                 </div>
             </div>
 
         </div>
-        <div id="page_foot"></div>
+        <div class="page_foot"></div>
 
     </div>
     
     <script src="js/index.js"></script>
+    <script src="js/fonctions.js"></script>
     
 </body>
 </html>

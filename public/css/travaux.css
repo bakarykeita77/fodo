@@ -1,0 +1,30 @@
+
+#tabke_des_travaux hr {
+    margin: 0;
+}
+.td_titre h3 {
+    margin: 0;
+    padding: 0;
+}
+.table_d_etape {
+    margin-bottom: 1rem;
+}
+.table_d_etape th, .table_d_etape td {
+    padding: 0 1rem;
+}
+#tabke_des_travaux th {
+    text-align: left;
+}
+.th_head {
+    background-color: #ccc;
+}
+.th_foot {
+    border: 0.125rem solid #ccc;
+}
+#tabke_des_travaux table:last-child td {
+    border-bottom: 1px solid #ccc;
+}
+#table_des_travaux form {
+    margin: 0;
+    padding: 0;
+}
