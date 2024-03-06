@@ -1,0 +1,61 @@
+
+    <% let cultures = []; cultures[0] = '';%>
+    <% let villages = []; villages[0] = '';%>
+    <% let champs = []; champs[0] = '';%>
+    <% let etapes = []; etapes[0] = '';%>
+
+    <% for(let i=0; i<data.length; i++) {
+
+        let culture = data[i].culture;
+        let village = data[i].village;
+        let champ = data[i].culture+' de '+data[i].village;
+        let etape = data[i].etape;
+
+        if(cultures.indexOf(culture) === -1) { cultures.push(culture); }
+        if(villages.indexOf(village) === -1) { villages.push(village); }
+        if(champs.indexOf(champ) === -1) { champs.push(champ); }
+        if(etapes.indexOf(etape) === -1) { etapes.push(etape); }
+    } %>
+    
+    <div class="culture_fiches" id="culture_fiche_info">
+        <form action="#">
+
+            <h1 id="nom_de_la_culture">Journal des Travaux</h1>
+
+            <label for="champs">Champs :</label>
+            <input type="text" name="champs" id="champs" value="No_<%= id_champs %>">/ 
+                
+            <label for="champs">Culture :</label>
+            <input type="text" name="<%= culture %>" id="<%= culture %>" value="<%= culture %>">/ 
+                
+            <label for="etape">Etape : </label>
+            <select type="text" name="etape" id="etape">
+                    <option value=""></option>
+                    <option value="preparation_du_terrain">Preparation du terrain</option>
+                    <option value="semis">Semis</option>
+                    <option value="travaux_d_entretient">Travaux d'entretient</option>
+                    <option value="recolte">Recolte</option>
+            </select><br>
+
+            <label for="date">Date :</label>
+            <input type="text" name="date" id="date" value="<%=  %>"><br>
+
+            <label for="travail">Travail :</label>
+            <input type="text" name="travail" id="travail" value="<%=  %>"><br>
+
+            <label for="personnel">Personnel :</label>
+            <input type="text" name="personnel" id="personnel" value="<%=  %>">/
+
+            <label for="quantite">Quantite :</label>
+            <input type="text" name="quantite" id="quantite" value="<%=  %>">/
+
+            <label for="duree">Duree :</label>
+            <input type="text" name="duree" id="duree" value="<%=  %>">/
+
+            <label for="cout">Cout :</label>
+            <input type="text" name="cout" id="cout" value="<%=  %>"><br>
+
+            <input type="submit" name="submit" id="submit" value="Enregistrer">
+
+        </form>
+    </div>
