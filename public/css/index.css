@@ -18,15 +18,6 @@
         max-width: 40rem;
         max-height: 20rem;
     }
-    .culture_fiches select {
-        border-style: none;
-        border-bottom: 1px solid #aaa;
-        margin-bottom: 1rem;
-        padding: 0 1rem;
-        min-width: 8rem;
-        font-weight: bold;
-
-    }
 
     @keyframes glisser_de_haut {
         from { top: -80vh; }

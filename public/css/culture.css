@@ -10,16 +10,3 @@
 #culture_onglet span:hover {
     background-color: #ccc;
 }
-.culture_fiches {
-    margin: 1rem 2rem;
-    min-height: 6rem;
-}
-/* .culture_fiches:not(#culture_fiche_info) { display: none; } */
-.culture_fiches input {
-    border-style: none;
-    border-bottom: 1px solid #aaa;
-    margin-bottom: 1rem;
-    padding: 0 1rem;
-    width: 7rem;
-    font-weight: bold;
-}

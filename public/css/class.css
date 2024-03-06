@@ -21,3 +21,16 @@
     width: 74%;
     min-height: calc(100vh - 24rem);
 }
+.culture_fiches {
+    height: 58vh;
+    overflow: auto;
+}
+.culture_fiches select, .culture_fiches input {
+    border-style: none;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    min-width: 8rem;
+    font-weight: bold;
+
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>culture</title>
+    <title>cultures</title>
     <link rel="stylesheet" href="css/cultures.css">
     <link rel="stylesheet" href="css/class.css">
     <link rel="stylesheet" href="css/index.css">
@@ -21,13 +21,13 @@
        
             <div id="champs_container">
 
-                <h1 id="culture_titre"> Champs de <%= data[0].culture %></h1> 
+                <h1 id="culture_titre"> Champs de <%= culture %></h1> 
 
                 <div id="reumes_des_champs">
                         
                     <table id="resunes_des_champs_table">
 
-                        <% let total_superficie = 0 %>
+                        <% let total_superficie = 0; %>
                         <tr>
                             <th>Numero du Champs</th>
                             <th>Lieu de la culture</th>
@@ -36,30 +36,37 @@
                         </tr>
                         <% for(let i=0; i<data.length; i++) { %>
                             <tr>
-                                <td><%= i+1 %></td>
-                                <td><%= data[i].village %></td>
-                                <td><%= data[i].superficie %></td>
+                                <td><%= i+1; %></td>
+                                <td><%= data[i].village; %></td>
+                                <td><%= data[i].superficie; %></td>
                                 <td><%= data[i].observations_de_la_culture %></td>
                             </tr>
-                            <% total_superficie += parseInt(data[i].superficie.split(' ')[0]) %>
+                            <% total_superficie += parseInt(data[i].superficie.split(' ')[0]); %>
                             
                         <%} %>
                         <tr>
                             <th colspan="2">Total superficie cultivee</th>
-                            <th><%= total_superficie %> ha</th>
+                            <th><%= total_superficie; %> ha</th>
                         </tr>
                     </table>
                 </div>
 
                 <div id="cultures_cards_container">
                     <% for(let i=0; i<data.length; i++) { %>
-                        <div class="culture_card" id="<%= data[i].culture %>_de_<%= data[i].village %>">
-                            <a href="/champs?lieu=<%= data[i].village %>&culture=<%= data[i].culture %>">
-                                <h4><%= data[i].village %></h4>
+
+                        <% let lieu = data[i].village; %>
+                        <% let culture = data[i].culture; %>
+                        <% let id_champs = data[i].id_champs; %>
+                        <% let id_lieu = data[i].id_lieu; %>
+                        <% let superficie = data[i].superficie; %>
+
+                        <div class="culture_card" id="<%= culture %>_de_<%= lieu %>">
+                            <a href="/champs?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&id_lieu=<%= id_lieu %>&superficie=<%= superficie %>">
+                                <h4><%= lieu %></h4>
                                 <span class="trois_points">&#8942;</span>
                                 <div class="options_container" id="option_<%= i+1 %>">
                                     <div class="champs_options" id="option_<%= i+1 %>">
-                                        <p class="modifier_champs" onclick="charger_form_culture('<%= data[i].id %>','<%= data[i].id_lieu %>','<%= data[i].culture %>','<%= data[i].superficie %>','<%= data[i].observations %>')">Modifier</p>
+                                        <p class="modifier_champs" onclick="charger_form_culture('<%= id_champs %>','<%= id_lieu %>','<%= culture %>','<%= superficie %>')">Modifier</p>
                                         <p class="supprimer_champs" onclick="supprimer('<% %>')">Supprimer</p>
                                     </div>
                                 </div>

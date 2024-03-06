@@ -7,12 +7,12 @@
     padding: 0;
 }
 .table_d_etape {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 .table_d_etape th, .table_d_etape td {
     padding: 0 1rem;
 }
-#tabke_des_travaux th {
+#table_des_travaux th {
     text-align: left;
 }
 .th_head {
@@ -27,4 +27,7 @@
 #table_des_travaux form {
     margin: 0;
     padding: 0;
+}
+.etape_libele {
+    position: absolute;
 }

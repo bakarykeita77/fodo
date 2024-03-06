@@ -58,7 +58,6 @@ const app = express();
                         console.log(erreur);
                     }else{
                         res.status(200).render('index', { data });
-                        console.log(data);
                     }
                 });
             }
@@ -72,7 +71,9 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                let culture = req.url.split('?')[1].split('=')[1];
+
+                let culture    = req.url.split('?')[1].split('=')[1];
+
                 let requete =  'SELECT * FROM champs \
                                 JOIN champs_cultures \
                                 ON champs.id = champs_cultures.id_champs \
@@ -89,7 +90,7 @@ const app = express();
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('cultures', { data });
+                        res.status(200).render('cultures', { data, culture });
                     }
                 });
             }
@@ -103,9 +104,12 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                
-                let lieu    = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture = req.url.split('?')[1].split('&')[1].split('=')[1];
+
+                let lieu       = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let culture    = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let id_champs  = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_lieu    = req.url.split('?')[1].split('&')[3].split('=')[1];
+                let superficie = req.url.split('?')[1].split('&')[4].split('=')[1];
 
                 let requete =  'SELECT * FROM champs \
                                 JOIN champs_cultures \
@@ -129,7 +133,7 @@ const app = express();
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('culture', { data });
+                        res.status(200).render('champs', { data, lieu, culture, id_champs, id_lieu, superficie });
                     }
                 });
             }
@@ -144,8 +148,9 @@ const app = express();
                 console.log(erreur);
             }else{
                 
-                let lieu    = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
 
                 let requete =  'SELECT * FROM champs \
                                 JOIN champs_cultures \
@@ -165,7 +170,7 @@ const app = express();
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('champs_info', { data });
+                        res.status(200).render('champs_info', { data, lieu, culture, id_champs });
                     }
                 });
             }
@@ -180,8 +185,9 @@ const app = express();
                 console.log(erreur);
             }else{
                 
-                let lieu = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture    = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
 
                 let requete =  'SELECT culture, superficie, village, etape, date_du_debut, date_de_fin, date, travail, personnel, quantite, duree, cout \
                                 FROM champs \
@@ -206,8 +212,7 @@ const app = express();
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('travaux', { data });
-                        console.log(data);
+                        res.status(200).render('travaux', { data, lieu, culture, id_champs });
                     }
                 });
 
@@ -223,25 +228,19 @@ const app = express();
                 console.log(erreur);
             }else{
                 
-                let lieu = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture    = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
 
                 let requete =  'SELECT * FROM champs \
                                 JOIN champs_cultures \
                                 ON champs.id = champs_cultures.id_champs \
                                 JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture\
-                                JOIN champs_lieux \
-                                ON champs.id = champs_lieux.id_champs \
+                                ON cultures.id = champs_cultures.id_culture \
                                 JOIN lieux \
-                                ON lieux.id = champs_lieux.id_lieu\
-                                JOIN travaux \
-                                ON champs.id = travaux.id_champs \
-                                JOIN etapes \
-                                ON etapes.id = travaux.id_etape \
+                                ON lieux.id = champs.id_lieu\
                                 WHERE culture = "'+culture+'" \
                                 AND village = "'+lieu+'" \
-                                ORDER BY personnel ASC \
                 ';
 
                              
@@ -249,8 +248,7 @@ const app = express();
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('comptes', { data });
-                        console.log(data);
+                        res.status(200).render('comptes', { data, lieu, culture, id_champs });
                     }
                 });
 

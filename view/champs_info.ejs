@@ -18,12 +18,12 @@
 
             <%- include('../public/composants/header.ejs') %> 
             
-            <h1 id="culture_titre">Champs de <%= data[0].culture %> de <%= data[0].village %></h1>
+            <h1 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h1>
 
             <div id="culture_onglet">
-                <span id="champs_info"><a href="info?lieu=<%= data[0].village %>&culture=<%= data[0].culture %>">Champs info</a></span>
-                <span id="travaux"><a href="travaux?lieu=<%= data[0].village %>&culture=<%= data[0].culture %>">Travaux</a></span>
-                <span id="comptes"><a href="comptes?lieu=<%= data[0].village %>&culture=<%= data[0].culture %>">Comptes d'exploitation</a></span>
+                <span id="champs_info"><a href="info?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Champs info</a></span>
+                <span id="travaux"><a href="travaux?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Travaux</a></span>
+                <span id="comptes"><a href="comptes?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Comptes</a></span>
             </div>
 
           <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -31,13 +31,13 @@
             <div class="culture_fiches" id="culture_fiche_info">
                 <form action="#">
 
-                    <h3 id="culture_info_titre">Champs de <%= data[0].culture %> No_ de <%= data[0].village %></h3>
+                    <h3 id="culture_info_titre">Champs No_<%= id_champs %></h3>
 
                     <label for="culture">Type de culture : </label>
-                    <input type="text" name="culture" id="culture" value="<%= data[0].culture %>"><br>
+                    <input type="text" name="culture" id="culture" value="<%= culture %>"><br>
                     
                     <label for="sous_prefecture">Lieu de la culture : </label>
-                    <input type="text" name="village" id="village" value="<%= data[0].village %>">/ 
+                    <input type="text" name="village" id="village" value="<%= lieu %>">/ 
                     <input type="text" name="sous_prefecture" id="sous_prefecture" value="<%= data[0].sous_prefecture %>">/ 
                     <input type="text" name="prefecture" id="prefecture" value="<%= data[0].prefecture %>">/ 
                     <input type="text" name="province" id="province" value="<%= data[0].province %>"><br>
