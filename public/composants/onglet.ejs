@@ -1,0 +1,27 @@
+<style>
+    #culture_onglet {
+        background-color: #ddd;
+        margin: 2PX 0;
+        padding: 0.25rem 0;
+    }
+    #culture_onglet span {
+        background-color: #ddd;
+        margin: 0 2px;
+        padding: 0.125rem 0.5rem;
+        cursor: pointer;
+    }
+    #culture_onglet a {
+        text-decoration: none;
+    }
+    #culture_onglet span:hover {
+        background-color: #ccc;
+    }
+</style>
+
+<hr style="margin: 0;">
+<div id="culture_onglet">
+    <span id="champs_info"><a href="info?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Champs info</a></span>
+    <span id="travaux"><a href="travaux?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Travaux</a></span>
+    <span id="comptes"><a href="comptes?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Comptes</a></span>
+</div>
+<hr style="margin: 0;">

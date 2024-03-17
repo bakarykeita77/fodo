@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>champs</title>
-    <link rel="stylesheet" href="css/culture.css">
+    <link rel="stylesheet" href="css/champs.css">
     <link rel="stylesheet" href="css/class.css">
 </head>
 <body>
@@ -16,20 +16,15 @@
 
             <%- include('../public/composants/header.ejs') %> 
 
-            <h1 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h1>
+            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
 
-            <div id="culture_onglet">
-                <span id="champs_info"><a href="info?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Champs info</a></span>
-                <span id="travaux"><a href="travaux?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Travaux</a></span>
-                <span id="comptes"><a href="comptes?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Comptes</a></span>
-            </div>
-
+            <h3 id="culture_info_titre">Champs No_<%= id_champs %></h3>
+            <%- include('../public/composants/onglet.ejs') %> 
+            <h1 id="depenses_titre">Infos</h1>
         <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
 
             <div class="culture_fiches" id="culture_fiche_info">
                 <form action="#">
-
-                    <h3 id="culture_info_titre">Champs No_<%= id_champs %></h3>
 
                     <label for="culture">Type de culture : </label>
                     <input type="text" name="culture" id="culture" value="<%= culture %>"><br>
@@ -50,30 +45,7 @@
                     <input type="text" name="route" id="route" value="<%= data[0].etat_de_route %>">
 
                 </form>
-            </div>
 
-        <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
-        
-            <div class="culture_fiches" id="culture_fiche_travaux">
-                <form action="#">
-
-                    <h3 id="culture_travaux_titre">Travaux du Champs No_<%= id_champs %> de <%= culture %> de <%= lieu %></h3>
-
-                    <label for=""></label>
-                    <input type="text">
-                </form>
-            </div>
-        
-        <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
-
-            <div class="culture_fiches" id="culture_fiche_comptes">
-                <form action="#">
-
-                    <h3 id="culture_travaux_titre">Comptes du Champs No_<%= id_champs %> de <%= culture %> de <%= lieu %></h3>
-
-                    <label for=""></label>
-                    <input type="text">
-                </form>
             </div>
 
         </div>

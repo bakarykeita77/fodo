@@ -1,11 +1,14 @@
-
+body {
+    margin: 0;
+    padding: 0;
+}
 .container {
     padding: 0;
     margin: 0;
 }
 .page_body {
     width: 70%;
-    margin: auto;
+    margin-left: 15rem;
     padding: 0;
 }
 .sections {
@@ -23,6 +26,7 @@
 }
 .culture_fiches {
     height: 58vh;
+    margin: 1rem 0;
     overflow: auto;
 }
 .culture_fiches select, .culture_fiches input {
@@ -30,7 +34,24 @@
     border-bottom: 1px solid #aaa;
     margin-bottom: 1rem;
     padding: 0 1rem;
-    min-width: 8rem;
     font-weight: bold;
 
+}
+.culture_titre {
+    padding: 0 0.5rem;
+    margin: 0.5rem;
+}
+.culture_sous_titre {
+    padding: 0.5rem;
+    margin: 0;
+}
+.td_titre h3 {
+    margin: 0;
+    padding: 0;
+}
+.table_d_etape {
+    margin-bottom: 1rem;
+}
+.table_d_etape th, .table_d_etape td {
+    padding: 0 1rem;
 }

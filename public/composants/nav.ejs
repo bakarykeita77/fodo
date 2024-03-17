@@ -3,13 +3,13 @@
 <% let liste_de_culture_2 = []; %>
 <% let cultures_identiques = []; %>
                 
-<div id="nav_laterale_container">
+<div id="nav_container">
 
-    <div id="nav_laterale_head">
+    <div id="nav_head">
 
-        <h2 id="nav_laterale_titre">Les Cultures</h2>
+        <h2 id="nav_titre">Les Cultures</h2>
 
-        <div id="nav_laterale_plus">+</div>
+        <div id="nav_plus">+</div>
 
         <div id="forms_container">
             
@@ -43,7 +43,7 @@
         
     </div>
 
-    <div id="nav_laterale_body">
+    <div id="nav_body">
         <% 
             for(var i=0; i<data.length; i++) { 
                 liste_de_culture_1.push(data[i]);
@@ -65,7 +65,7 @@
         %>
         
 
-        <ol id="nav_laterale_list">
+        <ol id="nav_list">
 
             <% for(var i=0; i<liste_de_culture_2.length; i++) { %>
 
@@ -83,7 +83,7 @@
 
 
 <style>
-    #nav_laterale_container {
+    #nav_container {
         display: inline-block;
         position: relative;
         vertical-align: top;
@@ -94,7 +94,7 @@
         margin: 0.5rem;
         z-index: 1;
     }
-    #nav_laterale_titre, #nav_laterale_plus {
+    #nav_titre, #nav_plus {
         display: inline-block;
     }
     #forms_container {
@@ -145,7 +145,7 @@
         padding: 0 1rem;
         background-color: #eee;
     }
-    #nav_laterale_plus {
+    #nav_plus {
         margin: 0 0.5rem;
         height: 1.5rem;
         width: 1.5rem;
@@ -156,19 +156,19 @@
         line-height: 1.5rem;
         cursor: pointer;
     }
-    #nav_laterale_plus:hover {
+    #nav_plus:hover {
         background-color: #fff;
         font-weight: bold;
         color: green;
     }
-    #nav_laterale_list li {
+    #nav_list li {
         position: relative;
         padding: 0.25rem 0.5rem;
     }
-    #nav_laterale_list li:hover {
+    #nav_list li:hover {
         background-color: #0080000a;
     }
-    #nav_laterale_list li:hover .trois_points {
+    #nav_list li:hover .trois_points {
         display: block;
     }
 </style>
@@ -178,14 +178,14 @@
     let forms_container = document.getElementById('forms_container');
     let form_culture = document.getElementById('form_culture');
     let form_culture_titre = document.getElementById('form_culture_titre');
-    let nav_laterale_li = document.querySelectorAll('#nav_laterale_list li');
-    let cultures = document.querySelectorAll('#nav_laterale_list li .culture');
-    let id_lieux = document.querySelectorAll('#nav_laterale_list li .id_lieu');
-    let nav_laterale_plus = document.getElementById('nav_laterale_plus');
+    let nav_li = document.querySelectorAll('#nav_list li');
+    let cultures = document.querySelectorAll('#nav_list li .culture');
+    let id_lieux = document.querySelectorAll('#nav_list li .id_lieu');
+    let nav_plus = document.getElementById('nav_plus');
     let submit = document.getElementById('submit');
 
 
-    nav_laterale_plus.addEventListener('click', () => { 
+    nav_plus.addEventListener('click', () => { 
         affichageHorizontal(form_culture); 
         form_culture_titre.innerHTML = '<span id="titre_comentaire">Ajouter une nouvelle Culture</span><br><br>';
         viderLesChamps();

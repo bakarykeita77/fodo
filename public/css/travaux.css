@@ -2,16 +2,6 @@
 #tabke_des_travaux hr {
     margin: 0;
 }
-.td_titre h3 {
-    margin: 0;
-    padding: 0;
-}
-.table_d_etape {
-    margin: 1rem 0;
-}
-.table_d_etape th, .table_d_etape td {
-    padding: 0 1rem;
-}
 #table_des_travaux th {
     text-align: left;
 }
@@ -30,4 +20,7 @@
 }
 .etape_libele {
     position: absolute;
+}
+#depenses_titre {
+    margin-bottom: 0;
 }

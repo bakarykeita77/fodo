@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>travaux</title>
     <link rel="stylesheet" href="css/travaux.css">
-    <link rel="stylesheet" href="css/culture.css">
     <link rel="stylesheet" href="css/class.css">
 </head>
 <body>
@@ -14,20 +13,13 @@
     <div id="container">
         
         <%- include('../public/composants/page_head.ejs') %>
+
         <div class="page_body">
 
             <%- include('../public/composants/header.ejs') %> 
             
-            <h1 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h1>
+            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
 
-            <div id="culture_onglet">
-                <span id="champs_info"><a href="info?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Champs info</a></span>
-                <span id="travaux"><a href="travaux?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Travaux</a></span>
-                <span id="comptes"><a href="comptes?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Comptes</a></span>
-            </div>
-
-          <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
-          
             <% let travaux_1 = []; %> 
             <% let travaux_2 = []; %>
             <% let travaux_3 = []; %>
@@ -76,7 +68,10 @@
           
           <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
 
-            <h3 id="culture_info_titre">Travaux du Champs No_<%= id_champs %></h3>
+            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
+
+            <%- include('../public/composants/onglet.ejs') %> 
+            <h1 id="depenses_titre">Depenses effectuees</h1>
 
             <div class="culture_fiches" id="culture_fiche_info">
                 
@@ -87,7 +82,8 @@
                                 <tr>
                                     <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
                                     <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Activites</th>
+                                    <th class="th_head" style="width: 16rem;"> Travail</th>
+                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
                                     <th class="th_head" style="width: 4rem;">Quantite</th>
                                     <th class="th_head" style="width: 4rem;">Personnel</th>
                                     <th class="th_head" style="width: 4rem;">Duree</th>
@@ -101,12 +97,14 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                 </tr>
                                 <% for(let i=0; i<travaux_1.length; i++) { %>
                                     <tr>
                                         <td width="4"></td>
                                         <td><%= travaux_1[i].date %></td>
                                         <td><%= travaux_1[i].travail %></td>
+                                        <td><%= travaux_1[i].moyen %></td>
                                         <td style="text-align: right;"><%= travaux_1[i].quantite %></td>
                                         <td style="text-align: right;"><%= travaux_1[i].personnel %></td>
                                         <td style="text-align: right;"><%= travaux_1[i].duree %></td>
@@ -115,7 +113,7 @@
                                 <% } %>
                                 <tr>
                                     <th width="4"></th>
-                                    <th colspan="3"></th>
+                                    <th colspan="4"></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_1; %></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_3; %> jour</th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_4; %> FG</th>
@@ -130,7 +128,8 @@
                                 <tr>
                                     <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
                                     <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Activites</th>
+                                    <th class="th_head" style="width: 16rem;"> Travail</th>
+                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
                                     <th class="th_head" style="width: 4rem;">Quantite</th>
                                     <th class="th_head" style="width: 4rem;">Personnel</th>
                                     <th class="th_head" style="width: 4rem;">Duree</th>
@@ -150,6 +149,7 @@
                                         <td width="4"></td>
                                         <td><%= travaux_2[i].date %></td>
                                         <td><%= travaux_2[i].travail %></td>
+                                        <td><%= travaux_2[i].moyen %></td>
                                         <td style="text-align: right;"><%= travaux_2[i].quantite %></td>
                                         <td style="text-align: right;"><%= travaux_2[i].personnel %></td>
                                         <td style="text-align: right;"><%= travaux_2[i].duree %></td>
@@ -158,7 +158,7 @@
                                 <% } %>
                                 <tr>
                                     <th width="4"></th>
-                                    <th colspan="3"></th>
+                                    <th colspan="4"></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_5; %></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_7; %> jour</th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_8; %> FG</th>
@@ -173,7 +173,8 @@
                                 <tr>
                                     <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
                                     <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Activites</th>
+                                    <th class="th_head" style="width: 16rem;"> Travail</th>
+                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
                                     <th class="th_head" style="width: 4rem;">Quantite</th>
                                     <th class="th_head" style="width: 4rem;">Personnel</th>
                                     <th class="th_head" style="width: 4rem;">Duree</th>
@@ -193,6 +194,7 @@
                                         <td width="4"></td>
                                         <td><%= travaux_3[i].date %></td>
                                         <td><%= travaux_3[i].travail %></td>
+                                        <td><%= travaux_3[i].moyen %></td>
                                         <td style="text-align: right;"><%= travaux_3[i].quantite %></td>
                                         <td style="text-align: right;"><%= travaux_3[i].personnel %></td>
                                         <td style="text-align: right;"><%= travaux_3[i].duree %></td>
@@ -201,7 +203,7 @@
                                 <% } %>
                                 <tr>
                                     <th width="4"></th>
-                                    <th colspan="3"></th>
+                                    <th colspan="4"></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_9; %></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_11; %> jour</th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_12; %> FG</th>
@@ -216,7 +218,8 @@
                                 <tr>
                                     <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
                                     <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Activites</th>
+                                    <th class="th_head" style="width: 16rem;"> Travail</th>
+                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
                                     <th class="th_head" style="width: 4rem;">Quantite</th>
                                     <th class="th_head" style="width: 4rem;">Personnel</th>
                                     <th class="th_head" style="width: 4rem;">Duree</th>
@@ -236,6 +239,7 @@
                                         <td width="4"></td>
                                         <td><%= travaux_4[i].date %></td>
                                         <td><%= travaux_4[i].travail %></td>
+                                        <td><%= travaux_4[i].moyen %></td>
                                         <td style="text-align: right;"><%= travaux_4[i].quantite %></td>
                                         <td style="text-align: right;"><%= travaux_4[i].personnel %></td>
                                         <td style="text-align: right;"><%= travaux_4[i].duree %></td>
@@ -244,7 +248,7 @@
                                 <% } %>
                                 <tr>
                                     <th width="4"></th>
-                                    <th colspan="3"></th>
+                                    <th colspan="4"></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_13; %></th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_15; %> jour</th>
                                     <th class="th_foot" style="text-align: right;"><%= totaux_16; %> FG</th>
@@ -255,7 +259,7 @@
                 </table>
 
             </div>
-
+            
         </div>
     </div>
 </body>

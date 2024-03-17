@@ -189,7 +189,7 @@ const app = express();
                 let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
                 let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
 
-                let requete =  'SELECT culture, superficie, village, etape, date_du_debut, date_de_fin, date, travail, personnel, quantite, duree, cout \
+                let requete =  'SELECT * \
                                 FROM champs \
                                 JOIN champs_cultures \
                                 ON champs.id = champs_cultures.id_champs \
@@ -280,6 +280,59 @@ const app = express();
     app.get('/propos', (req, res) => {
         res.status(200).render('propos');
     });
+
+    /*---------------------------------------------------------------------------------------------------------------------------------------*/
+       
+       app.get('/projet', (req, res) => {
+           req.getConnection((erreur, connection) => {
+               if(erreur) {
+                   console.log(erreur);
+               }else{
+                   
+                   let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
+   
+                   let requete =  'SELECT id_champs FROM champs';
+   
+                   res.status(200).render('projet_'+id_champs);
+               }
+           });
+       });
+
+
+    /*---------------------------------------------------------------------------------------------------------------------------------------*/
+    
+        app.get('/journal', (req, res) => {
+            req.getConnection((erreur, connection) => {
+                if(erreur) {
+                    console.log(erreur);
+                }else{
+                    
+                    let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                    let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                    let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
+
+                    let requete =  'SELECT * FROM champs \
+                                    JOIN champs_cultures \
+                                    ON champs.id = champs_cultures.id_champs \
+                                    JOIN cultures \
+                                    ON cultures.id = champs_cultures.id_culture \
+                                    JOIN lieux \
+                                    ON lieux.id = champs.id_lieu\
+                                    WHERE culture = "'+culture+'" \
+                                    AND village = "'+lieu+'" \
+                    ';
+
+
+                    connection.query(requete, [], (erreur, data) => {
+                        if(erreur) {
+                            console.log(erreur);
+                        }else{
+                            res.status(200).render('journal', {data, lieu, culture, id_champs});
+                        }
+                    });
+                }
+            });
+        });
 
 
 //Envoi des donnees a la base de donnees

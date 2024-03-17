@@ -8,30 +8,25 @@
     <link rel="stylesheet" href="css/comptes.css">
     <link rel="stylesheet" href="css/class.css">
     <link rel="stylesheet" href="css/culture.css">
+    <link rel="stylesheet" href="css/journal.css">
 </head>
 <body>
 
     <div id="container">
         
         <%- include('../public/composants/page_head.ejs') %>
+
         <div class="page_body">
 
             <%- include('../public/composants/header.ejs') %> 
 
-            <h1 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h1>
+            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
+            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
 
-            <div id="culture_onglet">
-                <span id="champs_info"><a href="info?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Champs info</a></span>
-                <span id="travaux"><a href="travaux?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Travaux</a></span>
-                <span id="comptes"><a href="comptes?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">Comptes</a></span>
-            </div>
+            <%- include('../public/composants/onglet.ejs') %> 
+            <%- include('../public/composants/onglet_comptes.ejs') %> 
 
-          <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
-          
-            <h3 id="culture_info_titre">Comptes du Champs No_<%= id_champs %></h3>
-
-            <%- include('../public/composants/Journal.ejs') %>
-
+            
         </div>
     </div>
 </body>
