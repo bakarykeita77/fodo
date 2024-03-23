@@ -222,6 +222,44 @@ const app = express();
 
  /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
+     // Insertion ou modification des donnees de la table champs
+    app.post('/travaux', (req, res) => {
+ 
+        let id_lieu   = req.body.id_lieu;
+        let lieu      = req.body.lieu;
+        let culture   = req.body.culture;
+        let id_champs = req.body.id_champs;
+        let id_etape  = req.body.etape;
+        let date      = req.body.date;
+        let quantite  = req.body.quantite;
+        let travail   = req.body.travail;
+        let moyen     = req.body.moyen;
+        let personnel = req.body.personnel;
+        let duree     = req.body.duree;
+        let cout      = req.body.cout;
+
+
+        req.getConnection((erreur,connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+
+                let requetesql = "INSERT INTO travaux(id, id_lieu, id_champs, id_etape, date, travail, moyen, personnel, quantite, duree ,cout ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                let donnees = [null, id_lieu, id_champs, id_etape, date, travail, moyen, personnel, quantite, duree ,cout];
+                                    
+                connection.query(requetesql, donnees, (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(200).render('comptes', { data, lieu, culture, id_champs });
+                    }
+                });
+            }
+        });
+    });
+        
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
     app.get('/comptes', (req, res) => {
         req.getConnection((erreur,connection) => {
             if(erreur) {
@@ -276,73 +314,73 @@ const app = express();
     });
 
  /*---------------------------------------------------------------------------------------------------------------------------------------*/
-    
+      
     app.get('/propos', (req, res) => {
         res.status(200).render('propos');
     });
 
-    /*---------------------------------------------------------------------------------------------------------------------------------------*/
-       
-       app.get('/projet', (req, res) => {
-           req.getConnection((erreur, connection) => {
-               if(erreur) {
-                   console.log(erreur);
-               }else{
-                   
-                   let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
-   
-                   let requete =  'SELECT id_champs FROM champs';
-   
-                   res.status(200).render('projet_'+id_champs);
-               }
-           });
-       });
-
-
-    /*---------------------------------------------------------------------------------------------------------------------------------------*/
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
     
-        app.get('/journal', (req, res) => {
-            req.getConnection((erreur, connection) => {
-                if(erreur) {
-                    console.log(erreur);
-                }else{
-                    
-                    let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                    let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                    let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
+ // Afficher les projets
+    app.get('/projet', (req, res) => {
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                
+                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
 
-                    let requete =  'SELECT * FROM champs \
-                                    JOIN champs_cultures \
-                                    ON champs.id = champs_cultures.id_champs \
-                                    JOIN cultures \
-                                    ON cultures.id = champs_cultures.id_culture \
-                                    JOIN lieux \
-                                    ON lieux.id = champs.id_lieu\
-                                    WHERE culture = "'+culture+'" \
-                                    AND village = "'+lieu+'" \
-                    ';
-
-
-                    connection.query(requete, [], (erreur, data) => {
-                        if(erreur) {
-                            console.log(erreur);
-                        }else{
-                            res.status(200).render('journal', {data, lieu, culture, id_champs});
-                        }
-                    });
-                }
-            });
+                res.status(200).render('projet_'+id_champs);
+            }
         });
+    });
+
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+ // Affichage du fiche des travaux journaliers
+    app.get('/journal', (req, res) => {                                    
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
+
+                let requete =  'SELECT * FROM champs \
+                                JOIN champs_cultures \
+                                ON champs.id = champs_cultures.id_champs \
+                                JOIN cultures \
+                                ON cultures.id = champs_cultures.id_culture \
+                                JOIN lieux \
+                                ON lieux.id = champs.id_lieu\
+                                WHERE culture = "'+culture+'" \
+                                AND village = "'+lieu+'" \
+                ';
 
 
-//Envoi des donnees a la base de donnees
+                connection.query(requete, [], (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(200).render('journal', {data, lieu, culture, id_champs});
+                    }
+                });
+            }
+        });
+    });
+
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+ // Insertion ou modification des donnees de la table champs
     app.post('/', (req, res) => {
- 
+    
         let id = (req.body.id === "") ? null : req.body.id;
         let id_lieu = req.body.id_lieu;
         let culture = req.body.culture;
         let superficie = req.body.superficie;
-       
+        
         if(id_lieu == '')      { return; } 
         if(culture == '')      { return; } 
         if(superficie == '')   { return; } 
@@ -353,11 +391,11 @@ const app = express();
             }else{
 
                 let requetesql = (id === null) ? 
-                    "INSERT INTO champs(id, id_lieu, culture ,superficie ) VALUES(?,?,?,?,?)" : 
-                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ?, WHERE id = ?";
+                    "INSERT INTO champs(id, id_lieu, culture ,superficie ) VALUES(?,?,?,?,?)" :  /* pour inserer les donnees */
+                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ?, WHERE id = ?";  /* pour modifier les donnees */
                 let donnees = (id === null) ? 
-                    [null, id_lieu, culture, superficie] : 
-                    [id_lieu, culture, superficie, id];
+                    [null, id_lieu, culture, superficie] : /* pour inserer les donnees */
+                    [id_lieu, culture, superficie, id];    /* pour modifier les donnees */
                                     
                 connection.query(requetesql, donnees, (erreur, data) => {
                     if(erreur) {
@@ -369,8 +407,10 @@ const app = express();
             }
         });
     });
+    
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
-//Suppression des donnees de la base de donnees
+ // Suppression des donnees de la table champs
     app.delete('/:id', (req, res) => {
         req.getConnection((erreur, connection) => {
             if(erreur) {
@@ -389,11 +429,14 @@ const app = express();
         });
     });
 
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
     app.use((req, res) => {
         res.status(404).render('erreur');
     });
 
-    
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
     app.listen(3000, () => {
         console.log('Le serveur tourne sur le port 3000');
     });

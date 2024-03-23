@@ -11,7 +11,7 @@
 <body>
     
     <div id="container">
-        
+       
         <%- include('../public/composants/page_head.ejs') %>
 
         <div class="page_body">
@@ -71,7 +71,7 @@
             <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
 
             <%- include('../public/composants/onglet.ejs') %> 
-            <h1 id="depenses_titre">Depenses effectuees</h1>
+            <h1 id="depenses_titre">Travaux effectues</h1>
 
             <div class="culture_fiches" id="culture_fiche_info">
                 
@@ -114,12 +114,11 @@
                                 <tr>
                                     <th width="4"></th>
                                     <th colspan="4"></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_1; %></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_3; %> jour</th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_4; %> FG</th>
+                                    <th class="th_foot" ><%= totaux_1; %></th>
+                                    <th class="th_foot" ><%= totaux_3; %> jour</th>
+                                    <th class="th_foot" id="totaux_1"><%= totaux_4; %></th>
                                 </tr>
                             </table>
-                            <hr>
                         </td>
                     </tr>
                     <tr>
@@ -159,12 +158,11 @@
                                 <tr>
                                     <th width="4"></th>
                                     <th colspan="4"></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_5; %></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_7; %> jour</th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_8; %> FG</th>
+                                    <th class="th_foot" ><%= totaux_5; %></th>
+                                    <th class="th_foot" ><%= totaux_7; %> jour</th>
+                                    <th class="th_foot"id="totaux_2" ><%= totaux_8; %></th>
                                 </tr>
                             </table>
-                            <hr>
                         </td>
                     </tr>
                     <tr>
@@ -204,12 +202,11 @@
                                 <tr>
                                     <th width="4"></th>
                                     <th colspan="4"></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_9; %></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_11; %> jour</th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_12; %> FG</th>
+                                    <th class="th_foot" ><%= totaux_9; %></th>
+                                    <th class="th_foot" ><%= totaux_11; %> jour</th>
+                                    <th class="th_foot" id="totaux_3"><%= totaux_12; %></th>
                                 </tr>
                             </table>
-                            <hr>
                         </td>
                     </tr>
                     <tr>
@@ -249,9 +246,9 @@
                                 <tr>
                                     <th width="4"></th>
                                     <th colspan="4"></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_13; %></th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_15; %> jour</th>
-                                    <th class="th_foot" style="text-align: right;"><%= totaux_16; %> FG</th>
+                                    <th class="th_foot" ><%= totaux_13; %></th>
+                                    <th class="th_foot" ><%= totaux_15; %> jour</th>
+                                    <th class="th_foot" id="totaux_4"><%= totaux_16; %></th>
                                 </tr>
                             </table>
                         </td>
@@ -261,6 +258,9 @@
             </div>
             
         </div>
+
+        <script src="js/travaux.js"></script>
+
     </div>
 </body>
 </html>

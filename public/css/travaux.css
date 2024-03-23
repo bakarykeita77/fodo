@@ -2,15 +2,6 @@
 #tabke_des_travaux hr {
     margin: 0;
 }
-#table_des_travaux th {
-    text-align: left;
-}
-.th_head {
-    background-color: #ccc;
-}
-.th_foot {
-    border: 0.125rem solid #ccc;
-}
 #tabke_des_travaux table:last-child td {
     border-bottom: 1px solid #ccc;
 }
