@@ -251,45 +251,9 @@ const app = express();
                     if(erreur) {
                         console.log(erreur);
                     }else{
-                        res.status(200).render('comptes', { data, lieu, culture, id_champs });
+                        res.status(200).render('travaux', { data, lieu, culture, id_champs });
                     }
                 });
-            }
-        });
-    });
-        
- /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
-    app.get('/comptes', (req, res) => {
-        req.getConnection((erreur,connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
-                
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
-
-                let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture \
-                                JOIN lieux \
-                                ON lieux.id = champs.id_lieu\
-                                WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
-                ';
-
-                             
-                connection.query(requete, [], (erreur, data) => {
-                    if(erreur){
-                        console.log(erreur);
-                    }else{
-                        res.status(200).render('comptes', { data, lieu, culture, id_champs });
-                    }
-                });
-
             }
         });
     });
@@ -327,10 +291,12 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                
+              
+                let lieu = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let culture = req.url.split('?')[1].split('&')[1].split('=')[1];
                 let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
 
-                res.status(200).render('projet_'+id_champs);
+                res.status(200).render('projet_'+id_champs, {lieu, culture, id_champs});
             }
         });
     });

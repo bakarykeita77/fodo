@@ -17,14 +17,17 @@
 
             <%- include('../public/composants/header.ejs') %> 
 
-            <h1>Champs No_<%= id_champs %> : </h1>
-
             <%
                 let lieu = data[0].village;
                 let id_lieu = data[0].id_lieu;
                 let champ = data[0].culture+' de '+data[0].village;
                 let etape = data[0].etape;
             %>
+
+            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
+            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
+            
+            <%- include('../public/composants/onglet.ejs') %> 
         
             <h1 id="nom_de_la_culture">Fiche des Travaux journaliers</h1><br>
 

@@ -17,8 +17,12 @@
 
             <%- include('../public/composants/header.ejs') %> 
 
-            <h1>Projet No_8 : </h1>
-            <h2>Production de 5 tonnes de Manioc a Lola</h2>
+            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
+            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
+            
+            <%- include('../public/composants/onglet.ejs') %> 
+
+            <h1>Projet No_<%= id_champs %> : Production de 5 tonnes de <%= culture %> a <%= lieu %></h1>
 
             <table>
                 <tr>
