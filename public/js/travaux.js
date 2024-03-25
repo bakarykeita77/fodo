@@ -1,5 +1,6 @@
 
 let travaux_plus = document.getElementById('travaux_plus');
+let fiche_des_travaux_journaliers = document.querySelector('.fiche_des_travaux_journaliers');
 
 let totaux_1 = document.getElementById('totaux_1');
 let totaux_2 = document.getElementById('totaux_2');
@@ -13,9 +14,7 @@ let table_d_etape_4 = totaux_4.parentElement.parentElement.parentElement.parentE
 
 
 
-travaux_plus.addEventListener('click', () => {
-    //
-});
+travaux_plus.addEventListener('click', () => { couvercle_de_fiche.style.display = 'block'; });
 
 if(parseInt(totaux_1.textContent) == 0) { table_d_etape_1.style.display = 'none'; }
 if(parseInt(totaux_2.textContent) == 0) { table_d_etape_2.style.display = 'none'; }

@@ -66,6 +66,62 @@ const app = express();
 
  /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
+ // Insertion ou modification des donnees de la table champs
+    app.post('/', (req, res) => {
+        
+        let id = (req.body.id === "") ? null : req.body.id;
+        let id_lieu = req.body.id_lieu;
+        let culture = req.body.culture;
+        let superficie = req.body.superficie;
+        
+        if(id_lieu == '')      { return; } 
+        if(culture == '')      { return; } 
+        if(superficie == '')   { return; } 
+
+        req.getConnection((erreur,connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+
+                let requetesql = (id === null) ? 
+                    "INSERT INTO champs(id, id_lieu, culture ,superficie ) VALUES(?,?,?,?,?)" :  /* pour inserer les donnees */
+                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ?, WHERE id = ?";  /* pour modifier les donnees */
+                let donnees = (id === null) ? 
+                    [null, id_lieu, culture, superficie] : /* pour inserer les donnees */
+                    [id_lieu, culture, superficie, id];    /* pour modifier les donnees */
+                                    
+                connection.query(requetesql, donnees, (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(300).redirect('/');
+                    }
+                });
+            }
+        });
+    });
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+    // Afficher les projets
+    app.get('/projet', (req, res) => {
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+            
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
+
+                res.status(200).render('projet_'+id_champs, {lieu, id_lieu, culture, id_champs});
+            }
+        });
+    });
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+
     app.get('/cultures', (req, res) => {
         req.getConnection((erreur,connection) => {
             if(erreur) {
@@ -106,9 +162,9 @@ const app = express();
             }else{
 
                 let lieu       = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture    = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let id_champs  = req.url.split('?')[1].split('&')[2].split('=')[1];
-                let id_lieu    = req.url.split('?')[1].split('&')[3].split('=')[1];
+                let id_lieu    = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture    = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs  = req.url.split('?')[1].split('&')[3].split('=')[1];
                 let superficie = req.url.split('?')[1].split('&')[4].split('=')[1];
 
                 let requete =  'SELECT * FROM champs \
@@ -122,55 +178,18 @@ const app = express();
                                 ON lieux.id = champs_lieux.id_lieu\
                                 JOIN champs_etapes \
                                 ON champs.id = champs_etapes.id_champs \
+                                JOIN travaux \
+                                ON champs.id = travaux.id_champs \
                                 JOIN etapes \
                                 ON etapes.id = champs_etapes.id_etapes \
                                 WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
-                ';
-
-                                
+                                AND village = "'+lieu+'"';
+    
                 connection.query(requete, [], (erreur, data) => {
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('journal', { data, lieu, culture, id_champs, id_lieu, superficie });
-                    }
-                });
-            }
-        });
-    });
-
- /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
-    app.get('/info', (req, res) => {
-        req.getConnection((erreur,connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
-                
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
-
-                let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture \
-                                JOIN champs_lieux \
-                                ON champs.id = champs_lieux.id_champs \
-                                JOIN lieux \
-                                ON lieux.id = champs_lieux.id_lieu \
-                                WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
-                ';
-
-                                
-                connection.query(requete, [], (erreur, data) => {
-                    if(erreur){
-                        console.log(erreur);
-                    }else{
-                        res.status(200).render('champs_info', { data, lieu, culture, id_champs });
+                        res.status(300).redirect('/travaux?lieu='+lieu+'&id_lieu='+id_lieu+'&culture='+culture+'&id_champs='+id_champs+'&superficie='+superficie);
                     }
                 });
             }
@@ -184,10 +203,11 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                
+          
                 let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
 
                 let requete =  'SELECT * \
                                 FROM champs \
@@ -204,15 +224,13 @@ const app = express();
                                 JOIN etapes \
                                 ON etapes.id = travaux.id_etape \
                                 WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
-                                ORDER BY personnel ASC';
+                                AND village = "'+lieu+'"';
 
-                             
                 connection.query(requete, [], (erreur, data) => {
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('travaux', { data, lieu, culture, id_champs });
+                        res.status(200).render('travaux', { data, lieu, id_lieu, culture, id_champs });
                     }
                 });
 
@@ -251,7 +269,82 @@ const app = express();
                     if(erreur) {
                         console.log(erreur);
                     }else{
-                        res.status(200).render('champs', { data, lieu, culture, id_champs });
+                        res.status(200).redirect('/travaux?lieu='+lieu+'&id_lieu='+id_lieu+'&culture='+culture+'&id_champs='+id_champs);
+                    }
+                });
+            }
+        });
+    });
+
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+ // Affichage du fiche des travaux journaliers
+    app.get('/journal', (req, res) => {                                    
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
+
+                let requete =  'SELECT * FROM champs \
+                                JOIN champs_cultures \
+                                ON champs.id = champs_cultures.id_champs \
+                                JOIN cultures \
+                                ON cultures.id = champs_cultures.id_culture \
+                                JOIN lieux \
+                                ON lieux.id = champs.id_lieu\
+                                WHERE culture = "'+culture+'" \
+                                AND village = "'+lieu+'" \
+                ';
+
+
+                connection.query(requete, [], (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(200).render('journal', {data, lieu, id_lieu, culture, id_champs});
+                    }
+                });
+            }
+        });
+    });
+
+ /*---------------------------------------------------------------------------------------------------------------------------------------*/
+
+    app.get('/info', (req, res) => {
+        req.getConnection((erreur,connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
+
+                let requete =  'SELECT * FROM champs \
+                                JOIN champs_cultures \
+                                ON champs.id = champs_cultures.id_champs \
+                                JOIN cultures \
+                                ON cultures.id = champs_cultures.id_culture \
+                                JOIN champs_lieux \
+                                ON champs.id = champs_lieux.id_champs \
+                                JOIN lieux \
+                                ON lieux.id = champs_lieux.id_lieu \
+                                WHERE culture = "'+culture+'" \
+                                AND village = "'+lieu+'" \
+                ';
+
+                                
+                connection.query(requete, [], (erreur, data) => {
+                    if(erreur){
+                        console.log(erreur);
+                    }else{
+                        res.status(200).render('champs_info', { data, lieu, id_lieu, culture, id_champs });
                     }
                 });
             }
@@ -285,97 +378,6 @@ const app = express();
 
  /*---------------------------------------------------------------------------------------------------------------------------------------*/
     
- // Afficher les projets
-    app.get('/projet', (req, res) => {
-        req.getConnection((erreur, connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
-              
-                let lieu = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
-
-                res.status(200).render('projet_'+id_champs, {lieu, culture, id_champs});
-            }
-        });
-    });
-
- /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
- // Affichage du fiche des travaux journaliers
-    app.get('/journal', (req, res) => {                                    
-        req.getConnection((erreur, connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
-                
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[2].split('=')[1];
-
-                let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture \
-                                JOIN lieux \
-                                ON lieux.id = champs.id_lieu\
-                                WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
-                ';
-
-
-                connection.query(requete, [], (erreur, data) => {
-                    if(erreur) {
-                        console.log(erreur);
-                    }else{
-                        res.status(200).render('journal', {data, lieu, culture, id_champs});
-                    }
-                });
-            }
-        });
-    });
-
- /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
- // Insertion ou modification des donnees de la table champs
-    app.post('/', (req, res) => {
-    
-        let id = (req.body.id === "") ? null : req.body.id;
-        let id_lieu = req.body.id_lieu;
-        let culture = req.body.culture;
-        let superficie = req.body.superficie;
-        
-        if(id_lieu == '')      { return; } 
-        if(culture == '')      { return; } 
-        if(superficie == '')   { return; } 
-
-        req.getConnection((erreur,connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
-
-                let requetesql = (id === null) ? 
-                    "INSERT INTO champs(id, id_lieu, culture ,superficie ) VALUES(?,?,?,?,?)" :  /* pour inserer les donnees */
-                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ?, WHERE id = ?";  /* pour modifier les donnees */
-                let donnees = (id === null) ? 
-                    [null, id_lieu, culture, superficie] : /* pour inserer les donnees */
-                    [id_lieu, culture, superficie, id];    /* pour modifier les donnees */
-                                    
-                connection.query(requetesql, donnees, (erreur, data) => {
-                    if(erreur) {
-                        console.log(erreur);
-                    }else{
-                        res.status(300).redirect('/');
-                    }
-                });
-            }
-        });
-    });
-    
- /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
  // Suppression des donnees de la table champs
     app.delete('/:id', (req, res) => {
         req.getConnection((erreur, connection) => {

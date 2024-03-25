@@ -1,0 +1,72 @@
+    <style>
+        #culture { width: 4rem; }
+        #etape { width: 12rem; }
+        #date { width: 10rem; }
+        #travail { width: 14rem; }
+        #moyen { width: 6rem; }
+        #quantite { width: 1.5rem; }
+        #personnel { width: 1rem; }
+        #duree { width: 1rem; }
+        #cout { width: 5rem; }
+    </style>
+
+
+    <span class="fermeture" id="fermeture_de_fiche">&times;</span>
+    <h1 id="nom_de_la_culture">Fiche des Travaux journaliers</h1><br>
+
+    <div class="culture_fiches" id="culture_fiche_info">
+        <form action="/travaux" method="POST">
+
+            
+            <!-- <input type="hidden" name="id_lieu"   id="<%= id_lieu %>>"   value="<%= id_lieu %>"> -->
+            <input type="hidden" name="lieu"      id="<%= lieu %>>"      value="<%= lieu %>">
+            <input type="hidden" name="id_lieu"      id="<%= id_lieu %>>"      value="<%= id_lieu %>">
+            <input type="hidden" name="culture"   id="<%= culture %>>"   value="<%= culture %>">
+            <input type="hidden" name="id_champs" id="<%= id_champs %>>" value="<%= id_champs %>">
+
+
+            <label for="etape">Dans le champs No_<%= id_champs %> de la culture de <%= culture %> a <%= lieu %>, nous sommes a l'Etape de : </label>
+            <select type="text" name="etape" id="etape">
+                    <option value=""></option>
+                    <option value=1>Preparation du terrain</option>
+                    <option value=2>Semis</option>
+                    <option value=3>Travaux d'entretient</option>
+                    <option value=4>Recolte</option>
+            </select><br>
+
+            <label for="date">A la Date de :</label>
+            <input type="text" name="date" id="date" value="<%=  %>">
+
+            <label for="quantite">un volume de travail de :</label>
+            <input type="text" name="quantite" id="quantite" value=""
+
+            <label for="travail">ha de :</label>
+            <input type="text" name="travail" id="travail" value="">
+
+            <label for="moyen">a ete effectue au moyen de :</label>
+            <input type="text" name="moyen" id="moyen" value="">
+
+            <label for="personnel">par :</label>
+            <input type="text" name="personnel" id="personnel" value="">
+
+            <label for="duree">personnes en une duree de :</label>
+            <input type="text" name="duree" id="duree" value="">
+
+            <label for="cout">jour avec un cout total de :</label>
+            <input type="text" name="cout" id="cout" value="">
+            <label> FG </label><br><br><br>
+
+            <input type="submit" name="submit" id="submit" value="Enregistrer">
+
+        </form>
+    </div>
+
+
+    <script>
+        let fermeture_de_fiche = document.getElementById('fermeture_de_fiche');
+        let couvercle_de_fiche = document.getElementById('couvercle_de_fiche');
+
+        fermeture_de_fiche.addEventListener('click', () => {
+            couvercle_de_fiche.style.display = 'none';
+        });
+    </script>
