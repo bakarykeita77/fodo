@@ -12,6 +12,7 @@
 .etape_libele {
     position: absolute;
 }
-#depenses_titre {
+#travaux_titre, #travaux_plus { display: inline-block; }
+#travaux_titre {
     margin-bottom: 0;
 }

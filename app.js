@@ -133,7 +133,7 @@ const app = express();
                     if(erreur){
                         console.log(erreur);
                     }else{
-                        res.status(200).render('champs', { data, lieu, culture, id_champs, id_lieu, superficie });
+                        res.status(200).render('journal', { data, lieu, culture, id_champs, id_lieu, superficie });
                     }
                 });
             }
@@ -251,7 +251,7 @@ const app = express();
                     if(erreur) {
                         console.log(erreur);
                     }else{
-                        res.status(200).render('travaux', { data, lieu, culture, id_champs });
+                        res.status(200).render('champs', { data, lieu, culture, id_champs });
                     }
                 });
             }

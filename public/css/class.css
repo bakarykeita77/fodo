@@ -44,6 +44,18 @@ body {
     padding: 0.5rem;
     margin: 0;
 }
+.plus {
+    margin: 0 0.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    background-color: #eee;
+    text-align: center;
+    line-height: 1.5rem;
+    cursor: pointer;
+}
+.plus a { text-decoration: none; }
 .td_titre h3 {
     margin: 0;
     padding: 0;

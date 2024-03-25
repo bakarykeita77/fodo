@@ -30,7 +30,7 @@
             <% let totaux_3 = 0; %>  <% let totaux_7 = 0; %>  <% let totaux_11 = 0; %>  <% let totaux_15 = 0; %>
             <% let totaux_4 = 0; %>  <% let totaux_8 = 0; %>  <% let totaux_12 = 0; %>  <% let totaux_16 = 0; %>
           
-            
+  <% console.log(data); %>        
             <% for(let i=0; i<data.length; i++) {
                 if(data[i].etape === "Preparation du terrain") { 
                     travaux_1.push(data[i]);
@@ -71,7 +71,9 @@
             <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
 
             <%- include('../public/composants/onglet.ejs') %> 
-            <h1 id="depenses_titre">Travaux effectues</h1>
+
+            <h1 id="travaux_titre">Travaux effectues</h1>
+            <div class="plus" id="travaux_plus"><a href="/journal?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>">+</a></div>
 
             <div class="culture_fiches" id="culture_fiche_info">
                 
