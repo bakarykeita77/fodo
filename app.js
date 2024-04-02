@@ -224,7 +224,8 @@ const app = express();
                                 JOIN etapes \
                                 ON etapes.id = travaux.id_etape \
                                 WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'"';
+                                AND village = "'+lieu+'"\
+                                ORDER BY date ASC';
 
                 connection.query(requete, [], (erreur, data) => {
                     if(erreur){
@@ -240,7 +241,7 @@ const app = express();
 
  /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
-     // Insertion ou modification des donnees de la table champs
+     // Insertion ou modification des donnees de la table travaux
     app.post('/travaux', (req, res) => {
  
         let id_lieu   = req.body.id_lieu;
@@ -257,60 +258,30 @@ const app = express();
         let cout      = req.body.cout;
 
 
-        req.getConnection((erreur,connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
+        if(id_lieu != '' && lieu != '' && culture != '' && id_champs != '' && id_etape != '' && date != '' && quantite != '' && travail != '' && moyen != '' && personnel != '' && duree != '' && cout != '') {
 
-                let requetesql = "INSERT INTO travaux(id, id_lieu, id_champs, id_etape, date, travail, moyen, personnel, quantite, duree ,cout ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                let donnees = [null, id_lieu, id_champs, id_etape, date, travail, moyen, personnel, quantite, duree ,cout];
-                                    
-                connection.query(requetesql, donnees, (erreur, data) => {
-                    if(erreur) {
-                        console.log(erreur);
-                    }else{
-                        res.status(200).redirect('/travaux?lieu='+lieu+'&id_lieu='+id_lieu+'&culture='+culture+'&id_champs='+id_champs);
-                    }
-                });
-            }
-        });
-    });
+            req.getConnection((erreur,connection) => {
+                if(erreur) {
+                    console.log(erreur);
+                }else{
 
- /*---------------------------------------------------------------------------------------------------------------------------------------*/
-
- // Affichage du fiche des travaux journaliers
-    app.get('/journal', (req, res) => {                                    
-        req.getConnection((erreur, connection) => {
-            if(erreur) {
-                console.log(erreur);
-            }else{
-                
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
-
-                let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture \
-                                JOIN lieux \
-                                ON lieux.id = champs.id_lieu\
-                                WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
-                ';
-
-
-                connection.query(requete, [], (erreur, data) => {
-                    if(erreur) {
-                        console.log(erreur);
-                    }else{
-                        res.status(200).render('journal', {data, lieu, id_lieu, culture, id_champs});
-                    }
-                });
-            }
-        });
+                    let requetesql = "INSERT INTO travaux(id, id_lieu, id_champs, id_etape, date, travail, moyen, personnel, quantite, duree ,cout ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                    let donnees = [null, id_lieu, id_champs, id_etape, date, travail, moyen, personnel, quantite, duree ,cout];
+                                        
+                    connection.query(requetesql, donnees, (erreur, data) => {
+                        if(erreur) {
+                            console.log(erreur);
+                        }else{
+                            res.status(200).redirect('/travaux?lieu='+lieu+'&id_lieu='+id_lieu+'&culture='+culture+'&id_champs='+id_champs);
+                            console.log('Travail enregiste !');
+                        }
+                    });
+                }
+            });
+        }else{
+            res.status(300).redirect('/travaux?lieu='+lieu+'&id_lieu='+id_lieu+'&culture='+culture+'&id_champs='+id_champs);
+            console.log('Travail non enregistre. \nVeuiller remplir tous les champs !');
+        }
     });
 
  /*---------------------------------------------------------------------------------------------------------------------------------------*/

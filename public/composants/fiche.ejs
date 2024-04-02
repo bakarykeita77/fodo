@@ -12,6 +12,7 @@
 
 
     <span class="fermeture" id="fermeture_de_fiche">&times;</span>
+    <%- include('logo.ejs') %>
     <h1 id="nom_de_la_culture">Fiche des Travaux journaliers</h1><br>
 
     <div class="culture_fiches" id="culture_fiche_info">
@@ -20,7 +21,7 @@
             
             <!-- <input type="hidden" name="id_lieu"   id="<%= id_lieu %>>"   value="<%= id_lieu %>"> -->
             <input type="hidden" name="lieu"      id="<%= lieu %>>"      value="<%= lieu %>">
-            <input type="hidden" name="id_lieu"      id="<%= id_lieu %>>"      value="<%= id_lieu %>">
+            <input type="hidden" name="id_lieu"   id="<%= id_lieu %>>"   value="<%= id_lieu %>">
             <input type="hidden" name="culture"   id="<%= culture %>>"   value="<%= culture %>">
             <input type="hidden" name="id_champs" id="<%= id_champs %>>" value="<%= id_champs %>">
 
@@ -38,7 +39,7 @@
             <input type="text" name="date" id="date" value="<%=  %>">
 
             <label for="quantite">un volume de travail de :</label>
-            <input type="text" name="quantite" id="quantite" value=""
+            <input type="text" name="quantite" id="quantite" value="">
 
             <label for="travail">ha de :</label>
             <input type="text" name="travail" id="travail" value="">
@@ -56,7 +57,7 @@
             <input type="text" name="cout" id="cout" value="">
             <label> FG </label><br><br><br>
 
-            <input type="submit" name="submit" id="submit" value="Enregistrer">
+            <input type="submit" name="submit" id="submit" value="Enregistrer le travail">
 
         </form>
     </div>

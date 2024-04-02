@@ -71,7 +71,7 @@ body {
 .fermeture:active { background-color: #aaa; }
 .fiche_des_travaux_journaliers {
     position: relative;
-    top: 19rem;
+    top: 15rem;
     padding: 6rem 2rem 6rem 6rem;
     width: 60vw;
     max-width: 50rem;
