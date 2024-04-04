@@ -1,0 +1,21 @@
+CREATE TABLE `fodo`.`projets` ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `id_champs` INT NOT NULL ,
+    `no` VARCHAR(6) NOT NULL , 
+    `taches` VARCHAR(300) NOT NULL , 
+    `priorite` VARCHAR(6) NOT NULL , 
+    `duree` VARCHAR(10) NOT NULL , 
+    `debut` VARCHAR(50) NOT NULL , 
+    `fin` VARCHAR(50) NOT NULL , 
+    `moyen` VARCHAR(100) NOT NULL , 
+    `personnel` VARCHAR(5) NOT NULL , 
+    `cout` INT(16) NOT NULL , 
+     PRIMARY KEY (`id`)
+) ENGINE = MyISAM;
+
+
+CREATE TABLE `fodo`.`projets_list` ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `projet_name` VARCHAR(255) NOT NULL , 
+     PRIMARY KEY (`id`)
+) ENGINE = MyISAM;

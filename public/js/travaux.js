@@ -1,6 +1,5 @@
 
 let travaux_plus = document.getElementById('travaux_plus');
-let fiche_des_travaux_journaliers = document.querySelector('.fiche_des_travaux_journaliers');
 
 let totaux_1 = document.getElementById('totaux_1');
 let totaux_2 = document.getElementById('totaux_2');

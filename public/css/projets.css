@@ -1,0 +1,10 @@
+
+    #projets_titre, #projets_plus {
+        display: inline-block;
+    }
+    #projets_list {
+        list-style-type: none;
+    }
+    #projets_list a {
+        text-decoration: none;
+    }

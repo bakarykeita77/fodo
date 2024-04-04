@@ -32,17 +32,14 @@
                             <th>Numero du Champs</th>
                             <th>Lieu de la culture</th>
                             <th>Superficie</th>
-                            <th>Observations</th>
                         </tr>
                         <% for(let i=0; i<data.length; i++) { %>
                             <tr>
                                 <td><%= data[i].id_champs; %></td>
                                 <td><%= data[i].village; %></td>
                                 <td><%= data[i].superficie; %></td>
-                                <td><%= data[i].observations_de_la_culture %></td>
                             </tr>
                             <% total_superficie += parseInt(data[i].superficie.split(' ')[0]); %>
-                            
                         <%} %>
                         <tr>
                             <th colspan="2">Total superficie cultivee</th>

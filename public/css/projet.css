@@ -1,7 +1,44 @@
+
+#projet_titre {
+    margin: 1rem 0;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+}
+#projet_titre h1, #projet_titre h2 { display: inline-block; padding: 0; }
 table {
     border-collapse: collapse;
 }
-table th {
+th, td {
+    padding: 0.125rem 1rem;
+}
+th {
     text-align: left;
 }
-table td {}
+.th_etape { 
+    padding-top: 1rem;
+    border-bottom: 4px solid #bbb; 
+}
+.th_total { 
+    border: 1px solid #bbb; 
+}
+.th_totaux { 
+    border: 4px solid #bbb; 
+    background-color: #eee; 
+}
+td {
+    border: 1px solid #ccc;
+}
+.td_chifre { text-align: right; }
+.td_vide { border: none; }
+#last_td_vide { padding: 0.5rem 0; }
+#tr_1 th
+ { 
+    padding: 0.5rem;
+}
+#tr_1 th:not(.colonne_vide) { 
+    border: 1px solid #fff;
+    background-color: #ccc; 
+}
+.colonne_vide {
+    border: none;
+}

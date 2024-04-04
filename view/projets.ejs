@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projets</title>
+    <link rel="stylesheet" href="css/projets.css">
+    <link rel="stylesheet" href="css/class.css">
+</head>
+<body>
+    <div id="container">
+
+        <%- include('../public/composants/page_head.ejs') %>
+
+        <div class="page_body">
+
+            <%- include('../public/composants/header.ejs') %> 
+
+            <h2 id="culture_titre">Champs de</h2>
+            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_</h3>
+            
+            <%- include('../public/composants/onglet.ejs') %> 
+
+            <h1 id="projets_titre">Projets </h1>
+            <div class="plus" id="projets_plus">+</div>
+
+            <ul id="projets_list">
+                <% for(let i=0; i<data.length; i++) { %>
+                    <li><a href="projet?numero_du_projet=<%= data[i].id %>"><%= data[i].projet_name %></a></li>
+                <% } %>
+            </ul>
+
+
+        </div>
+    </div>
+    
+    <script src="js/projets.js"></script>
+</body>
+</html>

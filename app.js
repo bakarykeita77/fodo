@@ -103,19 +103,65 @@ const app = express();
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
+    app.get('/projets', (req, res) => {
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+                
+                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
+
+                let requete = 'SELECT * FROM projets_list';
+
+                connection.query(requete, [], (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(200).render('projets', {data, lieu, id_lieu, culture, id_champs});
+                    }
+                });
+            }
+        });
+    });
+
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+
     // Afficher les projets
     app.get('/projet', (req, res) => {
         req.getConnection((erreur, connection) => {
             if(erreur) {
                 console.log(erreur);
             }else{
-            
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
 
-                res.status(200).render('projet_'+id_champs, {lieu, id_lieu, culture, id_champs});
+                let id_champs = req.url.split('?')[1].split('=')[1];
+            
+                let requete  = 'SElECT projet_name, id_champs, id_etapes, etape, no, taches, duree, debut, fin, moyen, personnel, cout FROM projets \
+                                JOIN champs \
+                                ON champs.id = projets.id_champs \
+                                JOIN lieux \
+                                ON lieux.id = champs.id_lieu \
+                                JOIN cultures \
+                                ON cultures.id = champs.id_culture \
+                                JOIN etapes \
+                                ON etapes.id = projets.id_etapes \
+                                JOIN projets_list \
+                                ON projets_list.id = champs.id \
+                                WHERE projets.id_champs = '+id_champs;
+
+                connection.query(requete, [], (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        console.log(data);
+
+                        res.status(200).render('projet', {data, id_champs});
+                    }
+                });
+
             }
         });
     });
