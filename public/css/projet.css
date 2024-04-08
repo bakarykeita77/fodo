@@ -5,40 +5,61 @@
     border: 1px solid #ccc;
 }
 #projet_titre h1, #projet_titre h2 { display: inline-block; padding: 0; }
-table {
-    border-collapse: collapse;
+table { border-collapse: collapse; }
+#projet_table th, #projet_table td:not(.td_options) { padding: 0.125rem 1rem; }
+.td_options { padding: 0 0.5rem; cursor: pointer; }
+.td_options a { text-decoration: none; }
+#editer_projet_table input { 
+    border-style: none; 
+    background-color: transparent;
+    padding: 0 0.5rem; 
 }
-th, td {
-    padding: 0.125rem 1rem;
-}
-th {
-    text-align: left;
-}
+#input_2 { width: 2rem; }
+#input_3 { width: 14rem; }
+#input_4 { width: 3rem; }
+#input_5 { width: 6rem; }
+#input_6 { width: 6rem; }
+#input_7 { width: 8rem; }
+#input_8 { width: 5rem; }
+#input_9 { width: 3rem; }
+#input_10 { width: 4rem; }
+th { text-align: left; }
 .th_etape { 
     padding-top: 1rem;
     border-bottom: 4px solid #bbb; 
 }
-.th_total { 
-    border: 1px solid #bbb; 
-}
+.th_total { border: 1px solid #bbb; }
 .th_totaux { 
     border: 4px solid #bbb; 
     background-color: #eee; 
 }
-td {
-    border: 1px solid #ccc;
+#projet_table td:not(.sans_bordure) { border: 1px solid #ccc; }
+#editer_projet_table td { 
+    border: 1px solid #fff; 
+    background-color: #eee; 
+    height: 2rem;
 }
 .td_chifre { text-align: right; }
 .td_vide { border: none; }
-#last_td_vide { padding: 0.5rem 0; }
-#tr_1 th
- { 
-    padding: 0.5rem;
-}
-#tr_1 th:not(.colonne_vide) { 
+#tr_1 th { padding: 0.5rem; }
+#tr_1 th:not(.sans_bordure) { 
     border: 1px solid #fff;
     background-color: #ccc; 
 }
-.colonne_vide {
-    border: none;
+#projet_table .sans_bordure, #editer_projet_table .sans_bordure { border-color: #fff; background-color: transparent; }
+#editer_projet {
+    position: absolute;
+    padding: 2rem 0;
+    top: 60vh;
+    left: 15%;
+    min-height: 4rem;
+    background-color: #fff;
+    box-shadow: 0 0 0.5rem #aaa;
+}
+#editer_projet table { margin: 2rem; }
+#editer_projet input { min-width: 2rem; }
+#submit { 
+    border-style: none; 
+    cursor: pointer;
+    background-color: transparent;
 }

@@ -11,9 +11,13 @@ let table_d_etape_2 = totaux_2.parentElement.parentElement.parentElement.parentE
 let table_d_etape_3 = totaux_3.parentElement.parentElement.parentElement.parentElement.parentElement;
 let table_d_etape_4 = totaux_4.parentElement.parentElement.parentElement.parentElement.parentElement;
 
+let fermeture_de_fiche = document.getElementById('fermeture_de_fiche');
+let couvercle_de_fiche = document.getElementById('couvercle_de_fiche');
 
 
+couvercle_de_fiche.style.display = 'none';
 travaux_plus.addEventListener('click', () => { couvercle_de_fiche.style.display = 'block'; });
+fermeture_de_fiche.addEventListener('click', () => { couvercle_de_fiche.style.display = 'none'; });
 
 if(parseInt(totaux_1.textContent) == 0) { table_d_etape_1.style.display = 'none'; }
 if(parseInt(totaux_2.textContent) == 0) { table_d_etape_2.style.display = 'none'; }

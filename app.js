@@ -85,7 +85,7 @@ const app = express();
 
                 let requetesql = (id === null) ? 
                     "INSERT INTO champs(id, id_lieu, culture ,superficie ) VALUES(?,?,?,?,?)" :  /* pour inserer les donnees */
-                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ?, WHERE id = ?";  /* pour modifier les donnees */
+                    "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ? WHERE id = ?";  /* pour modifier les donnees */
                 let donnees = (id === null) ? 
                     [null, id_lieu, culture, superficie] : /* pour inserer les donnees */
                     [id_lieu, culture, superficie, id];    /* pour modifier les donnees */
@@ -109,10 +109,10 @@ const app = express();
                 console.log(erreur);
             }else{
                 
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
+                let lieu        = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let id_lieu     = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture     = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs   = req.url.split('?')[1].split('&')[3].split('=')[1];
 
                 let requete = 'SELECT * FROM projets_list';
 
@@ -139,7 +139,7 @@ const app = express();
 
                 let id_champs = req.url.split('?')[1].split('=')[1];
             
-                let requete  = 'SElECT projet_name, id_champs, id_etapes, etape, no, taches, duree, debut, fin, moyen, personnel, cout FROM projets \
+                let requete  = 'SElECT projets.id, projet_name, id_etapes, etape, no, taches, duree, debut, fin, moyen, personnel, cout FROM projets \
                                 JOIN champs \
                                 ON champs.id = projets.id_champs \
                                 JOIN lieux \
@@ -156,8 +156,6 @@ const app = express();
                     if(erreur) {
                         console.log(erreur);
                     }else{
-                        console.log(data);
-
                         res.status(200).render('projet', {data, id_champs});
                     }
                 });
@@ -168,6 +166,47 @@ const app = express();
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
+    app.post('/projet', (req, res) => {
+
+        let id_champs   = 8;
+
+        let id          = req.body.input_0;
+        let projet_name = req.body.input_1;
+        let no          = req.body.input_2;
+        let tache       = req.body.input_3;
+        let duree       = req.body.input_4;
+        let debut       = req.body.input_5;
+        let fin         = req.body.input_6;
+        let moyen       = req.body.input_7;
+        let personnel   = req.body.input_9;
+        let cout        = req.body.input_10;
+
+        id        = parseInt(id);
+        personnel = parseInt(personnel);
+        cout      = parseInt(cout);
+
+        req.getConnection((erreur, connection) => {
+            if(erreur) {
+                console.log(erreur);
+            }else{
+
+                let requete = "UPDATE projets SET no = ?, taches = ?, duree = ?, debut = ?, fin = ?, moyen = ?, personnel = ?, cout = ? WHERE id = ?";
+                let modifications = [no, tache, duree, debut, fin, moyen, personnel, cout, id];
+
+                connection.query(requete, modifications, (erreur, data) => {
+                    if(erreur) {
+                        console.log(erreur);
+                    }else{
+                        res.status(300).redirect('/projet?id_champs='+id_champs);
+                        console.log('Modifications reussies !');
+                    }
+                    
+                });
+            }
+        });
+    });
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
     app.get('/cultures', (req, res) => {
         req.getConnection((erreur,connection) => {
             if(erreur) {
@@ -180,11 +219,11 @@ const app = express();
                                 JOIN champs_cultures \
                                 ON champs.id = champs_cultures.id_champs \
                                 JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture\
+                                ON cultures.id = champs_cultures.id_culture \
                                 JOIN champs_lieux \
                                 ON champs.id = champs_lieux.id_champs \
                                 JOIN lieux \
-                                ON lieux.id = champs_lieux.id_lieu\
+                                ON lieux.id = champs_lieux.id_lieu \
                                 WHERE culture = "'+culture+'" \
                 ';
                 
@@ -250,10 +289,10 @@ const app = express();
                 console.log(erreur);
             }else{
           
-                let lieu      = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let id_lieu   = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let culture   = req.url.split('?')[1].split('&')[2].split('=')[1];
-                let id_champs = req.url.split('?')[1].split('&')[3].split('=')[1];
+                let lieu        = req.url.split('?')[1].split('&')[0].split('=')[1];
+                let id_lieu     = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let culture     = req.url.split('?')[1].split('&')[2].split('=')[1];
+                let id_champs   = req.url.split('?')[1].split('&')[3].split('=')[1];
 
                 let requete =  'SELECT * \
                                 FROM champs \

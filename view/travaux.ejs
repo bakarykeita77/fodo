@@ -75,189 +75,191 @@
             <h1 id="travaux_titre">Travaux effectues</h1>
             <div class="plus" id="travaux_plus">+</div>
 
-            <div class="culture_fiches" id="culture_fiche_info">
-                
-                <table id="table_des_travaux">
-                    <tr>
-                        <td>
-                            <table class="table_d_etape">
-                                <tr>
-                                    <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
-                                    <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Travail</th>
-                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
-                                    <th class="th_head" style="width: 4rem;">Quantite</th>
-                                    <th class="th_head" style="width: 4rem;">Personnel</th>
-                                    <th class="th_head" style="width: 4rem;">Duree</th>
-                                    <th class="th_head" style="width: 6rem;">Cout</th>
-                                </tr>
-                                <tr>
-                                    <td width="4" class="etape_libele">Preparation terrain</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <% for(let i=0; i<travaux_1.length; i++) { %>
+            <center>
+                <div class="culture_fiches" id="culture_fiche_info">
+                    
+                    <table id="table_des_travaux">
+                        <tr>
+                            <td>
+                                <table class="table_d_etape">
                                     <tr>
-                                        <td width="4"></td>
-                                        <td><%= travaux_1[i].date %></td>
-                                        <td><%= travaux_1[i].travail %></td>
-                                        <td><%= travaux_1[i].moyen %></td>
-                                        <td style="text-align: right;"><%= travaux_1[i].quantite %></td>
-                                        <td style="text-align: right;"><%= travaux_1[i].personnel %></td>
-                                        <td style="text-align: right;"><%= travaux_1[i].duree %></td>
-                                        <td style="text-align: right;"><%= travaux_1[i].cout %></td>
+                                        <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
+                                        <th class="th_head" style="width: 6rem;">Date</th>
+                                        <th class="th_head" style="width: 16rem;"> Travail</th>
+                                        <th class="th_head" style="width: 6rem;"> Moyen</th>
+                                        <th class="th_head" style="width: 4rem;">Quantite</th>
+                                        <th class="th_head" style="width: 4rem;">Personnel</th>
+                                        <th class="th_head" style="width: 4rem;">Duree</th>
+                                        <th class="th_head" style="width: 6rem;">Cout</th>
                                     </tr>
-                                <% } %>
-                                <tr>
-                                    <th width="4"></th>
-                                    <th colspan="4"></th>
-                                    <th class="th_foot" ><%= totaux_1; %></th>
-                                    <th class="th_foot" ><%= totaux_3; %></th>
-                                    <th class="th_foot" id="totaux_1"><%= totaux_4; %></th>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table class="table_d_etape">
-                                <tr>
-                                    <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
-                                    <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Travail</th>
-                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
-                                    <th class="th_head" style="width: 4rem;">Quantite</th>
-                                    <th class="th_head" style="width: 4rem;">Personnel</th>
-                                    <th class="th_head" style="width: 4rem;">Duree</th>
-                                    <th class="th_head" style="width: 6rem;">Cout</th>
-                                </tr>
-                                <tr>
-                                    <td width="4" class="etape_libele">Semis</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <% for(let i=0; i<travaux_2.length; i++) { %>
                                     <tr>
-                                        <td width="4"></td>
-                                        <td><%= travaux_2[i].date %></td>
-                                        <td><%= travaux_2[i].travail %></td>
-                                        <td><%= travaux_2[i].moyen %></td>
-                                        <td style="text-align: right;"><%= travaux_2[i].quantite %></td>
-                                        <td style="text-align: right;"><%= travaux_2[i].personnel %></td>
-                                        <td style="text-align: right;"><%= travaux_2[i].duree %></td>
-                                        <td style="text-align: right;"><%= travaux_2[i].cout %></td>
+                                        <td width="4" class="etape_libele">Preparation terrain</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
-                                <% } %>
-                                <tr>
-                                    <th width="4"></th>
-                                    <th colspan="4"></th>
-                                    <th class="th_foot" ><%= totaux_5; %></th>
-                                    <th class="th_foot" ><%= totaux_7; %></th>
-                                    <th class="th_foot"id="totaux_2" ><%= totaux_8; %></th>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table class="table_d_etape">
-                                <tr>
-                                    <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
-                                    <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Travail</th>
-                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
-                                    <th class="th_head" style="width: 4rem;">Quantite</th>
-                                    <th class="th_head" style="width: 4rem;">Personnel</th>
-                                    <th class="th_head" style="width: 4rem;">Duree</th>
-                                    <th class="th_head" style="width: 6rem;">Cout</th>
-                                </tr>
-                                <tr>
-                                    <td width="4" class="etape_libele">Entretients</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <% for(let i=0; i<travaux_3.length; i++) { %>
+                                    <% for(let i=0; i<travaux_1.length; i++) { %>
+                                        <tr>
+                                            <td width="4"></td>
+                                            <td><%= travaux_1[i].date %></td>
+                                            <td><%= travaux_1[i].travail %></td>
+                                            <td><%= travaux_1[i].moyen %></td>
+                                            <td style="text-align: right;"><%= travaux_1[i].quantite %></td>
+                                            <td style="text-align: right;"><%= travaux_1[i].personnel %></td>
+                                            <td style="text-align: right;"><%= travaux_1[i].duree %></td>
+                                            <td style="text-align: right;"><%= travaux_1[i].cout %></td>
+                                        </tr>
+                                    <% } %>
                                     <tr>
-                                        <td width="4"></td>
-                                        <td><%= travaux_3[i].date %></td>
-                                        <td><%= travaux_3[i].travail %></td>
-                                        <td><%= travaux_3[i].moyen %></td>
-                                        <td style="text-align: right;"><%= travaux_3[i].quantite %></td>
-                                        <td style="text-align: right;"><%= travaux_3[i].personnel %></td>
-                                        <td style="text-align: right;"><%= travaux_3[i].duree %></td>
-                                        <td style="text-align: right;"><%= travaux_3[i].cout %></td>
+                                        <th width="4"></th>
+                                        <th colspan="4"></th>
+                                        <th class="th_foot" ><%= totaux_1; %></th>
+                                        <th class="th_foot" ><%= totaux_3; %></th>
+                                        <th class="th_foot" id="totaux_1"><%= totaux_4; %></th>
                                     </tr>
-                                <% } %>
-                                <tr>
-                                    <th width="4"></th>
-                                    <th colspan="4"></th>
-                                    <th class="th_foot" ><%= totaux_9; %></th>
-                                    <th class="th_foot" ><%= totaux_11; %></th>
-                                    <th class="th_foot" id="totaux_3"><%= totaux_12; %></th>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table class="table_d_etape">
-                                <tr>
-                                    <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
-                                    <th class="th_head" style="width: 6rem;">Date</th>
-                                    <th class="th_head" style="width: 16rem;"> Travail</th>
-                                    <th class="th_head" style="width: 6rem;"> Moyen</th>
-                                    <th class="th_head" style="width: 4rem;">Quantite</th>
-                                    <th class="th_head" style="width: 4rem;">Personnel</th>
-                                    <th class="th_head" style="width: 4rem;">Duree</th>
-                                    <th class="th_head" style="width: 6rem;">Cout</th>
-                                </tr>
-                                <tr>
-                                    <td width="4" class="etape_libele">Recolte</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <% for(let i=0; i<travaux_4.length; i++) { %>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table class="table_d_etape">
                                     <tr>
-                                        <td width="4"></td>
-                                        <td><%= travaux_4[i].date %></td>
-                                        <td><%= travaux_4[i].travail %></td>
-                                        <td><%= travaux_4[i].moyen %></td>
-                                        <td style="text-align: right;"><%= travaux_4[i].quantite %></td>
-                                        <td style="text-align: right;"><%= travaux_4[i].personnel %></td>
-                                        <td style="text-align: right;"><%= travaux_4[i].duree %></td>
-                                        <td style="text-align: right;"><%= travaux_4[i].cout %></td>
+                                        <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
+                                        <th class="th_head" style="width: 6rem;">Date</th>
+                                        <th class="th_head" style="width: 16rem;"> Travail</th>
+                                        <th class="th_head" style="width: 6rem;"> Moyen</th>
+                                        <th class="th_head" style="width: 4rem;">Quantite</th>
+                                        <th class="th_head" style="width: 4rem;">Personnel</th>
+                                        <th class="th_head" style="width: 4rem;">Duree</th>
+                                        <th class="th_head" style="width: 6rem;">Cout</th>
                                     </tr>
-                                <% } %>
-                                <tr>
-                                    <th width="4"></th>
-                                    <th colspan="4"></th>
-                                    <th class="th_foot" ><%= totaux_13; %></th>
-                                    <th class="th_foot" ><%= totaux_15; %></th>
-                                    <th class="th_foot" id="totaux_4"><%= totaux_16; %></th>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                                    <tr>
+                                        <td width="4" class="etape_libele">Semis</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <% for(let i=0; i<travaux_2.length; i++) { %>
+                                        <tr>
+                                            <td width="4"></td>
+                                            <td><%= travaux_2[i].date %></td>
+                                            <td><%= travaux_2[i].travail %></td>
+                                            <td><%= travaux_2[i].moyen %></td>
+                                            <td style="text-align: right;"><%= travaux_2[i].quantite %></td>
+                                            <td style="text-align: right;"><%= travaux_2[i].personnel %></td>
+                                            <td style="text-align: right;"><%= travaux_2[i].duree %></td>
+                                            <td style="text-align: right;"><%= travaux_2[i].cout %></td>
+                                        </tr>
+                                    <% } %>
+                                    <tr>
+                                        <th width="4"></th>
+                                        <th colspan="4"></th>
+                                        <th class="th_foot" ><%= totaux_5; %></th>
+                                        <th class="th_foot" ><%= totaux_7; %></th>
+                                        <th class="th_foot"id="totaux_2" ><%= totaux_8; %></th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table class="table_d_etape">
+                                    <tr>
+                                        <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
+                                        <th class="th_head" style="width: 6rem;">Date</th>
+                                        <th class="th_head" style="width: 16rem;"> Travail</th>
+                                        <th class="th_head" style="width: 6rem;"> Moyen</th>
+                                        <th class="th_head" style="width: 4rem;">Quantite</th>
+                                        <th class="th_head" style="width: 4rem;">Personnel</th>
+                                        <th class="th_head" style="width: 4rem;">Duree</th>
+                                        <th class="th_head" style="width: 6rem;">Cout</th>
+                                    </tr>
+                                    <tr>
+                                        <td width="4" class="etape_libele">Entretients</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <% for(let i=0; i<travaux_3.length; i++) { %>
+                                        <tr>
+                                            <td width="4"></td>
+                                            <td><%= travaux_3[i].date %></td>
+                                            <td><%= travaux_3[i].travail %></td>
+                                            <td><%= travaux_3[i].moyen %></td>
+                                            <td style="text-align: right;"><%= travaux_3[i].quantite %></td>
+                                            <td style="text-align: right;"><%= travaux_3[i].personnel %></td>
+                                            <td style="text-align: right;"><%= travaux_3[i].duree %></td>
+                                            <td style="text-align: right;"><%= travaux_3[i].cout %></td>
+                                        </tr>
+                                    <% } %>
+                                    <tr>
+                                        <th width="4"></th>
+                                        <th colspan="4"></th>
+                                        <th class="th_foot" ><%= totaux_9; %></th>
+                                        <th class="th_foot" ><%= totaux_11; %></th>
+                                        <th class="th_foot" id="totaux_3"><%= totaux_12; %></th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table class="table_d_etape">
+                                    <tr>
+                                        <th width="4" class="th_head" style="width: 6rem;">Etapes</th>
+                                        <th class="th_head" style="width: 6rem;">Date</th>
+                                        <th class="th_head" style="width: 16rem;"> Travail</th>
+                                        <th class="th_head" style="width: 6rem;"> Moyen</th>
+                                        <th class="th_head" style="width: 4rem;">Quantite</th>
+                                        <th class="th_head" style="width: 4rem;">Personnel</th>
+                                        <th class="th_head" style="width: 4rem;">Duree</th>
+                                        <th class="th_head" style="width: 6rem;">Cout</th>
+                                    </tr>
+                                    <tr>
+                                        <td width="4" class="etape_libele">Recolte</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <% for(let i=0; i<travaux_4.length; i++) { %>
+                                        <tr>
+                                            <td width="4"></td>
+                                            <td><%= travaux_4[i].date %></td>
+                                            <td><%= travaux_4[i].travail %></td>
+                                            <td><%= travaux_4[i].moyen %></td>
+                                            <td style="text-align: right;"><%= travaux_4[i].quantite %></td>
+                                            <td style="text-align: right;"><%= travaux_4[i].personnel %></td>
+                                            <td style="text-align: right;"><%= travaux_4[i].duree %></td>
+                                            <td style="text-align: right;"><%= travaux_4[i].cout %></td>
+                                        </tr>
+                                    <% } %>
+                                    <tr>
+                                        <th width="4"></th>
+                                        <th colspan="4"></th>
+                                        <th class="th_foot" ><%= totaux_13; %></th>
+                                        <th class="th_foot" ><%= totaux_15; %></th>
+                                        <th class="th_foot" id="totaux_4"><%= totaux_16; %></th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
 
-            </div>
+                </div>
+            </center>
 
             <div class="couvercle" id="couvercle_de_fiche">
                 <div class="fiche_des_travaux_journaliers">
