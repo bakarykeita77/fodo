@@ -4,48 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cultures</title>
-    <link rel="stylesheet" href="css/cultures.css">
+    <title>lieux</title>
+    <link rel="stylesheet" href="css/lieux.css">
     <link rel="stylesheet" href="css/class.css">
-    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-
+    
     <div class="container">
         
         <%- include('../public/composants/page_head.ejs') %>
-        
-        <div class="page_body">
-                
-            <%- include('../public/composants/header.ejs') %> 
-       
-            <div id="champs_container">
 
-                <h1 id="culture_titre">Les Champs de <%= culture %></h1> 
+        <div class="page_body">
+                    
+                <%- include('../public/composants/header.ejs') %> 
+
+                <h1>Les Champs de <%= data[0].village %></h1>
 
                 <div class="reumes_des_champs">
-                        
+
                     <table class="resunes_des_champs_table">
 
                         <% let total_superficie = 0; %>
+
                         <tr>
                             <th>No du Champs</th>
-                            <th>Lieu de la culture</th>
+                            <th>Culture</th>
                             <th>Superficie</th>
                         </tr>
+
                         <% for(let i=0; i<data.length; i++) { %>
                             <tr>
-                                <td><%= data[i].id_champs; %></td>
-                                <td><%= data[i].village; %></td>
-                                <td><%= data[i].superficie; %></td>
+                                <td><%= data[i].id %></td>
+                                <td><%= data[i].culture %></td>
+                                <td><%= data[i].superficie %></td>
                             </tr>
                             <% total_superficie += parseInt(data[i].superficie.split(' ')[0]); %>
-                        <%} %>
+                        <% } %>
+                        
                         <tr>
                             <th colspan="2">Total superficie cultivee</th>
                             <th><%= total_superficie; %> ha</th>
                         </tr>
+
                     </table>
+
                 </div>
 
                 <div class="champs_cards_container">
@@ -53,31 +55,19 @@
 
                         <% let lieu = data[i].village; %>
                         <% let culture = data[i].culture; %>
-                        <% let id_champs = data[i].id_champs; %>
+                        <% let id_champs = data[i].id; %>
                         <% let id_lieu = data[i].id_lieu; %>
                         <% let superficie = data[i].superficie; %>
 
                         <div class="culture_card" id="Champs_No_<%= data[i].id_champs %>">
-                            <a href="/champs?lieu=<%= lieu %>&id_lieu=<%= id_lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&superficie=<%= superficie %>">
-                                <h4>Champs No_<%= data[i].id_champs %></h4>
-                                <!-- <span class="trois_points">&#8942;</span>
-                                <div class="options_container" id="option_<%= i+1 %>">
-                                    <div class="champs_options" id="option_<%= i+1 %>">
-                                        <p class="modifier_champs" onclick="charger_form_culture('<%= id_champs %>','<%= id_lieu %>','<%= culture %>','<%= superficie %>')">Modifier</p>
-                                        <p class="supprimer_champs" onclick="supprimer('<% %>')">Supprimer</p>
-                                    </div>
-                                </div> -->
+                            <a href="/champs?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&superficie=<%= superficie %>">
+                                <h4>Champs No_<%= data[i].id %></h4>
                             </a>
-                        </div>
+                        </div> 
                     <% } %>
                 </div>
                    
-            </div>
-
         </div>
     </div>
-    
-    <script src="js/index.js"></script>
-    
 </body>
 </html>

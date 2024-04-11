@@ -1,0 +1,153 @@
+
+<div id="editer_travail">
+    <span class="fermeture" id="fermer_edition_travail">&times;</span>
+
+    <table id="editer_travail_table"> 
+        <form action="/travaux" method="post">
+
+            <tr>
+                <tr id="tr_1">
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th><label for="input_1">Date</label>
+                    <th><label for="input_2">Travail</label></th>
+                    <th><label for="input_3">Moyen</label></th>
+                    <th><label for="input_4">Quantite</label></th>
+                    <th><label for="input_5">Personnel</label></th>
+                    <th id="th_7"><label for="input_6">Duree</label></th>
+                    <th id="th_8"><label for="input_7">Cout</label></th>
+                </tr>
+            </tr>
+
+            <tr>
+                <td style="display: none;"><input type="hidden" name="input_0" id="input_0" value=""></td>
+                <td style="display: none;"><input type="hidden" name="input_1" id="input_1" value=""></td>
+                <td style="display: none;"><input type="hidden" name="input_2" id="input_2" value=""></td>
+                <td style="display: none;"><input type="hidden" name="input_3" id="input_3" value=""></td>
+
+                <td><input type="text" name="input_4"  id="input_4"  value=""></td>
+                <td><input type="text" name="input_5"  id="input_5"  value=""></td>
+                <td><input type="text" name="input_6"  id="input_6"  value=""></td>
+                <td><input type="text" name="input_7"  id="input_7"  value=""></td>
+                <td><input type="text" name="input_8"  id="input_8"  value=""></td>
+                <td><input type="text" name="input_9"  id="input_9"  value="" class="td_chifre"></td>
+                <td><input type="text" name="input_10" id="input_10" value="" class="td_chifre"></td>
+            </tr>
+
+            <tr>
+                <table><tr><td><input type="submit" name="submit" id="submit" value="Enregistrer les modifications"></td></tr></table>
+            </tr>
+        </form>
+    </table>   
+        
+</div>
+
+
+<style>
+    
+    #editer_travail_table input { 
+        border-style: none; 
+        background-color: transparent;
+        padding: 0 0.5rem; 
+    }
+    #input_1 { max-width: 5rem; }
+    #input_2 { max-width: 14rem; }
+    #input_3 { max-width: 8rem; }
+    #input_4 { max-width: 3rem; text-align: right; }
+    #input_5 { max-width: 3rem; text-align: right; }
+    #input_6 { max-width: 3rem; text-align: right; }
+    #input_7 { max-width: 5rem; text-align: right; }
+    th { text-align: left; }
+    #editer_travail_table td { 
+        background-color: #eee; 
+        height: 2rem;
+    }
+    #tr_1 th { padding: 0.5rem; }
+    #tr_1 th:not(.sans_bordure) { 
+        background-color: #ccc; 
+    }
+    #editer_travail_table .sans_bordure { border-color: #fff; background-color: transparent; }
+    #editer_travail {
+        position: absolute;
+        padding: 2rem 0;
+        top: 60vh;
+        left: 15%;
+        min-height: 4rem;
+        background-color: #fff;
+        box-shadow: 0 0 0.5rem #aaa;
+        border-radius: 0.5rem;
+    }
+    #editer_travail table { margin: 2rem; }
+    #editer_travail input { min-width: 2rem; }
+    #submit { 
+        border-style: none; 
+        cursor: pointer;
+        background-color: transparent;
+    }
+</style>
+
+<script>
+    
+    let couvercle_edition_travail = document.getElementById('couvercle_edition_travail');
+    let modifier_travail = document.querySelectorAll('.modifier_travail');
+    let fermer_edition_travail = document.querySelector('#fermer_edition_travail');
+    let lieu = document.getElementById('lieu').textContent;
+    let culture = document.getElementById('culture').textContent;
+    let id_champs = document.getElementById('id_champs').textContent;
+    let inputs = document.querySelectorAll('#editer_travail table td input');
+    
+
+
+    modifier_travail.forEach((element) => {
+        element.addEventListener('click', () => { 
+
+            couvercle_edition_travail.style.display = 'block';
+
+         // Selection des td consernes par les modifications
+            let tr_id = element.parentElement.id;
+            let tds   = document.querySelectorAll('#'+tr_id+' td');
+            
+            let id        = tds[0].textContent;
+            let date      = tds[1].textContent;
+            let travail   = tds[2].textContent;
+            let moyen     = tds[3].textContent;
+            let quantite  = tds[4].textContent;
+            let personnel = tds[5].textContent;
+            let duree     = tds[6].textContent;
+            let cout      = tds[7].textContent;
+
+         // Insertion des valeurs a modifier dans les elements de editer_travail.
+            inputs[0].value  = lieu;
+            inputs[1].value  = culture;
+            inputs[2].value  = parseInt(id_champs);
+            inputs[3].value  = parseInt(id);
+            inputs[4].value  = date;
+            inputs[5].value  = travail;
+            inputs[6].value  = moyen;
+            inputs[7].value  = quantite;
+            inputs[8].value  = personnel;
+            inputs[9].value  = duree;
+            inputs[10].value = cout;
+
+         // Mettre en surbrillance la ligne selectionnee
+            document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_vide, .td_options)').forEach(element => {
+                element.style.backgroundColor = 'yellow';
+            });
+
+        // Enlever la surbrillance sur la ligne selectionnee
+            fermer_edition_travail.addEventListener('click', () => {
+                setTimeout(() => {
+                    document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_options)').forEach(element => {
+                        element.style.backgroundColor = 'white';
+                    });
+                }, 1000);
+            });
+            
+        });
+    });
+
+    fermer_edition_travail.addEventListener('click', () => { couvercle_edition_travail.style.display = 'none'; });
+
+</script>

@@ -10,8 +10,10 @@
     padding: 0;
 }
 .etape_libele {
-    position: absolute;
+    border-bottom: 4px solid #bbb;
+    text-align: left;
 }
+#culture_fiche_des_travaux .td_vide { border: none; }
 #travaux_titre, #travaux_plus { display: inline-block; }
 #travaux_titre {
     margin-bottom: 0;

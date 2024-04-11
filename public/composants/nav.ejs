@@ -1,13 +1,13 @@
 
-<% let liste_de_culture_1 = []; %>
-<% let liste_de_culture_2 = []; %>
-<% let cultures_identiques = []; %>
+<% let liste_de_culture = []; %>
+<% let liste_de_lieu    = []; %>
+<% let liste_id_de_lieu = []; %>
                 
 <div id="nav_container">
 
     <div id="nav_head">
 
-        <h2 id="nav_titre">Les Cultures</h2>
+        <h2 id="nav_titre">Les Champs</h2>
 
         <div class="plus" id="nav_plus">+</div>
 
@@ -45,30 +45,22 @@
 
     <div id="nav_body">
         <% 
-            for(var i=0; i<data.length; i++) { 
-                liste_de_culture_1.push(data[i]);
-                if(liste_de_culture_2.indexOf(data[i].culture) === -1) { liste_de_culture_2.push(data[i].culture); }
-            }
+            for(let i=0; i<data.length; i++) { if(liste_de_culture.indexOf(data[i].culture) === -1) { liste_de_culture.push(data[i].culture); }}
+            for(let i=0; i<data.length; i++) { if(liste_de_lieu.indexOf(data[i].village) === -1) { liste_de_lieu.push(data[i].village); }}
+        %>     
 
-            for(let i=0; i<liste_de_culture_2.length; i++) {
-                cultures_identiques.push([liste_de_culture_2[i]]);
-            }
+        <ol id="nav_culture_list">
+            <% for(var i=0; i<liste_de_culture.length; i++) { %>
+                <li id=<%= liste_de_culture[i] %>>
+                    <span class="culture"><a href="/cultures?culture=<%= liste_de_culture[i] %>"><%= liste_de_culture[i] %></a></span> 
+                </li>
+            <% } %>
+        </ol>
 
-            for(let i=0; i<cultures_identiques.length; i++) {
-                for(let j=0; j<liste_de_culture_1.length; j++) {
-                    if(cultures_identiques[i][0] === liste_de_culture_1[j].culture) {
-                        cultures_identiques[i].push(liste_de_culture_1[j]);
-                    }
-                }
-                cultures_identiques[i].shift();
-            }
-        %>
-        
-
-        <ol id="nav_list">
-            <% for(var i=0; i<liste_de_culture_2.length; i++) { %>
-                <li id=<%= liste_de_culture_2[i] %>>
-                    <span class="culture"><a href="/cultures?culture=<%= liste_de_culture_2[i] %>"><%= liste_de_culture_2[i] %></a></span> 
+        <ol id="nav_lieu_list">
+            <% for(var i=0; i<liste_de_lieu.length; i++) { %>
+                <li id=<%= liste_de_lieu[i] %>>
+                    <span class="culture"><a href="/lieux?lieu=<%= liste_de_lieu[i] %>"><%= liste_de_lieu[i] %></a></span> 
                 </li>
             <% } %>
         </ol>
@@ -92,9 +84,7 @@
         margin: 0.5rem;
         z-index: 1;
     }
-    #nav_titre, #nav_plus {
-        display: inline-block;
-    }
+    #nav_titre, #nav_plus { display: inline-block; }
     #forms_container {
         position: absolute;
         top: 0;
@@ -148,14 +138,14 @@
         font-weight: bold;
         color: green;
     }
-    #nav_list li {
+    #nav_culture_list li {
         position: relative;
         padding: 0.25rem 0.5rem;
     }
-    #nav_list li:hover {
+    #nav_culture_list li:hover {
         background-color: #0080000a;
     }
-    #nav_list li:hover .trois_points {
+    #nav_culture_list li:hover .trois_points {
         display: block;
     }
 </style>
@@ -165,9 +155,9 @@
     let forms_container = document.getElementById('forms_container');
     let form_culture = document.getElementById('form_culture');
     let form_culture_titre = document.getElementById('form_culture_titre');
-    let nav_li = document.querySelectorAll('#nav_list li');
-    let cultures = document.querySelectorAll('#nav_list li .culture');
-    let id_lieux = document.querySelectorAll('#nav_list li .id_lieu');
+    let nav_li = document.querySelectorAll('#nav_culture_list li');
+    let cultures = document.querySelectorAll('#nav_culture_list li .culture');
+    let id_lieux = document.querySelectorAll('#nav_culture_list li .id_lieu');
     let nav_plus = document.getElementById('nav_plus');
     let submit = document.getElementById('submit');
 
