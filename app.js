@@ -44,14 +44,7 @@ const app = express();
             if(erreur) {
                 console.log(erreur);
             }else{
-                let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture \
-                                JOIN lieux \
-                                ON lieux.id = champs.id_lieu\
-                ';
+                let requete =  'SELECT * FROM champs';
 
                 connection.query(requete, [], (erreur, data) => {
                     if(erreur){
@@ -110,9 +103,8 @@ const app = express();
             }else{
                 
                 let lieu        = req.url.split('?')[1].split('&')[0].split('=')[1];
-                let id_lieu     = req.url.split('?')[1].split('&')[1].split('=')[1];
-                let culture     = req.url.split('?')[1].split('&')[2].split('=')[1];
-                let id_champs   = req.url.split('?')[1].split('&')[3].split('=')[1];
+                let culture     = req.url.split('?')[1].split('&')[1].split('=')[1];
+                let id_champs   = req.url.split('?')[1].split('&')[2].split('=')[1];
 
                 let requete = 'SELECT * FROM projets_list';
 
@@ -120,7 +112,7 @@ const app = express();
                     if(erreur) {
                         console.log(erreur);
                     }else{
-                        res.status(200).render('projets', {data, lieu, id_lieu, culture, id_champs});
+                        res.status(200).render('projets', {data, lieu, culture, id_champs});
                     }
                 });
             }
@@ -138,19 +130,7 @@ const app = express();
             }else{
 
                 let id_champs = req.url.split('?')[1].split('=')[1];
-            
-                let requete  = 'SElECT projets.id, projet_name, id_etapes, etape, no, taches, duree, debut, fin, moyen, personnel, cout FROM projets \
-                                JOIN champs \
-                                ON champs.id = projets.id_champs \
-                                JOIN lieux \
-                                ON lieux.id = champs.id_lieu \
-                                JOIN cultures \
-                                ON cultures.id = champs.id_culture \
-                                JOIN etapes \
-                                ON etapes.id = projets.id_etapes \
-                                JOIN projets_list \
-                                ON projets_list.id = champs.id \
-                                WHERE projets.id_champs = '+id_champs;
+                let requete  = 'SElECT * FROM projets WHERE id_champs = '+id_champs;
 
                 connection.query(requete, [], (erreur, data) => {
                     if(erreur) {
@@ -168,10 +148,8 @@ const app = express();
 
     app.post('/projet', (req, res) => {
 
-        let id_champs   = 8;
-
         let id          = req.body.input_0;
-        let projet_name = req.body.input_1;
+        let id_champs = req.body.input_1;
         let no          = req.body.input_2;
         let tache       = req.body.input_3;
         let duree       = req.body.input_4;
@@ -215,16 +193,7 @@ const app = express();
 
                 let culture    = req.url.split('?')[1].split('=')[1];
 
-                let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture \
-                                JOIN champs_lieux \
-                                ON champs.id = champs_lieux.id_champs \
-                                JOIN lieux \
-                                ON lieux.id = champs_lieux.id_lieu \
-                                WHERE culture = "'+culture+'" \
+                let requete =  'SELECT * FROM champs  WHERE culture = "'+culture+'" \
                 ';
                 
                 connection.query(requete, [], (erreur, data) => {
@@ -248,7 +217,7 @@ const app = express();
             }else{
 
                 let lieu = req.url.split('?')[1].split('=')[1];
-                let requete =  'SELECT champs.id, village, culture, superficie FROM champs \
+                let requete =  'SELECT champs.id, lieu, culture, superficie FROM champs \
                                 JOIN champs_cultures \
                                 ON champs.id = champs_cultures.id_champs \
                                 JOIN cultures \
@@ -257,7 +226,7 @@ const app = express();
                                 ON champs.id = champs_lieux.id_champs \
                                 JOIN lieux \
                                 ON lieux.id = champs_lieux.id_lieu \
-                                WHERE village = "'+lieu+'" \
+                                WHERE lieu = "'+lieu+'" \
                 ';
 
                 connection.query(requete, [], (erreur, data) => {
@@ -286,14 +255,6 @@ const app = express();
                 let superficie = req.url.split('?')[1].split('&')[3].split('=')[1];
 
                 let requete =  'SELECT * FROM champs \
-                                JOIN champs_cultures \
-                                ON champs.id = champs_cultures.id_champs \
-                                JOIN cultures \
-                                ON cultures.id = champs_cultures.id_culture\
-                                JOIN champs_lieux \
-                                ON champs.id = champs_lieux.id_champs \
-                                JOIN lieux \
-                                ON lieux.id = champs_lieux.id_lieu\
                                 JOIN champs_etapes \
                                 ON champs.id = champs_etapes.id_champs \
                                 JOIN travaux \
@@ -301,7 +262,7 @@ const app = express();
                                 JOIN etapes \
                                 ON etapes.id = champs_etapes.id_etapes \
                                 WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'"';
+                                AND lieu = "'+lieu+'"';
     
                 connection.query(requete, [], (erreur, data) => {
                     if(erreur){
@@ -345,19 +306,26 @@ const app = express();
      // Insertion ou modification des donnees de la table travaux
     app.post('/travaux', (req, res) => {
 
-        let id = parseInt(req.body.input_3);
+        let id = req.body.input_4;
 
-        let lieu      = (id === null) ? req.body.lieu      : req.body.input_0;
-        let culture   = (id === null) ? req.body. culture  : req.body.input_1;
-        let id_champs = (id === null) ? req.body.id_champs : req.body.input_2;
+        let lieu      = (id === undefined) ? req.body.lieu      : req.body.input_0;
+        let culture   = (id === undefined) ? req.body.culture   : req.body.input_1;
+        let id_champs = (id === undefined) ? req.body.id_champs : req.body.input_2;
+        let id_etape  = (id === undefined) ? req.body.id_etape  : req.body.input_3;
         
-        let date      = (id === null) ? req.body.date      : req.body.input_4;
-        let travail   = (id === null) ? req.body.travail   : req.body.input_5;
-        let moyen     = (id === null) ? req.body.moyen     : req.body.input_6;
-        let quantite  = (id === null) ? req.body.quantite  : req.body.input_7;
-        let personnel = (id === null) ? req.body.personnel : req.body.input_8;
-        let duree     = (id === null) ? req.body.duree     : req.body.input_9;
-        let cout      = (id === null) ? req.body.cout      : req.body.input_10;
+        let date      = (id === undefined) ? req.body.date      : req.body.input_5;
+        let travail   = (id === undefined) ? req.body.travail   : req.body.input_6;
+        let moyen     = (id === undefined) ? req.body.moyen     : req.body.input_7;
+        let quantite  = (id === undefined) ? req.body.quantite  : req.body.input_8;
+        let personnel = (id === undefined) ? req.body.personnel : req.body.input_9;
+        let duree     = (id === undefined) ? req.body.duree     : req.body.input_10;
+        let cout      = (id === undefined) ? req.body.cout      : req.body.input_11;
+
+        id_champs = parseInt(id_champs);
+        id_etape  = parseInt(id_etape);
+        personnel = parseInt(personnel);
+        duree     = parseInt(duree);
+        cout      = parseInt(cout);
 
 
         req.getConnection((erreur,connection) => {
@@ -365,11 +333,11 @@ const app = express();
                 console.log(erreur);
             }else{
 
-                let requetesql = (id === null) ? "INSERT INTO travaux(id, id_champs, id_etape, date, travail, moyen, quantite, personnel, duree ,cout ) VALUES(?,?,?,?,?,?,?,?,?,?)":
-                                                 "UPDATE travaux SET date=?, travail=?, moyen=?, quantite=?, personnel=?, duree=?, cout=? WHERE id=?";
-                let donnees    = (id === null) ? [null, id_champs, id_etape, date, travail, moyen, quantite, personnel, duree ,cout]:
-                                                 [date, travail, moyen, quantite, personnel, duree ,cout, id];
-                                    
+                let requetesql = (id === undefined) ? "INSERT INTO travaux(id, id_champs, id_etape, date, travail, moyen, quantite, personnel, duree ,cout ) VALUES(?,?,?,?,?,?,?,?,?,?)":
+                                                      "UPDATE travaux SET date=?, travail=?, moyen=?, quantite=?, personnel=?, duree=?, cout=? WHERE id=?";
+                let donnees    = (id === undefined) ? [null, id_champs, id_etape, date, travail, moyen, quantite, personnel, duree ,cout]:
+                                                      [date, travail, moyen, quantite, personnel, duree, cout, id];
+
                 connection.query(requetesql, donnees, (erreur, data) => {
                     if(erreur) {
                         console.log(erreur);
@@ -405,7 +373,7 @@ const app = express();
                                 JOIN lieux \
                                 ON lieux.id = champs_lieux.id_lieu \
                                 WHERE culture = "'+culture+'" \
-                                AND village = "'+lieu+'" \
+                                AND lieu = "'+lieu+'" \
                 ';
 
                                 

@@ -35,8 +35,8 @@
                         </tr>
                         <% for(let i=0; i<data.length; i++) { %>
                             <tr>
-                                <td><%= data[i].id_champs; %></td>
-                                <td><%= data[i].village; %></td>
+                                <td><%= data[i].id; %></td>
+                                <td><%= data[i].lieu; %></td>
                                 <td><%= data[i].superficie; %></td>
                             </tr>
                             <% total_superficie += parseInt(data[i].superficie.split(' ')[0]); %>
@@ -51,22 +51,14 @@
                 <div class="champs_cards_container">
                     <% for(let i=0; i<data.length; i++) { %>
 
-                        <% let lieu = data[i].village; %>
+                        <% let lieu = data[i].lieu; %>
                         <% let culture = data[i].culture; %>
-                        <% let id_champs = data[i].id_champs; %>
-                        <% let id_lieu = data[i].id_lieu; %>
+                        <% let id_champs = data[i].id; %>
                         <% let superficie = data[i].superficie; %>
 
-                        <div class="culture_card" id="Champs_No_<%= data[i].id_champs %>">
-                            <a href="/champs?lieu=<%= lieu %>&id_lieu=<%= id_lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&superficie=<%= superficie %>">
-                                <h4>Champs No_<%= data[i].id_champs %></h4>
-                                <!-- <span class="trois_points">&#8942;</span>
-                                <div class="options_container" id="option_<%= i+1 %>">
-                                    <div class="champs_options" id="option_<%= i+1 %>">
-                                        <p class="modifier_champs" onclick="charger_form_culture('<%= id_champs %>','<%= id_lieu %>','<%= culture %>','<%= superficie %>')">Modifier</p>
-                                        <p class="supprimer_champs" onclick="supprimer('<% %>')">Supprimer</p>
-                                    </div>
-                                </div> -->
+                        <div class="culture_card" id="Champs_No_<%= data[i].id %>">
+                            <a href="/champs?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&superficie=<%= superficie %>">
+                                <h4>Champs No_<%= data[i].id %></h4>
                             </a>
                         </div>
                     <% } %>

@@ -1,0 +1,150 @@
+
+    <div class="couvercle" id="form_nouveau_champs_container">
+        
+        <table id="nouveau_champs_table">    
+            <form action="/" method="post" id="form_nouveau_champs">
+                <span class="fermeture" id="fermer_nouveau_champs">&times</span>
+                <br><br>
+                <div id="titre_nouveau_champs"></div>
+                <br>
+                <div id="form_content">
+                    
+                    <tr><td><input type="hidden" name="id" id="id"></td></tr>
+                    <tr>
+                        <th><label for="nouveau_id_lieu"   >Lieu      </label></th>
+                        <th><label for="nouveau_culture"   >Culture   </label></th>
+                        <th><label for="nouveau_superficie">Superficie</label></th>
+                        <th><label for="nouveau_projet"    >Projet    </label></th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="nouveau_id_lieu"    id="nouveau_id_lieu"   ></td>
+                        <td><input type="text" name="nouveau_culture"    id="nouveau_culture"   ></td>
+                        <td><input type="text" name="nouveau_superficie" id="nouveau_superficie"></td>
+                        <td><input type="text" name="nouveau_projet"     id="nouveau_projet"    ></td>
+                    </tr>
+
+                    <tr><td><br></td></tr>
+
+                    <tr><td><input type="submit" id="submit" value="Creer le nouveau champs"></td></tr>
+                </div>
+                
+            </form>
+        </table>
+
+    </div>
+
+
+
+    <style>
+        #nav_container {
+            display: inline-block;
+            position: relative;
+            vertical-align: top;
+            border: 1px solid transparent;
+            border-right-color: #aaa;
+            width: 12rem;
+            min-height: calc(100vh - 24rem);
+            margin: 0.5rem;
+            z-index: 1;
+        }
+        #nav_titre, #projet_plus { display: inline-block; }
+        #form_nouveau_champs_container {
+            display: none;
+            overflow: hidden;
+        }
+        #nouveau_champs_table {
+            position: relative;
+            padding: 2rem;
+            width: 60%;
+            margin: auto;
+            top: 40%;
+            background-color: white;
+            border-radius: 0.5rem;
+        }
+        #nouveau_champs_table th {
+            text-align: left;
+            padding: 0 1rem;
+        }
+        #form_fermeture {
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            background-color: #eee;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            text-align: center;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+        }
+        #form_fermeture:hover {
+            background-color: white;
+            font-weight: bold;
+            background-color: #ddd;
+        }
+        #form_nouveau_champs_container form {
+            position: relative;
+            padding: 2rem;
+            box-shadow: 0.5rem 0.8rem 2rem #555;
+            border-radius: 00.5rem;
+        }
+        #titre_comentaire, #titre { display: inline-block; }
+        #form_content {
+            width: 15rem;
+            max-height: 20rem;
+            margin: auto;
+            overflow: auto;
+        }
+        #form_nouveau_champs_container input {
+            height: 2rem;
+            border-style: none;
+            padding: 0 1rem;
+            background-color: #eee;
+        }
+        #projet_plus:hover {
+            background-color: #fff;
+            font-weight: bold;
+            color: green;
+        }
+        #nav_culture_list li {
+            position: relative;
+            padding: 0.25rem 0.5rem;
+        }
+        #nav_culture_list li:hover {
+            background-color: #0080000a;
+        }
+        #nav_culture_list li:hover .trois_points {
+            display: block;
+        }
+    </style>
+
+    <script>
+        
+        let form_nouveau_champs_container = document.getElementById('form_nouveau_champs_container');
+        let form_nouveau_champs = document.getElementById('form_nouveau_champs');
+        let fermer_nouveau_champs = document.getElementById('fermer_nouveau_champs');
+        let form_nouveau_champs_titre = document.getElementById('form_nouveau_champs_titre');
+        let projet_plus = document.getElementById('projet_plus');
+
+
+        projet_plus.addEventListener('click', () => { 
+            form_nouveau_champs_container.style.display = 'block';
+        });
+
+        submit.addEventListener('click', () => { fermetureHorizontal(form_nouveau_champs); });
+        fermer_nouveau_champs.addEventListener('click', () => { form_nouveau_champs_container.style.display = 'none'; });
+        
+
+        
+        function charger_form_nouveau_champs(id, id_lieu, culture, superficie, projet) {
+            document.getElementById('id').value = id;
+            document.getElementById('id_lieu').value = id_lieu;
+            document.getElementById('culture').value = culture;
+            document.getElementById('superficie').value = superficie;
+            document.getElementById('projet').value = projet;
+        }
+    </script>
+        

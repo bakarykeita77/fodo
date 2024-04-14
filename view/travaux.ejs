@@ -29,40 +29,40 @@
             <% let totaux_2 = 0; %>  <% let totaux_6 = 0; %>  <% let totaux_10 = 0; %>  <% let totaux_14 = 0; %>
             <% let totaux_3 = 0; %>  <% let totaux_7 = 0; %>  <% let totaux_11 = 0; %>  <% let totaux_15 = 0; %>
             <% let totaux_4 = 0; %>  <% let totaux_8 = 0; %>  <% let totaux_12 = 0; %>  <% let totaux_16 = 0; %>
-          
+                
         
             <% for(let i=0; i<data.length; i++) {
                 if(data[i].id_etape === 1) { 
                     travaux_1.push(data[i]);
 
-                    totaux_1 += parseInt(data[i].personnel);
-                    totaux_2 += parseInt(data[i].quantite.split(' ')[0]);
-                    totaux_3 += parseInt(data[i].duree.split(' ')[0]);
-                    totaux_4 += parseInt(data[i].cout.split(' ')[0]);
+                    totaux_1 += data[i].personnel;
+                    totaux_2 += data[i].quantite;
+                    totaux_3 += data[i].duree;
+                    totaux_4 += data[i].cout;
                 }
                 if(data[i].id_etape === 2) { 
                     travaux_2.push(data[i]); 
 
-                    totaux_5 += parseInt(data[i].personnel);
-                    totaux_6 += parseInt(data[i].quantite.split(' ')[0]);
-                    totaux_7 += parseInt(data[i].duree.split(' ')[0]);
-                    totaux_8 += parseInt(data[i].cout.split(' ')[0]);
+                    totaux_5 += data[i].personnel;
+                    totaux_6 += data[i].quantite;
+                    totaux_7 += data[i].duree;
+                    totaux_8 += data[i].cout;
                 }
                 if(data[i].id_etape === 3) { 
                     travaux_3.push(data[i]); 
 
-                    totaux_9 += parseInt(data[i].personnel);
-                    totaux_10 += parseInt(data[i].quantite.split(' ')[0]);
-                    totaux_11 += parseInt(data[i].duree.split(' ')[0]);
-                    totaux_12 += parseInt(data[i].cout.split(' ')[0]);
+                    totaux_9  += data[i].personnel;
+                    totaux_10 += data[i].quantite;
+                    totaux_11 += data[i].duree;
+                    totaux_12 += data[i].cout;
                 }
                 if(data[i].id_etape === 4) { 
                     travaux_4.push(data[i]); 
 
-                    totaux_13 += parseInt(data[i].personnel);
-                    totaux_14 += parseInt(data[i].quantite.split(' ')[0]);
-                    totaux_15 += parseInt(data[i].duree.split(' ')[0]);
-                    totaux_16 += parseInt(data[i].cout.split(' ')[0]);
+                    totaux_13 += data[i].personnel;
+                    totaux_14 += data[i].quantite;
+                    totaux_15 += data[i].duree;
+                    totaux_16 += data[i].cout;
                 }
             } %>
           
@@ -223,17 +223,9 @@
                 </div>
             </center>
 
-            <div class="couvercle" id="couvercle_de_fiche">
-                <div class="fiche_des_travaux_journaliers">
-                    <%- include('../public/composants/fiche.ejs') %> 
-                </div>
-            </div>
+            <%- include('../public/composants/fiche.ejs') %> 
+            <%- include('../public/composants/edition_travaux.ejs') %> 
 
-            <div class="cover" id="couvercle_edition_travail">
-                <%- include('../public/composants/edition_travaux.ejs') %> 
-            </div>
-
-        
         </div>
 
         <script src="js/travaux.js"></script>

@@ -17,8 +17,7 @@
 
             <%- include('../public/composants/header.ejs') %> 
 
-            <h2 id="culture_titre">Champs de</h2>
-            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_</h3>
+            <h1 id="culture_titre">Les Projets de Walike</h1>
             
             <%- include('../public/composants/onglet.ejs') %> 
 
@@ -27,7 +26,7 @@
 
             <ul id="projets_list">
                 <% for(let i=0; i<data.length; i++) { %>
-                    <li><a href="projet?numero_du_projet=<%= data[i].id %>"><%= data[i].projet_name %></a></li>
+                    <li><a href="projet?id_champs=<%= data[i].id %>"><%= data[i].projet_name %></a></li>
                 <% } %>
             </ul>
 

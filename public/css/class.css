@@ -14,23 +14,28 @@ body {
     padding: 0;
     margin: 0;
 }
-.couvercle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-.cover {
+.couvercle, .cover {
     position: absolute;
     display: none;
     top: 0;
     left: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
 }
+.editeur {
+    position: absolute;
+    padding: 2rem 0;
+    top: 60vh;
+    left: 15%;
+    min-height: 4rem;
+    background-color: #fff;
+    box-shadow: 0 0 0.5rem #aaa;
+    border-radius: 0.5rem;
+}
+.editeur table { margin: 2rem; }
+.editeur input { min-width: 2rem; }
 .page_body {
     width: 70%;
     margin-left: 15rem;
@@ -161,6 +166,7 @@ body {
 .table_des_travaux th, .table_des_travaux td {
     padding: 0 1rem;
 }
+.table_des_travaux #tr_1 th { background-color: #ccc; border: 1px solid #fff; }
 .td_chifre { text-align: right; }
 .td_options { padding: 0 0.5rem; cursor: pointer; }
 .td_options a { text-decoration: none; }
@@ -174,7 +180,6 @@ body {
 }
 .th_head {
     text-align: left;
-    background-color: #ccc;
 }
 .th_etape { 
     padding-top: 1rem;
