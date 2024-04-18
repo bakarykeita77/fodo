@@ -18,7 +18,7 @@
 
             <%- include('../public/composants/header.ejs') %> 
 
-            <!-- Tri des taches et calcul des couts -->
+         <!-- Tri des taches et calcul des couts par etape de travail -->
 
             <% let taches_1 = []; %>
             <% let taches_2 = []; %>
@@ -63,198 +63,203 @@
             <% totaux_cout = total_cout_1 + total_cout_2 + total_cout_3 + total_cout_4 %>
 
 
-            <div id="projet_titre">
-                <h2>Projet No_<%= id_champs %></h2>
-            </div>     
+            <div class="titre_container">
+                <h2>Projet No_<%= id_champs %> : </h2>
+                <h1><%= data[0].projet_name %></h1>
+            </div> 
+            <hr style="margin: 3px 0 1rem;">    
 
             <center>
-                <table id="projet_table"> 
-                    
-                    <tr id="tr_1">
-                        <th style="display: none;"></th>
-                        <th style="display: none;"></th>
-                        <th style="max-width: 3rem;">No </th>
-                        <th style="max-width: 16rem;">Taches</th>
-                        <th style="max-width: 6rem;">Duree</th>
-                        <th style="max-width: 6rem;">Debut</th>
-                        <th style="max-width: 6rem;">Fin</th>
-                        <th style="max-width: 6rem;">Moyen</th>
-                        <th class="sans_bordure"></th>
-                        <th style="max-width: 3rem;">Personnel</th>
-                        <th style="max-width: 4rem;">Cout</th>
-                    </tr>
-
-                    <tr><td class="sans_bordure" height="16"></td></tr>
-
-                    <% if(taches_1.length != 0) { %> 
-                        <tr>
-                            <th style="display: none;"><%= taches_1[0].id %></th>
-                            <th style="display: none;"><%= taches_1[0].id_champs %></th>
-                            <th class="th_etape"><%= taches_1[0].no %></th>
-                            <th class="th_etape"><%= taches_1[0].taches %></th>
-                            <th class="th_etape"><%= taches_1[0].duree %></th>
-                            <th class="th_etape"><%= taches_1[0].debut %></th>
-                            <th class="th_etape"><%= taches_1[0].fin %></th>
-                            <th class="th_etape"><%= taches_1[0].moyen %></th>
-                            <th class="th_etape sans_bordure"></th>
-                            <th class="th_etape td_chifre"><%= total_personnel_1 %></th>
-                            <th class="th_etape td_chifre"><%= total_cout_1 %></th>
+                <div class="table_deroulant_container">
+                    <table class="table_deroulant" id="table_projet"> 
+                        
+                        <tr class="tr_1 tr_entete">
+                            <th style="display: none;"></th>
+                            <th style="display: none;"></th>
+                            <th class="th_head" style="max-width: 3rem;">No </th>
+                            <th class="th_head" style="max-width: 16rem;">Taches</th>
+                            <th class="th_head" style="max-width: 6rem;">Duree</th>
+                            <th class="th_head" style="max-width: 6rem;">Debut</th>
+                            <th class="th_head" style="max-width: 6rem;">Fin</th>
+                            <th class="th_head" style="max-width: 6rem;">Moyen</th>
+                            <th class="th_head" class="sans_bordure"></th>
+                            <th class="th_head" style="max-width: 3rem;">Personnel</th>
+                            <th class="th_head" style="max-width: 4rem;">Cout</th>
                         </tr>
 
-                        <tr><td class="sans_bordure"></td></tr>
+                        <tr><td class="sans_bordure" height="16"></td></tr>
 
-                        <% for(let i=1; i<taches_1.length; i++) { %>
-                            <tr id='tr_1<%= i %>'>
-                                <td style="display: none;"><%= taches_1[i].id %></td>
-                                <td style="display: none;"><%= taches_1[i].id_champs %></td>
-                                <td><%= taches_1[i].no %></td>
-                                <td><%= taches_1[i].taches %></td>
-                                <td><%= taches_1[i].duree %></td>
-                                <td><%= taches_1[i].debut %></td>
-                                <td><%= taches_1[i].fin %></td>
-                                <td><%= taches_1[i].moyen %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_chifre"><%= taches_1[i].personnel %></td>
-                                <td class="td_chifre"><%= taches_1[i].cout %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_options modifier_projet">Modifier</td>
-                                <td class="td_options supprimer_projet">Supprimer</td>
+                        <% if(taches_1.length != 0) { %> 
+                            <tr>
+                                <th style="display: none;"><%= taches_1[0].id %></th>
+                                <th style="display: none;"><%= taches_1[0].id_champs %></th>
+                                <th class="th_etape"><%= taches_1[0].no %></th>
+                                <th class="th_etape"><%= taches_1[0].taches %></th>
+                                <th class="th_etape"><%= taches_1[0].duree %></th>
+                                <th class="th_etape"><%= taches_1[0].debut %></th>
+                                <th class="th_etape"><%= taches_1[0].fin %></th>
+                                <th class="th_etape"><%= taches_1[0].moyen %></th>
+                                <th class="th_etape sans_bordure"></th>
+                                <th class="th_etape td_chifre"><%= total_personnel_1 %></th>
+                                <th class="th_etape td_chifre"><%= total_cout_1 %></th>
                             </tr>
-                        <% } %>
-                    <% } %>
 
-                    <tr><td class="sans_bordure" height="16"></td></tr>
-                    
-                    <% if(taches_2.length != 0) { %> 
+                            <tr><td class="sans_bordure"></td></tr>
+
+                            <% for(let i=1; i<taches_1.length; i++) { %>
+                                <tr id='tr_1<%= i %>'>
+                                    <td style="display: none;"><%= taches_1[i].id %></td>
+                                    <td style="display: none;"><%= taches_1[i].id_champs %></td>
+                                    <td><%= taches_1[i].no %></td>
+                                    <td><%= taches_1[i].taches %></td>
+                                    <td><%= taches_1[i].duree %></td>
+                                    <td><%= taches_1[i].debut %></td>
+                                    <td><%= taches_1[i].fin %></td>
+                                    <td><%= taches_1[i].moyen %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_chifre"><%= taches_1[i].personnel %></td>
+                                    <td class="td_chifre"><%= taches_1[i].cout %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_options modifier_projet">Modifier</td>
+                                    <td class="td_options supprimer_projet">Supprimer</td>
+                                </tr>
+                            <% } %>
+                        <% } %>
+
+                        <tr><td class="sans_bordure" height="16"></td></tr>
+                        
+                        <% if(taches_2.length != 0) { %> 
+                            <tr>
+                                <th style="display: none;"><%= taches_2[0].id %></th>
+                                <th style="display: none;"><%= taches_2[0].id_champs %></th>
+                                <th class="th_etape"><%= taches_2[0].no %></th>
+                                <th class="th_etape"><%= taches_2[0].taches %></th>
+                                <th class="th_etape"><%= taches_2[0].duree %></th>
+                                <th class="th_etape"><%= taches_2[0].debut %></th>
+                                <th class="th_etape"><%= taches_2[0].fin %></th>
+                                <th class="th_etape"><%= taches_1[0].moyen %></th>
+                                <th class="th_etape sans_bordure"></th>
+                                <th class="th_etape td_chifre"><%= total_personnel_2 %></th>
+                                <th class="th_etape td_chifre"><%= total_cout_2 %></th>
+                            </tr>
+
+                            <tr><td class="sans_bordure"></td></tr>
+
+                            <% for(let i=1; i<taches_2.length; i++) { %>
+                                <tr id='tr_2<%= i %>'>
+                                    <td style="display: none;"><%= taches_2[i].id %></td>
+                                    <td style="display: none;"><%= taches_2[i].id_champs %></td>
+                                    <td><%= taches_2[i].no %></td>
+                                    <td><%= taches_2[i].taches %></td>
+                                    <td><%= taches_2[i].duree %></td>
+                                    <td><%= taches_2[i].debut %></td>
+                                    <td><%= taches_2[i].fin %></td>
+                                    <td><%= taches_2[i].moyen %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_chifre"><%= taches_2[i].personnel %></td>
+                                    <td class="td_chifre"><%= taches_2[i].cout %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_options modifier_projet">Modifier</td>
+                                    <td class="td_options supprimer_projet">Supprimer</td>
+                                </tr>
+                            <% } %>
+                        <% } %>
+                        
+                        <tr><td class="sans_bordure" height="16"></td></tr>
+
+                        <% if(taches_3.length != 0) { %> 
+                            <tr>
+                                <th style="display: none;"><%= taches_3[0].id %></th>
+                                <th style="display: none;"><%= taches_3[0].id_champs %></th>
+                                <th class="th_etape"><%= taches_3[0].no %></th>
+                                <th class="th_etape"><%= taches_3[0].taches %></th>
+                                <th class="th_etape"><%= taches_3[0].duree %></th>
+                                <th class="th_etape"><%= taches_3[0].debut %></th>
+                                <th class="th_etape"><%= taches_3[0].fin %></th>
+                                <th class="th_etape"><%= taches_1[0].moyen %></th>
+                                <th class="th_etape sans_bordure"></th>
+                                <th class="th_etape td_chifre"><%= total_personnel_3 %></th>
+                                <th class="th_etape td_chifre"><%= total_cout_3 %></th>
+                            </tr>
+
+                            <tr><td class="sans_bordure"></td></tr>
+
+                            <% for(let i=1; i<taches_3.length; i++) { %>
+                                <tr id='tr_3<%= i %>'>
+                                    <td style="display: none;"><%= taches_3[i].id %></td>
+                                    <td style="display: none;"><%= taches_3[i].id_champs %></td>
+                                    <td><%= taches_3[i].no %></td>
+                                    <td><%= taches_3[i].taches %></td>
+                                    <td><%= taches_3[i].duree %></td>
+                                    <td><%= taches_3[i].debut %></td>
+                                    <td><%= taches_3[i].fin %></td>
+                                    <td><%= taches_3[i].moyen %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_chifre"><%= taches_3[i].personnel %></td>
+                                    <td class="td_chifre"><%= taches_3[i].cout %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_options modifier_projet">Modifier</td>
+                                    <td class="td_options supprimer_projet">Supprimer</td>
+                                </tr>
+                            <% } %>
+                        <% } %>
+
+                        <tr><td class="sans_bordure" height="16"></td></tr>
+                        
+                        <% if(taches_4.length != 0) { %> 
+                            <tr>
+                                <th style="display: none;"><%= taches_4[0].id %></th>
+                                <th style="display: none;"><%= taches_4[0].id_champs %></th>
+                                <th class="th_etape"><%= taches_4[0].no %></th>
+                                <th class="th_etape"><%= taches_4[0].taches %></th>
+                                <th class="th_etape"><%= taches_4[0].duree %></th>
+                                <th class="th_etape"><%= taches_4[0].debut %></th>
+                                <th class="th_etape"><%= taches_4[0].fin %></th>
+                                <th class="th_etape"><%= taches_1[0].moyen %></th>
+                                <th class="th_etape sans_bordure"></th>
+                                <th class="th_etape td_chifre"><%= total_personnel_4 %></th>
+                                <th class="th_etape td_chifre"><%= total_cout_4 %></th>
+                            </tr>
+
+                            <tr><td class="sans_bordure"></td></tr>
+
+                            <% for(let i=1; i<taches_4.length; i++) { %>
+                                <tr id='tr_4<%= i %>'>
+                                    <td style="display: none;"><%= taches_4[i].id %></td>
+                                    <td style="display: none;"><%= taches_4[i].id_champs %></td>
+                                    <td><%= taches_4[i].no %></td>
+                                    <td><%= taches_4[i].taches %></td>
+                                    <td><%= taches_4[i].duree %></td>
+                                    <td><%= taches_4[i].debut %></td>
+                                    <td><%= taches_4[i].fin %></td>
+                                    <td><%= taches_4[i].moyen %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_chifre"><%= taches_4[i].personnel %></td>
+                                    <td class="td_chifre"><%= taches_4[i].cout %></td>
+                                    <td class="sans_bordure"></td>
+                                    <td class="td_options modifier_projet">Modifier</td>
+                                    <td class="td_options supprimer_projet">Supprimer</td>
+                                </tr>
+                            <% } %>
+                        <% } %>
+
+                        <tr><td class="sans_bordure" height="16"></td></tr>
+
                         <tr>
-                            <th style="display: none;"><%= taches_2[0].id %></th>
-                            <th style="display: none;"><%= taches_2[0].id_champs %></th>
-                            <th class="th_etape"><%= taches_2[0].no %></th>
-                            <th class="th_etape"><%= taches_2[0].taches %></th>
-                            <th class="th_etape"><%= taches_2[0].duree %></th>
-                            <th class="th_etape"><%= taches_2[0].debut %></th>
-                            <th class="th_etape"><%= taches_2[0].fin %></th>
-                            <th class="th_etape"><%= taches_1[0].moyen %></th>
-                            <th class="th_etape sans_bordure"></th>
-                            <th class="th_etape td_chifre"><%= total_personnel_2 %></th>
-                            <th class="th_etape td_chifre"><%= total_cout_2 %></th>
+                            <th colspan="7"></th>
+                            <th class="th_totaux td_chifre"><%= totaux_personnel %></th>
+                            <th class="th_totaux td_chifre"><%= totaux_cout %></th>
                         </tr>
-
-                        <tr><td class="sans_bordure"></td></tr>
-
-                        <% for(let i=1; i<taches_2.length; i++) { %>
-                            <tr id='tr_2<%= i %>'>
-                                <td style="display: none;"><%= taches_2[i].id %></td>
-                                <td style="display: none;"><%= taches_2[i].id_champs %></td>
-                                <td><%= taches_2[i].no %></td>
-                                <td><%= taches_2[i].taches %></td>
-                                <td><%= taches_2[i].duree %></td>
-                                <td><%= taches_2[i].debut %></td>
-                                <td><%= taches_2[i].fin %></td>
-                                <td><%= taches_2[i].moyen %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_chifre"><%= taches_2[i].personnel %></td>
-                                <td class="td_chifre"><%= taches_2[i].cout %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_options modifier_projet">Modifier</td>
-                                <td class="td_options supprimer_projet">Supprimer</td>
-                            </tr>
-                        <% } %>
-                    <% } %>
-                    
-                    <tr><td class="sans_bordure" height="16"></td></tr>
-
-                    <% if(taches_3.length != 0) { %> 
-                        <tr>
-                            <th style="display: none;"><%= taches_3[0].id %></th>
-                            <th style="display: none;"><%= taches_3[0].id_champs %></th>
-                            <th class="th_etape"><%= taches_3[0].no %></th>
-                            <th class="th_etape"><%= taches_3[0].taches %></th>
-                            <th class="th_etape"><%= taches_3[0].duree %></th>
-                            <th class="th_etape"><%= taches_3[0].debut %></th>
-                            <th class="th_etape"><%= taches_3[0].fin %></th>
-                            <th class="th_etape"><%= taches_1[0].moyen %></th>
-                            <th class="th_etape sans_bordure"></th>
-                            <th class="th_etape td_chifre"><%= total_personnel_3 %></th>
-                            <th class="th_etape td_chifre"><%= total_cout_3 %></th>
-                        </tr>
-
-                        <tr><td class="sans_bordure"></td></tr>
-
-                        <% for(let i=1; i<taches_3.length; i++) { %>
-                            <tr id='tr_3<%= i %>'>
-                                <td style="display: none;"><%= taches_3[i].id %></td>
-                                <td style="display: none;"><%= taches_3[i].id_champs %></td>
-                                <td><%= taches_3[i].no %></td>
-                                <td><%= taches_3[i].taches %></td>
-                                <td><%= taches_3[i].duree %></td>
-                                <td><%= taches_3[i].debut %></td>
-                                <td><%= taches_3[i].fin %></td>
-                                <td><%= taches_3[i].moyen %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_chifre"><%= taches_3[i].personnel %></td>
-                                <td class="td_chifre"><%= taches_3[i].cout %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_options modifier_projet">Modifier</td>
-                                <td class="td_options supprimer_projet">Supprimer</td>
-                            </tr>
-                        <% } %>
-                    <% } %>
-
-                    <tr><td class="sans_bordure" height="16"></td></tr>
-                    
-                    <% if(taches_4.length != 0) { %> 
-                        <tr>
-                            <th style="display: none;"><%= taches_4[0].id %></th>
-                            <th style="display: none;"><%= taches_4[0].id_champs %></th>
-                            <th class="th_etape"><%= taches_4[0].no %></th>
-                            <th class="th_etape"><%= taches_4[0].taches %></th>
-                            <th class="th_etape"><%= taches_4[0].duree %></th>
-                            <th class="th_etape"><%= taches_4[0].debut %></th>
-                            <th class="th_etape"><%= taches_4[0].fin %></th>
-                            <th class="th_etape"><%= taches_1[0].moyen %></th>
-                            <th class="th_etape sans_bordure"></th>
-                            <th class="th_etape td_chifre"><%= total_personnel_4 %></th>
-                            <th class="th_etape td_chifre"><%= total_cout_4 %></th>
-                        </tr>
-
-                        <tr><td class="sans_bordure"></td></tr>
-
-                        <% for(let i=1; i<taches_4.length; i++) { %>
-                            <tr id='tr_4<%= i %>'>
-                                <td style="display: none;"><%= taches_4[i].id %></td>
-                                <td style="display: none;"><%= taches_4[i].id_champs %></td>
-                                <td><%= taches_4[i].no %></td>
-                                <td><%= taches_4[i].taches %></td>
-                                <td><%= taches_4[i].duree %></td>
-                                <td><%= taches_4[i].debut %></td>
-                                <td><%= taches_4[i].fin %></td>
-                                <td><%= taches_4[i].moyen %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_chifre"><%= taches_4[i].personnel %></td>
-                                <td class="td_chifre"><%= taches_4[i].cout %></td>
-                                <td class="sans_bordure"></td>
-                                <td class="td_options modifier_projet">Modifier</td>
-                                <td class="td_options supprimer_projet">Supprimer</td>
-                            </tr>
-                        <% } %>
-                    <% } %>
-
-                    <tr><td class="sans_bordure" height="16"></td></tr>
-
-                    <tr>
-                        <th colspan="7"></th>
-                        <th class="th_totaux td_chifre"><%= totaux_personnel %></th>
-                        <th class="th_totaux td_chifre"><%= totaux_cout %></th>
-                    </tr>
-                    
-                </table>
+                        
+                    </table>
+                </div>
             </center>
 
             <div class="cover" id="couvercle_edition_projet">
                 <%- include('../public/composants/edition_projet.ejs') %> 
             </div>
 
+            <%- include('../public/composants/onglet.ejs') %> 
         </div>
     </div>
 

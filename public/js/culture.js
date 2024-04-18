@@ -1,14 +1,14 @@
 
-let fiches = document.querySelector('.culture_fiches:not(#culture_fiche_info)');
-let culture_fiches = document.querySelectorAll('.culture_fiches');
+let fiches = document.querySelector('.table_deroulant_container:not(#culture_fiche_info)');
+let table_deroulant_container = document.querySelectorAll('.table_deroulant_container');
 let champs_info = document.getElementById('champs_info');
 let champs_info_form = document.getElementById('champs_info_form');
 
 
-document.getElementsByTagName('.culture_fiches:not(#culture_fiche_info)').style.display = 'none';
+document.getElementsByTagName('.table_deroulant_container:not(#culture_fiche_info)').style.display = 'none';
 
 function a() {
-    culture_fiches.forEach(fiche => {
+    table_deroulant_container.forEach(fiche => {
 
         let id_fiche = fiche.id;
             

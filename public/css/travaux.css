@@ -1,11 +1,12 @@
 
-#table_des_travaux hr {
+#id_champs { margin: 0; padding: 0; height: 0; }
+#table_travaux hr {
     margin: 0;
 }
-#table_des_travaux table:last-child td {
+#table_travaux table:last-child td {
     border-bottom: 1px solid #ccc;
 }
-#table_des_travaux form {
+#table_travaux form {
     margin: 0;
     padding: 0;
 }
@@ -16,5 +17,5 @@
 #culture_fiche_des_travaux .td_vide { border: none; }
 #travaux_titre, #travaux_plus { display: inline-block; }
 #travaux_titre {
-    margin-bottom: 0;
+    margin: 0;
 }

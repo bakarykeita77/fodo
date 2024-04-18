@@ -51,13 +51,10 @@
                 <div class="champs_cards_container">
                     <% for(let i=0; i<data.length; i++) { %>
 
-                        <% let lieu = data[i].lieu; %>
-                        <% let culture = data[i].culture; %>
                         <% let id_champs = data[i].id; %>
-                        <% let superficie = data[i].superficie; %>
 
                         <div class="culture_card" id="Champs_No_<%= data[i].id %>">
-                            <a href="/champs?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&superficie=<%= superficie %>">
+                            <a href="/champs?id_champs=<%= id_champs %>">
                                 <h4>Champs No_<%= data[i].id %></h4>
                             </a>
                         </div>

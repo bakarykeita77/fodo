@@ -18,21 +18,21 @@
         <div class="page_body">
 
             <%- include('../public/composants/header.ejs') %> 
-            
-            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
+          
+            <h2 id="culture_titre">Champs de <%= data[0].culture %> de <%= data[0].lieu %></h2>
             <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
             <%- include('../public/composants/onglet.ejs') %> 
             <h1 id="travaux_titre">Infos</h1>
 
-            <div class="culture_fiches" id="culture_fiche_info">
+            <div class="table_deroulant_container" id="culture_fiche_info">
                 <form action="#">
 
 
                     <label for="culture">Type de culture : </label>
-                    <input type="text" name="culture" id="culture" value="<%= culture %>"><br>
+                    <input type="text" name="culture" id="culture" value="<%= data[0].culture %>"><br>
                     
                     <label for="sous_prefecture">Lieu de la culture : </label>
-                    <input type="text" name="village" id="village" value="<%= lieu %>">/ 
+                    <input type="text" name="village" id="village" value="<%= data[0].lieu %>">/ 
                     <input type="text" name="sous_prefecture" id="sous_prefecture" value="<%= data[0].sous_prefecture %>">/ 
                     <input type="text" name="prefecture" id="prefecture" value="<%= data[0].prefecture %>">/ 
                     <input type="text" name="province" id="province" value="<%= data[0].province %>"><br>

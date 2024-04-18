@@ -1,15 +1,36 @@
 
-let totaux_1 = document.getElementById('totaux_1');
-let totaux_2 = document.getElementById('totaux_2');
-let totaux_3 = document.getElementById('totaux_3');
-let totaux_4 = document.getElementById('totaux_4');
+    let tr_1 = document.querySelectorAll('.tr_1');
+    let tr_2 = document.querySelectorAll('.tr_2');
+    let tr_3 = document.querySelectorAll('.tr_3');
+    let tr_4 = document.querySelectorAll('.tr_4');
 
-let table_des_travaux_1 = totaux_1.parentElement.parentElement.parentElement.parentElement.parentElement;
-let table_des_travaux_2 = totaux_2.parentElement.parentElement.parentElement.parentElement.parentElement;
-let table_des_travaux_3 = totaux_3.parentElement.parentElement.parentElement.parentElement.parentElement;
-let table_des_travaux_4 = totaux_4.parentElement.parentElement.parentElement.parentElement.parentElement;
+    let totaux_1 = document.getElementById('totaux_1');
+    let totaux_2 = document.getElementById('totaux_2');
+    let totaux_3 = document.getElementById('totaux_3');
+    let totaux_4 = document.getElementById('totaux_4');
 
-if(parseInt(totaux_1.textContent) == 0) { table_des_travaux_1.style.display = 'none'; }
-if(parseInt(totaux_2.textContent) == 0) { table_des_travaux_2.style.display = 'none'; }
-if(parseInt(totaux_3.textContent) == 0) { table_des_travaux_3.style.display = 'none'; }
-if(parseInt(totaux_4.textContent) == 0) { table_des_travaux_4.style.display = 'none'; }
+    
+ // Masquer les parties des travaux non effectues.
+    if(totaux_1.textContent == 0) {
+        tr_1.forEach(element => {
+            element.style.display = 'none';
+        });
+    }
+
+    if(totaux_2.textContent == 0) {
+        tr_2.forEach(element => {
+            element.style.display = 'none';
+        });
+    }
+
+    if(totaux_3.textContent == 0) {
+        tr_3.forEach(element => {
+            element.style.display = 'none';
+        });
+    }
+
+    if(totaux_4.textContent == 0) {
+        tr_4.forEach(element => {
+            element.style.display = 'none';
+        });
+    }

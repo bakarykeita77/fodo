@@ -1,7 +1,6 @@
 
 <% let liste_de_culture = []; %>
 <% let liste_de_lieu    = []; %>
-<% let liste_id_de_lieu = []; %>
                 
 <div id="nav_container">
 
@@ -47,7 +46,7 @@
     <div id="nav_body">
         <% 
             for(let i=0; i<data.length; i++) { if(liste_de_culture.indexOf(data[i].culture) === -1) { liste_de_culture.push(data[i].culture); }}
-            for(let i=0; i<data.length; i++) { if(liste_de_lieu.indexOf(data[i].lieu) === -1) { liste_de_lieu.push(data[i].lieu); }}
+            for(let i=0; i<data.length; i++) { if(liste_de_lieu.indexOf(data[i].lieu)       === -1) { liste_de_lieu.push(data[i].lieu);       }}
         %>     
 
         <ol id="nav_culture_list">

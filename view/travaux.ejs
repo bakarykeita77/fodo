@@ -17,8 +17,6 @@
         <div class="page_body">
 
             <%- include('../public/composants/header.ejs') %> 
-          
-            <h2 id="culture_titre">Champs de <%= culture %> de <%= lieu %></h2>
 
             <% let travaux_1 = []; %> 
             <% let travaux_2 = []; %>
@@ -29,7 +27,8 @@
             <% let totaux_2 = 0; %>  <% let totaux_6 = 0; %>  <% let totaux_10 = 0; %>  <% let totaux_14 = 0; %>
             <% let totaux_3 = 0; %>  <% let totaux_7 = 0; %>  <% let totaux_11 = 0; %>  <% let totaux_15 = 0; %>
             <% let totaux_4 = 0; %>  <% let totaux_8 = 0; %>  <% let totaux_12 = 0; %>  <% let totaux_16 = 0; %>
-                
+           
+            <% let totaux_personnel = 0, totaux_duree = 0; totaux_cout = 0; %>  
         
             <% for(let i=0; i<data.length; i++) {
                 if(data[i].id_etape === 1) { 
@@ -64,48 +63,57 @@
                     totaux_15 += data[i].duree;
                     totaux_16 += data[i].cout;
                 }
+
             } %>
-          
+
+            <%
+            totaux_personnel = totaux_1 + totaux_5 +  totaux_9 + totaux_13;
+            totaux_duree     = totaux_3 + totaux_7 + totaux_11 + totaux_15;
+            totaux_cout      = totaux_4 + totaux_8 + totaux_12 + totaux_16;
+            %>
+     
           <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
 
-            <h3 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %></h3>
 
-            <%- include('../public/composants/onglet.ejs') %> 
-
-            <h1 id="travaux_titre">Travaux effectues</h1>
-            <div class="plus" id="travaux_plus">+</div>
+            <div class="titre_container" id="travaux_titre_container">
+                <h2 class="culture_sous_titre" id="culture_info_titre">Champs No_<%= id_champs %> :</h2>
+                <h1 id="travaux_titre">Travaux effectues</h1>
+                <div class="plus" id="travaux_plus">+</div>
+            </div>
+            <hr style="margin: 3px 0;">
 
             <center>
-                <div class="culture_fiches" id="culture_fiche_des_travaux">
-
-                    <p id="lieu"      style="display: none;"><%= lieu %></p>
-                    <p id="culture"   style="display: none;"><%= culture %></p>
-                    <p id="id_champs" style="display: none;"><%= id_champs %></p>
+                <div class="table_deroulant_container" id="culture_fiche_des_travaux">
                     
-                    <table class="table_des_travaux">
-                        <tr id='tr_1'>
-                            <th style="display:none"></th>
-                            <th class="th_head" style="max-width: 6rem;">Date</th>
-                            <th class="th_head" style="max-width: 16rem;"> Travail</th>
-                            <th class="th_head" style="max-width: 6rem;"> Moyen</th>
-                            <th class="th_head" style="max-width: 4rem;">Quantite</th>
-                            <th class="th_head" style="max-width: 4rem;">Personnel</th>
-                            <th class="th_head" style="max-width: 4rem;">Duree</th>
-                            <th class="th_head" style="max-width: 6rem;">Cout</th>
+                    <table class="table_deroulant" id="table_travaux">
+
+                        <tr style="display: none;"><td id="id_champs"><%= id_champs %></td></tr>
+
+                        <tr class="tr_1 .tr_entete">
+                            <th class="th_head" style="max-width:  6rem;">Date</th>
+                            <th class="th_head" style="max-width: 16rem;">Travail</th>
+                            <th class="th_head" style="max-width:  6rem;">Moyen</th>
+                            <th class="th_head" style="max-width:  4rem;">Quantite</th>
+                            <th class="th_head" style="max-width:  4rem;">Personnel</th>
+                            <th class="th_head" style="max-width:  4rem;">Duree</th>
+                            <th class="th_head" style="max-width:  6rem;">Cout</th>
+                            <th class="th_head" colspan="3" style="background-color: white;"></th>
                         </tr>
 
-                        <tr class="tr_vide"><td></td></tr>
+                        <tr class="tr_vide"><td height="16"></td></tr>
 
-                        <tr><th class="etape_libele" colspan="7">Preparation du terrain</th></tr>
+                        <tr><th class="etape_libele tr_1" colspan="7">Preparation du terrain</th></tr>
 
                         <tr class="tr_vide"><td></td></tr>
 
                         <% for(let i=0; i<travaux_1.length; i++) { %>
-                            <tr id='tr_1<%= i %>'>
+                            <tr class="tr_1" id='tr_1<%= i %>'>
                                 <td style="display:none"><%= travaux_1[i].id %></td>
-                                <td><%= travaux_1[i].date %></td>
+                                <td style="display:none"><%= travaux_1[i].id_champs %></td>
+                                <td style="display:none"><%= travaux_1[i].id_etape %></td>
+                                <td><%= travaux_1[i].date    %></td>
                                 <td><%= travaux_1[i].travail %></td>
-                                <td><%= travaux_1[i].moyen %></td>
+                                <td><%= travaux_1[i].moyen   %></td>
                                 <td style="text-align: right;"><%= travaux_1[i].quantite %></td>
                                 <td style="text-align: right;"><%= travaux_1[i].personnel %></td>
                                 <td style="text-align: right;"><%= travaux_1[i].duree %></td>
@@ -118,7 +126,7 @@
                         
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr>
+                        <tr class="tr_1">
                             <th colspan="4"></th>
                             <th class="th_foot" ><%= totaux_1; %></th>
                             <th class="th_foot" ><%= totaux_3; %></th>
@@ -127,13 +135,15 @@
 
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr><th class="etape_libele" colspan="7">Semis</th></tr>
+                        <tr><th class="etape_libele tr_2" colspan="7">Semis</th></tr>
                         
                         <tr class="tr_vide"><td></td></tr>
 
                         <% for(let i=0; i<travaux_2.length; i++) { %>
-                            <tr id='tr_2<%= i %>'>
+                            <tr class="tr_2" id='tr_2<%= i %>'>
                                 <td style="display:none"><%= travaux_2[i].id %></td>
+                                <td style="display:none"><%= travaux_2[i].id_champs %></td>
+                                <td style="display:none"><%= travaux_2[i].id_etape %></td>
                                 <td><%= travaux_2[i].date %></td>
                                 <td><%= travaux_2[i].travail %></td>
                                 <td><%= travaux_2[i].moyen %></td>
@@ -149,7 +159,7 @@
                         
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr>
+                        <tr class="tr_2">
                             <th colspan="4"></th>
                             <th class="th_foot" ><%= totaux_5; %></th>
                             <th class="th_foot" ><%= totaux_7; %></th>
@@ -158,13 +168,15 @@
                         
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr><th class="etape_libele" colspan="7">Travaux d'Entretient</th></tr>
+                        <tr><th class="etape_libele tr_3" colspan="7">Travaux d'Entretient</th></tr>
                         
                         <tr class="tr_vide"><td></td></tr>
 
                         <% for(let i=0; i<travaux_3.length; i++) { %>
-                            <tr id='tr_3<%= i %>'>
+                            <tr class="tr_3" id='tr_3<%= i %>'>
                                 <td style="display:none"><%= travaux_3[i].id %></td>
+                                <td style="display:none"><%= travaux_3[i].id_champs %></td>
+                                <td style="display:none"><%= travaux_3[i].id_etape %></td>
                                 <td><%= travaux_3[i].date %></td>
                                 <td><%= travaux_3[i].travail %></td>
                                 <td><%= travaux_3[i].moyen %></td>
@@ -180,7 +192,7 @@
                         
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr>
+                        <tr class="tr_3">
                             <th colspan="4"></th>
                             <th class="th_foot" ><%= totaux_9; %></th>
                             <th class="th_foot" ><%= totaux_11; %></th>
@@ -189,13 +201,15 @@
                         
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr><th class="etape_libele" colspan="7">Recolte</th></tr>
+                        <tr><th class="etape_libele tr_4" colspan="7">Recolte</th></tr>
                         
                         <tr class="tr_vide"><td></td></tr>
 
                         <% for(let i=0; i<travaux_4.length; i++) { %>
-                            <tr id='tr_4<%= i %>'>
+                            <tr class="tr_4" id='tr_4<%= i %>'>
                                 <td style="display:none"><%= travaux_4[i].id %></td>
+                                <td style="display:none"><%= travaux_4[i].id_champs %></td>
+                                <td style="display:none"><%= travaux_4[i].id_etape %></td>
                                 <td><%= travaux_4[i].date %></td>
                                 <td><%= travaux_4[i].travail %></td>
                                 <td><%= travaux_4[i].moyen %></td>
@@ -211,12 +225,22 @@
                         
                         <tr class="tr_vide"><td></td></tr>
 
-                        <tr>
+                        <tr class="tr_4">
                             <th colspan="4"></th>
                             <th class="th_foot" ><%= totaux_13; %></th>
                             <th class="th_foot" ><%= totaux_15; %></th>
                             <th class="th_foot" id="totaux_4"><%= totaux_16; %></th>
                         </tr>
+
+                        <tr><td class="td_vide" height="16"></td></tr>
+
+                        <tr>
+                            <th class="th_totaux" id="th_vide" colspan="4"></th>
+                            <th class="th_totaux td_chifre"><%= totaux_personnel %></th>
+                            <th class="th_totaux td_chifre"><%= totaux_duree %></th>
+                            <th class="th_totaux td_chifre"><%= totaux_cout %></th>
+                        </tr>
+                        
 
                     </table>
                 
@@ -225,6 +249,7 @@
 
             <%- include('../public/composants/fiche.ejs') %> 
             <%- include('../public/composants/edition_travaux.ejs') %> 
+            <%- include('../public/composants/onglet.ejs') %> 
 
         </div>
 

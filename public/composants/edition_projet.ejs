@@ -2,7 +2,7 @@
 <div class="editeur">
     <span class="fermeture" id="fermer_edition_projet">&times;</span>
 
-    <table id="editer_projet_table"> 
+    <table id="editer_table_projet"> 
         <form action="/projet" method="post">
 
             <tr>
@@ -48,7 +48,7 @@
 
 <style>
     
-    #editer_projet_table input { 
+    #editer_table_projet input { 
         border-style: none; 
         background-color: transparent;
         padding: 0 0.5rem; 
@@ -63,13 +63,13 @@
     #input_9 { width: 3rem; }
     #input_10 { width: 4rem; }
     th { text-align: left; }
-    #editer_projet_table td { 
+    #editer_table_projet td { 
         border: 1px solid #fff; 
         background-color: #eee; 
         height: 2rem;
     }
     #tr_1 th { padding: 0.5rem; }
-    #editer_projet_table .sans_bordure { border-color: #fff; background-color: transparent; }
+    #editer_table_projet .sans_bordure { border-color: #fff; background-color: transparent; }
     #submit { 
         border-style: none; 
         cursor: pointer;
@@ -82,7 +82,7 @@
     let couvercle_edition_projet = document.getElementById('couvercle_edition_projet');
     let modifier_projet = document.querySelectorAll('.modifier_projet');
     let fermer_edition_projet = document.querySelector('#fermer_edition_projet');
-    let inputs = document.querySelectorAll('#editer_projet_table td input');
+    let inputs = document.querySelectorAll('#editer_table_projet td input');
     let id_champs = document.getElementById('id_champs');
 
 

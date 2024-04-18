@@ -11,16 +11,13 @@
                 <tr>
                     <tr id="tr_1">
                         <th style="display:none"></th>
-                        <th style="display:none"></th>
-                        <th style="display:none"></th>
-                        <th style="display:none"></th>
-                        <th><label for="input_4">Date</label>
-                        <th><label for="input_5">Travail</label></th>
-                        <th><label for="input_6">Moyen</label></th>
-                        <th><label for="input_7">Quantite</label></th>
-                        <th><label for="input_8">Personnel</label></th>
-                        <th><label for="input_9">Duree</label></th>
-                        <th><label for="input_10">Cout</label></th>
+                        <th><label for="input_1">Date</label>
+                        <th><label for="input_2">Travail</label></th>
+                        <th><label for="input_3">Moyen</label></th>
+                        <th><label for="input_4">Quantite</label></th>
+                        <th><label for="input_5">Personnel</label></th>
+                        <th><label for="input_6">Duree</label></th>
+                        <th><label for="input_7">Cout</label></th>
                     </tr>
                 </tr>
 
@@ -28,16 +25,14 @@
                     <td style="display: none;"><input type="hidden" name="input_0" id="input_0" value=""></td>
                     <td style="display: none;"><input type="hidden" name="input_1" id="input_1" value=""></td>
                     <td style="display: none;"><input type="hidden" name="input_2" id="input_2" value=""></td>
-                    <td style="display: none;"><input type="hidden" name="input_3" id="input_3" value=""></td>
-                    <td style="display: none;"><input type="hidden" name="input_4" id="input_4" value="<%= id_champs %>"></td>
 
-                    <td><input type="text" name="input_5"  id="input_5"  value=""></td>
-                    <td><input type="text" name="input_6"  id="input_6"  value=""></td>
-                    <td><input type="text" name="input_7"  id="input_7"  value=""></td>
-                    <td><input type="text" name="input_8"  id="input_8"  value=""></td>
-                    <td><input type="text" name="input_9"  id="input_9"  value=""></td>
-                    <td><input type="text" name="input_10" id="input_10" value=""></td>
-                    <td><input type="text" name="input_11" id="input_11" value=""></td>
+                    <td><input type="text" name="input_3" id="input_3" value=""></td>
+                    <td><input type="text" name="input_4" id="input_4" value=""></td>
+                    <td><input type="text" name="input_5" id="input_5" value=""></td>
+                    <td><input type="text" name="input_6" id="input_6" value=""></td>
+                    <td><input type="text" name="input_7" id="input_7" value=""></td>
+                    <td><input type="text" name="input_8" id="input_8" value=""></td>
+                    <td><input type="text" name="input_9" id="input_9" value=""></td>
                 </tr>
 
                 <tr>
@@ -61,13 +56,13 @@
         background-color: transparent;
         padding: 0 0.5rem; 
     }
-    #input_5 { max-width: 5rem; }
-    #input_6 { max-width: 14rem; }
-    #input_7 { max-width: 8rem; }
-    #input_8 { max-width: 3rem; text-align: right; }
-    #input_9 { max-width: 3rem; text-align: right; }
-    #input_10 { max-width: 3rem; text-align: right; }
-    #input_11 { max-width: 5rem; text-align: right; }
+    #input_2  { max-width: 5rem; }
+    #input_3  { max-width: 14rem;}
+    #input_4  { max-width: 8rem; }
+    #input_5  { max-width: 3rem; text-align: right; }
+    #input_6  { max-width: 3rem; text-align: right; }
+    #input_7 { max-width: 3rem; text-align: right; }
+    #input_8 { max-width: 5rem; text-align: right; }
     th { text-align: left; }
     #editer_travail_table td { 
         background-color: #eee; 
@@ -87,64 +82,110 @@
     let couvercle_edition_travail = document.getElementById('couvercle_edition_travail');
     let editer_travail_titre = document.getElementById('editer_travail_titre');
     let modifier_travail = document.querySelectorAll('.modifier_travail');
+    let supprimer_travail = document.querySelectorAll('.supprimer_travail');
     let fermer_edition_travail = document.querySelector('#fermer_edition_travail');
-    let lieu = document.getElementById('lieu').textContent;
-    let culture = document.getElementById('culture').textContent;
-    let id_champs = document.getElementById('id_champs').textContent;
     let inputs = document.querySelectorAll('#editer_travail_table td input');
     let submit_travail = document.getElementById('submit_travail');
     
+    let id_champs = document.getElementById('id_champs').textContent;
 
 
     modifier_travail.forEach((element) => {
+
+     // Selection des td de travaux consernes par les modifications
+        let tr_id = element.parentElement.id;
+        let tds   = document.querySelectorAll('#'+tr_id+' td'); 
+        
+
+        element.addEventListener('mouseover',  () => { mettreSurbrillance();  });
+        element.addEventListener('mouseleave', () => { enleverSurbrillance(); });
+
+
         element.addEventListener('click', () => { 
-
-            couvercle_edition_travail.style.display = 'block';
-
-         // Selection des td consernes par les modifications
-            let tr_id = element.parentElement.id;
-            let tds   = document.querySelectorAll('#'+tr_id+' td');
             
-            let id        = tds[0].textContent;
-            let date      = tds[1].textContent;
-            let travail   = tds[2].textContent;
-            let moyen     = tds[3].textContent;
-            let quantite  = tds[4].textContent;
-            let personnel = tds[5].textContent;
-            let duree     = tds[6].textContent;
-            let cout      = tds[7].textContent;
+            fermer_edition_travail.addEventListener('click', () => {
+                setTimeout(() => { enleverSurbrillance(); }, 1000);
+            });
 
-         // Insertion des valeurs a modifier dans les elements de editer_travail.
-            inputs[0].value  = lieu;
-            inputs[1].value  = culture;
-            inputs[2].value  = parseInt(id_champs);
-            inputs[3].value  = parseInt(id_etape);
-            inputs[4].value  = parseInt(id);
-            inputs[5].value  = date;
-            inputs[6].value  = travail;
-            inputs[7].value  = moyen;
-            inputs[8].value  = quantite;
-            inputs[9].value  = personnel;
-            inputs[10].value  = duree;
-            inputs[11].value = cout;
+         // Afficher edition de travail.
+            couvercle_edition_travail.style.display = 'block';
+            
+            
+         // Recuperation des valeurs des td de travaux consernes par les modifications
+            let id        = tds[0].textContent; // Masque
+            let id_champs = tds[1].textContent; // Masque
+            let id_etape  = tds[2].textContent; // Masque
+            let date      = tds[3].textContent;
+            let travail   = tds[4].textContent;
+            let moyen     = tds[5].textContent;
+            let quantite  = tds[6].textContent;
+            let personnel = tds[7].textContent;
+            let duree     = tds[8].textContent;
+            let cout      = tds[9].textContent;
 
-         // Mettre en surbrillance la ligne selectionnee
+         // Insertion des valeurs a modifier dans les inputs de editer_travail.
+            
+            inputs[0].value = id;
+            inputs[1].value = id_champs;
+            inputs[2].value = id_etape;
+            inputs[3].value = date;
+            inputs[4].value = travail;
+            inputs[5].value = moyen;
+            inputs[6].value = quantite;
+            inputs[7].value = personnel;
+            inputs[8].value = duree;
+            inputs[9].value = cout;
+
+        });
+        
+        
+        function mettreSurbrillance() {
             document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_vide, .td_options)').forEach(element => {
                 element.style.backgroundColor = 'yellow';
             });
-
-        // Enlever la surbrillance sur la ligne selectionnee
-            fermer_edition_travail.addEventListener('click', () => {
-                setTimeout(() => {
-                    document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_options)').forEach(element => {
-                        element.style.backgroundColor = 'white';
-                    });
-                }, 1000);
+        }
+        function enleverSurbrillance() {
+            document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_vide, .td_options)').forEach(element => {
+                element.style.backgroundColor = 'white';
             });
+        }
+
+
+    });
+
+    supprimer_travail.forEach((element) => {
+
+     // Selection des td de travaux consernes par la suppression
+        let tr_id = element.parentElement.id;
+        let tds   = document.querySelectorAll('#'+tr_id+' td');
+
+     // Mettre en surbrillance la ligne a supprimer
+        element.addEventListener('mouseover', () => {
+            document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_vide, .td_options)').forEach(element => {
+                element.style.backgroundColor = 'red';
+            });
+        });
+
+     // Enlever la surbrillance sur la ligne selectionee
+        element.addEventListener('mouseleave', () => {
+            document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_vide, .td_options)').forEach(element => {
+                element.style.backgroundColor = '#fff';
+            });
+        });
+
+        element.addEventListener('click', () => { 
             
+            alert("Etes-vous sure ? \n Vous voulez supprimer ce travail ? \n Cette action est ireversible !");
+
+         // Mettre en surbrillance la ligne selectionnee
+            document.querySelectorAll('#'+tr_id+' td:not(.sans_bordure, .td_vide, .td_options)').forEach(element => {
+                element.style.backgroundColor = 'red';
+            });
+
         });
     });
 
+ // Fermeture de edition travaux.
     fermer_edition_travail.addEventListener('click', () => { couvercle_edition_travail.style.display = 'none'; });
 
 </script>

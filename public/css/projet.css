@@ -1,11 +1,10 @@
 
 #projet_titre {
-    margin: 1rem 0;
+    margin: 2px 0;
     padding: 0 1rem;
     border: 1px solid #ccc;
 }
-#projet_titre h1, #projet_titre h2 { display: inline-block; padding: 0; }
 table { border-collapse: collapse; }
-#projet_table th, #projet_table td:not(.td_options) { padding: 0.125rem 1rem; }
-#projet_table td:not(.sans_bordure) { border: 1px solid #ccc; }
-#projet_table .sans_bordure { border-color: #fff; background-color: transparent; }
+#table_projet th, #table_projet td:not(.td_options) { padding: 0.125rem 1rem; }
+#table_projet #tr_1 th { background-color: #ccc; }
+#table_projet td:not(.sans_bordure) { border: 1px solid #ccc; }

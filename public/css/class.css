@@ -21,7 +21,7 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 100;
 }
 .editeur {
@@ -76,11 +76,15 @@ body {
 .culture_card h4 {
     margin: 00.5rem;
 }
-.culture_fiches {
-    margin: 1rem 0;
-    overflow: auto;
+.fiche_des_travaux_journaliers select, .fiche_des_travaux_journaliers input {
+    border-style: none;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    font-weight: bold;
+
 }
-.culture_fiches select, .culture_fiches input {
+.table_deroulant_container select, .table_deroulant_container input {
     border-style: none;
     border-bottom: 1px solid #aaa;
     margin-bottom: 1rem;
@@ -114,14 +118,16 @@ body {
 .fermeture:active { background-color: #aaa; }
 .fiche_des_travaux_journaliers {
     position: relative;
-    top: 15rem;
-    padding: 6rem 2rem 6rem 6rem;
+    top: 30rem;
+    padding: 2rem 6rem;
     width: 60vw;
     max-width: 50rem;
+    max-height: 32rem;
     margin: auto;
     box-shadow: 0 0 1rem #666;
     background-color: #fff;
     border-radius: 0.5rem;
+    overflow-y: auto;
 }
 .hide { display: none; }
 .plus {
@@ -152,34 +158,41 @@ body {
     padding: 0.125rem 1rem; 
 }
 .resunes_des_champs_table td { padding: 0.125rem 1rem; }
+.sans_bordure { border-color: #fff; background-color: transparent; }
 .show { display: block; }
-.table_des_travaux {
+.table_deroulant_container {
+    margin: 1rem 0;
+    overflow: auto;
+    height: 65vh;
+}
+.table_deroulant {
     border-collapse: collapse;
     margin-bottom: 1rem;
 }
-.table_des_travaux tr:first-child {
-    height: 2rem;
-}
-.table_des_travaux td {
+.table_deroulant td:not(.sans_bordure) {
     border: 1px solid #ccc;
 }
-.table_des_travaux th, .table_des_travaux td {
-    padding: 0 1rem;
+.table_deroulant th, .table_deroulant td {
+    padding: 0 0.5rem;
 }
-.table_des_travaux #tr_1 th { background-color: #ccc; border: 1px solid #fff; }
 .td_chifre { text-align: right; }
 .td_options { padding: 0 0.5rem; cursor: pointer; }
 .td_options a { text-decoration: none; }
+.td_options:hover { background-color: #ddd; }
 .td_titre h3 {
     margin: 0;
     padding: 0;
 }
+.th_head {
+    position: sticky;
+    top: 0;
+    text-align: left;
+    background-color: #ccc;
+    height: 2rem;
+}
 .th_foot {
     text-align: right;
     border: 0.125rem solid #ccc;
-}
-.th_head {
-    text-align: left;
 }
 .th_etape { 
     padding-top: 1rem;
@@ -187,8 +200,18 @@ body {
 }
 .th_total { border: 1px solid #bbb; }
 .th_totaux { 
-    border: 4px solid #bbb; 
-    background-color: #eee; 
+    position: sticky;
+    bottom: 0;
+    height: 2rem;
 }
+.th_totaux:not(#th_vide) { 
+    background-color: #ccc; 
+    border: 1px solid transparent; 
+}
+.titre_container {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+.titre_container h1, .titre_container h2, .titre_container h3 { display: inline-block; padding: 0; margin: 0; }
 .tr_vide { height: 0.4rem; }
 .tr_vide td { border: none; }

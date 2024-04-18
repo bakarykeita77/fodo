@@ -18,7 +18,7 @@
                     
                 <%- include('../public/composants/header.ejs') %> 
 
-                <h1>Les Champs de <%= data[0].village %></h1>
+                <h1>Les Champs de <%= lieu %></h1>
 
                 <div class="reumes_des_champs">
 
@@ -53,14 +53,10 @@
                 <div class="champs_cards_container">
                     <% for(let i=0; i<data.length; i++) { %>
 
-                        <% let lieu = data[i].village; %>
-                        <% let culture = data[i].culture; %>
                         <% let id_champs = data[i].id; %>
-                        <% let id_lieu = data[i].id_lieu; %>
-                        <% let superficie = data[i].superficie; %>
 
                         <div class="culture_card" id="Champs_No_<%= data[i].id_champs %>">
-                            <a href="/champs?lieu=<%= lieu %>&culture=<%= culture %>&id_champs=<%= id_champs %>&superficie=<%= superficie %>">
+                            <a href="/champs?id_champs=<%= id_champs %>">
                                 <h4>Champs No_<%= data[i].id %></h4>
                             </a>
                         </div> 
