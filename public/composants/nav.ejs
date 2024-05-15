@@ -30,10 +30,7 @@
                     <label for="superficie">Superficie</label><br>
                     <input type="text" name="superficie" id="superficie">
                     <br><br>
-                    <label for="observations">observations de la culture</label><br>
-                    <input type="text" name="observations_de_la_culture" id="observations_de_la_culture">
-                    <br><br>
-
+                  
                     <input type="submit" id="submit" value="Submit">
                 </div>
                 
@@ -173,11 +170,10 @@
     
 
     
-    function charger_form_culture(id, id_lieu, culture, superficie, observations) {
+    function charger_form_culture(id, id_lieu, culture, superficie) {
         document.getElementById('id').value = id;
         document.getElementById('id_lieu').value = id_lieu;
         document.getElementById('culture').value = culture;
         document.getElementById('superficie').value = superficie;
-        document.getElementById('observations').value = observations;
     }
 </script>

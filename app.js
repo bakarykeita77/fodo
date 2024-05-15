@@ -3,7 +3,6 @@ const express = require('express');
 const mysql = require('mysql');
 const myconnection = require('express-myconnection');
 const path = require('path');
-const sharp = require('sharp');
 const { LONG } = require('mysql/lib/protocol/constants/types');
 const { urlencoded } = require('express');
 
@@ -79,7 +78,7 @@ const app = express();
             }else{
 
                 let requetesql = (id === null) ? 
-                    "INSERT INTO champs(id, id_lieu, culture ,superficie ) VALUES(?,?,?,?,?)" :  /* pour inserer les donnees */
+                    "INSERT INTO champs(id, id_lieu, culture ,superficie) VALUES(?,?,?,?)" :  /* pour inserer les donnees */
                     "UPDATE champs SET id_lieu = ?, culture = ? ,superficie = ? WHERE id = ?";  /* pour modifier les donnees */
                 let donnees = (id === null) ? 
                     [null, id_lieu, culture, superficie] : /* pour inserer les donnees */
@@ -420,5 +419,5 @@ const app = express();
  /*---------------------------------------------------------------------------------------------------------------------------------------*/
 
     app.listen(3000, () => {
-        console.log('Le serveur tourne sur le port 3000');
+        console.log('Le serveur tourne maintenant sur le port 3000');
     });
