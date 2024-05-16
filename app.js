@@ -14,12 +14,6 @@ const connect = {
     database: 'fodo'
 }
 
-// sharp('./images/logos/houe.jpg')
-//     .webp()
-//     .toFile('houe.webp')
-//     .then((info) => { console.log(info); })
-// .catch(erreur => {console.log(erreur);});
-
 const app = express();
 
 //Rendre les contenus des dossiers public et view disponibles
